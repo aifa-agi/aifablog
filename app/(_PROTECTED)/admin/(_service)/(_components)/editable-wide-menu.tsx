@@ -31,6 +31,7 @@ import { generateCuid } from "@/lib/generate-cuid";
 import { ChatSynchroniseActionDropdown } from "./chat-synchronise-action-dropdown";
 import { normalizeText } from "@/lib/normalize-text";
 import { humanize } from "@/lib/humanize";
+import { PageActionsDropdown } from "./page-actions-dropdown";
 
 const greenDotClass = "bg-emerald-500";
 
@@ -230,6 +231,10 @@ export default function EditableWideMenu({
                   categoryTitle={categoryTitle}
                   setCategories={setCategories}
                 />
+                <PageActionsDropdown
+                  link={link}
+                  setCategories={setCategories}
+                />
                 <span
                   className="flex items-center justify-center w-8 h-8 cursor-grab rounded hover:bg-accent/60 ml-1"
                   tabIndex={-1}
@@ -260,7 +265,8 @@ export default function EditableWideMenu({
         }
         const exists = categories.some(
           (cat) =>
-            normalizeText(cat.title).toLowerCase() === normalizedValue.toLowerCase()
+            normalizeText(cat.title).toLowerCase() ===
+            normalizedValue.toLowerCase()
         );
         if (exists) {
           toast.error("Category with this name already exists");
