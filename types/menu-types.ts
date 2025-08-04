@@ -25,7 +25,9 @@ export interface MenuLink {
   hasBadge?: boolean;
   badgeName?: BadgeName;
   order?: number;
-  isPublished: boolean; 
+  isPublished: boolean;
+  isVectorConnected: boolean;
+  isChatSynchronized:boolean;
 }
 
 export interface MenuCategory {

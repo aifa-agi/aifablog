@@ -27,6 +27,7 @@ import {
 import { PublishActionsDropdown } from "./publish-actions-dropdown";
 import { VectorStoreActionsDropdown } from "./vector-store-actions-dropdown";
 import { generateCuid } from "@/lib/generate-cuid";
+import { ChatSynchroniseActionDropdown } from "./chat-synchronise-action-dropdown";
 
 const greenDotClass = "bg-emerald-500";
 
@@ -51,8 +52,14 @@ function DraggableCategoryCard({
   onClick: () => void;
   children: React.ReactNode;
 }) {
-  const { setNodeRef, attributes, listeners, transform, transition, isDragging } =
-    useSortable({ id: category.title });
+  const {
+    setNodeRef,
+    attributes,
+    listeners,
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({ id: category.title });
   return (
     <div
       ref={setNodeRef}
@@ -83,8 +90,14 @@ function DraggableMenuLink({
   categoryTitle: string;
   children: React.ReactNode;
 }) {
-  const { setNodeRef, attributes, listeners, transform, transition, isDragging } =
-    useSortable({ id: link.id });
+  const {
+    setNodeRef,
+    attributes,
+    listeners,
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({ id: link.id });
   return (
     <li
       ref={setNodeRef}
@@ -115,9 +128,13 @@ export default function EditableWideMenu({
   onUpdate,
 }: WideMenuProps) {
   const dialogs = useDialogs();
-  const [activeCategoryTitle, setActiveCategoryTitle] = useState<string | null>(null);
+  const [activeCategoryTitle, setActiveCategoryTitle] = useState<string | null>(
+    null
+  );
 
-  const sensors = useSensors(useSensor(PointerSensor, { activationConstraint: { distance: 8 } }));
+  const sensors = useSensors(
+    useSensor(PointerSensor, { activationConstraint: { distance: 8 } })
+  );
 
   const activeCategory = useMemo(
     () => categories.find((cat) => cat.title === activeCategoryTitle) ?? null,
@@ -166,14 +183,23 @@ export default function EditableWideMenu({
       >
         <ul className="space-y-0 pr-1">
           {links.map((link) => (
-            <DraggableMenuLink key={link.id} link={link} categoryTitle={categoryTitle}>
+            <DraggableMenuLink
+              key={link.id}
+              link={link}
+              categoryTitle={categoryTitle}
+            >
               <div className="flex-grow flex items-center gap-2 overflow-hidden">
                 <span className="overflow-hidden text-ellipsis whitespace-nowrap">
                   {link.name}
                 </span>
                 {link.hasBadge && link.badgeName && (
                   <Badge className="shadow-none rounded-full px-2.5 py-0.5 text-xs font-semibold h-6 flex items-center">
-                    <div className={cn("h-1.5 w-1.5 rounded-full mr-2", greenDotClass)} />
+                    <div
+                      className={cn(
+                        "h-1.5 w-1.5 rounded-full mr-2",
+                        greenDotClass
+                      )}
+                    />
                     {link.badgeName}
                   </Badge>
                 )}
@@ -184,8 +210,21 @@ export default function EditableWideMenu({
                   categoryTitle={categoryTitle}
                   setCategories={setCategories}
                 />
-                <PublishActionsDropdown linkId={link.id} />
-                <VectorStoreActionsDropdown linkId={link.id} />
+                <PublishActionsDropdown
+                  link={link}
+                  categoryTitle={categoryTitle}
+                  setCategories={setCategories}
+                />
+                <VectorStoreActionsDropdown
+                  link={link}
+                  categoryTitle={categoryTitle}
+                  setCategories={setCategories}
+                />
+                < ChatSynchroniseActionDropdown 
+                link={link}
+                  categoryTitle={categoryTitle}
+                  setCategories={setCategories}
+                />
                 <span
                   className="flex items-center justify-center w-8 h-8 cursor-grab rounded hover:bg-accent/60 ml-1"
                   tabIndex={-1}
@@ -248,6 +287,8 @@ export default function EditableWideMenu({
                       roles: ["guest"],
                       hasBadge: false,
                       isPublished: false,
+                      isVectorConnected: false,
+                      isChatSynchronized: false,
                       order:
                         cat.links.length > 0
                           ? Math.max(...cat.links.map((l) => l.order ?? 0)) + 1
@@ -294,7 +335,10 @@ export default function EditableWideMenu({
                 </div>
               </div>
               <div className="flex-1 min-h-0 overflow-y-auto custom-scrollbar">
-                {renderCategoryLinks(activeCategory.links, activeCategory.title)}
+                {renderCategoryLinks(
+                  activeCategory.links,
+                  activeCategory.title
+                )}
               </div>
             </div>
           ) : (
@@ -333,7 +377,9 @@ export default function EditableWideMenu({
                     <Card
                       className={cn(
                         "bg-gray-800 p-4 rounded-lg hover:bg-gray-700 transition-colors duration-200 cursor-pointer h-[60px]",
-                        activeCategoryTitle === category.title ? "ring-2 ring-white" : ""
+                        activeCategoryTitle === category.title
+                          ? "ring-2 ring-white"
+                          : ""
                       )}
                     >
                       <CardContent className="flex items-center justify-between p-0 h-full">

@@ -1,20 +1,58 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Database } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { MenuLink, MenuCategory } from "@/types/menu-types";
 
-export function VectorStoreActionsDropdown({ linkId }: { linkId: string }) {
-  const [connected, setConnected] = useState(false);
+interface VectorStoreActionsDropdownProps {
+  link: MenuLink;
+  categoryTitle: string;
+  setCategories: React.Dispatch<React.SetStateAction<MenuCategory[]>>;
+}
+
+export function VectorStoreActionsDropdown({
+  link,
+  categoryTitle,
+  setCategories,
+}: VectorStoreActionsDropdownProps) {
+  const connected = link.isVectorConnected === true;
 
   const handleConnect = () => {
-    setConnected(true);
-    console.log("VectorStore CONNECTED", linkId);
+    setCategories((prev) =>
+      prev.map((cat) =>
+        cat.title !== categoryTitle
+          ? cat
+          : {
+              ...cat,
+              links: cat.links.map((l) =>
+                l.id === link.id
+                  ? { ...l, isVectorConnected: true }
+                  : l
+              ),
+            }
+      )
+    );
+    console.log("VectorStore CONNECTED", link.id);
   };
+
   const handleDisconnect = () => {
-    setConnected(false);
-    console.log("VectorStore DISCONNECTED", linkId);
+    setCategories((prev) =>
+      prev.map((cat) =>
+        cat.title !== categoryTitle
+          ? cat
+          : {
+              ...cat,
+              links: cat.links.map((l) =>
+                l.id === link.id
+                  ? { ...l, isVectorConnected: false }
+                  : l
+              ),
+            }
+      )
+    );
+    console.log("VectorStore DISCONNECTED", link.id);
   };
 
   return (
@@ -25,7 +63,7 @@ export function VectorStoreActionsDropdown({ linkId }: { linkId: string }) {
           tabIndex={-1}
           className={cn(
             "flex items-center justify-center w-8 h-8 rounded transition hover:bg-accent/60",
-            connected ? "text-green-500" : "text-gray-400"
+            connected ? "text-green-500" : "text-orange-500"
           )}
         >
           <Database className="w-4 h-4" />
@@ -49,7 +87,7 @@ export function VectorStoreActionsDropdown({ linkId }: { linkId: string }) {
             <span
               className={cn(
                 "inline-block mr-3 align-middle rounded-full border border-black/30",
-                !connected ? "bg-green-500" : "bg-muted-foreground"
+                !connected ? "bg-orange-500" : "bg-muted-foreground"
               )}
               style={{ width: 12, height: 12, minWidth: 12, minHeight: 12 }}
             />

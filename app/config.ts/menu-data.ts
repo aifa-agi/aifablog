@@ -8,12 +8,14 @@ export const menuData = {
       title: "WEBSITE",
       links: [
         {
-          id: "clwn5jb6b0000ufd9ukcrgrjt", // пример cuid
+          id: "clwn5jb6b0000ufd9ukcrgrjt", 
           order: 0,
           name: "Dashboard",
           href: "/dashboard",
           roles: ["guest", "admin", "editor", "architect"],
           isPublished: false,
+          isVectorConnected: true,
+          isChatSynchronized:true
         },
         {
           id: "clwn5jb6b0001ufd9ukcrgrjw",
@@ -24,6 +26,8 @@ export const menuData = {
           hasBadge: true,
           badgeName: "ADMIN",
           isPublished: true,
+          isVectorConnected:false,
+          isChatSynchronized:false
         },
       ],
     },
@@ -38,6 +42,8 @@ export const menuData = {
           href: "/ecommerce",
           roles: ["guest", "customer"],
           isPublished: false,
+          isVectorConnected:false,
+          isChatSynchronized:true
         },
         {
           id: "clwn5jb6b0003ufd9ukcrgrj6",
@@ -46,6 +52,8 @@ export const menuData = {
           href: "/ecommerce-templates",
           roles: ["guest", "admin"],
           isPublished: true,
+          isVectorConnected: true,
+          isChatSynchronized:false
         },
       ],
     },
