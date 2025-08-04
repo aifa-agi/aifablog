@@ -2,7 +2,7 @@
   <img src="public/favicons/1024.png" alt="AIFA Logo" width="120" height="120" style="border-radius:50%; box-shadow:0 2px 12px #00000022;">
 </p>
 
-<h1 align="center">AIFA NextJs blog with blob starter/h1>
+<h1 align="center">AIFA NextJs blog with blob starter</h1>
 <p align="center">
   <a href="https://www.gnu.org/licenses/agpl-3.0" target="_blank">
     <img alt="License: AGPL v3" src="https://img.shields.io/badge/License-AGPLv3-blue.svg?style=for-the-badge">
