@@ -4,7 +4,7 @@ import React, { useState, useMemo } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Loader2, GripVertical, Plus } from "lucide-react";
+import { Loader2, GripVertical, Plus, Globe, Database, Pencil } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { MenuCategory, MenuLink } from "@/types/menu-types";
 import { LinkActionsDropdown } from "./link-actions-dropdown";
@@ -24,6 +24,8 @@ import {
   useSortable,
   arrayMove,
 } from "@dnd-kit/sortable";
+import { PublishActionsDropdown } from "./publish-actions-dropdown";
+import { VectorStoreActionsDropdown } from "./vector-store-actions-dropdown";
 
 const greenDotClass = "bg-emerald-500";
 
@@ -176,17 +178,21 @@ export default function EditableWideMenu({
                   </Badge>
                 )}
               </div>
-              <LinkActionsDropdown
-                link={link}
-                categoryTitle={categoryTitle}
-                setCategories={setCategories}
-              />
-              <span
-                className="flex items-center justify-center w-8 h-8 cursor-grab rounded hover:bg-accent/60 ml-1"
-                tabIndex={-1}
-              >
-                <GripVertical className="w-4 h-4 text-primary/80" />
-              </span>
+              <div className="flex items-center gap-1">
+                <LinkActionsDropdown
+                  link={link}
+                  categoryTitle={categoryTitle}
+                  setCategories={setCategories}
+                />
+                <PublishActionsDropdown linkId={link.name} />
+                <VectorStoreActionsDropdown linkId={link.name} />
+                <span
+                  className="flex items-center justify-center w-8 h-8 cursor-grab rounded hover:bg-accent/60 ml-1"
+                  tabIndex={-1}
+                >
+                  <GripVertical className="w-4 h-4 text-primary/80" />
+                </span>
+              </div>
               <div className="absolute left-0 bottom-0 w-full h-px bg-border opacity-50 pointer-events-none" />
             </DraggableMenuLink>
           ))}
