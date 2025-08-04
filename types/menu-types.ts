@@ -18,12 +18,14 @@ export type BadgeName =
   | "RECOMMENDATION";
 
 export interface MenuLink {
+  id: string; 
   name: string;
   href?: string;
   roles: UserRole[];
   hasBadge?: boolean;
   badgeName?: BadgeName;
   order?: number;
+  isPublished: boolean; 
 }
 
 export interface MenuCategory {

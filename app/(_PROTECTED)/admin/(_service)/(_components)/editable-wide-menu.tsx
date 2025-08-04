@@ -4,7 +4,7 @@ import React, { useState, useMemo } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Loader2, GripVertical, Plus, Globe, Database, Pencil } from "lucide-react";
+import { Loader2, GripVertical, Plus } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { MenuCategory, MenuLink } from "@/types/menu-types";
 import { LinkActionsDropdown } from "./link-actions-dropdown";
@@ -26,6 +26,7 @@ import {
 } from "@dnd-kit/sortable";
 import { PublishActionsDropdown } from "./publish-actions-dropdown";
 import { VectorStoreActionsDropdown } from "./vector-store-actions-dropdown";
+import { generateCuid } from "@/lib/generate-cuid";
 
 const greenDotClass = "bg-emerald-500";
 
@@ -44,7 +45,6 @@ function DraggableCategoryCard({
   isActive,
   onClick,
   children,
-  ...rest
 }: {
   category: MenuCategory;
   isActive: boolean;
@@ -84,7 +84,7 @@ function DraggableMenuLink({
   children: React.ReactNode;
 }) {
   const { setNodeRef, attributes, listeners, transform, transition, isDragging } =
-    useSortable({ id: link.name });
+    useSortable({ id: link.id });
   return (
     <li
       ref={setNodeRef}
@@ -145,8 +145,8 @@ export default function EditableWideMenu({
                 ...cat,
                 links: arrayMove(
                   cat.links,
-                  cat.links.findIndex((l) => l.name === active.id),
-                  cat.links.findIndex((l) => l.name === over?.id)
+                  cat.links.findIndex((l) => l.id === active.id),
+                  cat.links.findIndex((l) => l.id === over?.id)
                 ),
               }
         )
@@ -161,12 +161,12 @@ export default function EditableWideMenu({
       onDragEnd={handleLinkDragEnd}
     >
       <SortableContext
-        items={links.map((link) => link.name)}
+        items={links.map((link) => link.id)}
         strategy={verticalListSortingStrategy}
       >
         <ul className="space-y-0 pr-1">
-          {links.map((link, idx) => (
-            <DraggableMenuLink key={link.name} link={link} categoryTitle={categoryTitle}>
+          {links.map((link) => (
+            <DraggableMenuLink key={link.id} link={link} categoryTitle={categoryTitle}>
               <div className="flex-grow flex items-center gap-2 overflow-hidden">
                 <span className="overflow-hidden text-ellipsis whitespace-nowrap">
                   {link.name}
@@ -184,8 +184,8 @@ export default function EditableWideMenu({
                   categoryTitle={categoryTitle}
                   setCategories={setCategories}
                 />
-                <PublishActionsDropdown linkId={link.name} />
-                <VectorStoreActionsDropdown linkId={link.name} />
+                <PublishActionsDropdown linkId={link.id} />
+                <VectorStoreActionsDropdown linkId={link.id} />
                 <span
                   className="flex items-center justify-center w-8 h-8 cursor-grab rounded hover:bg-accent/60 ml-1"
                   tabIndex={-1}
@@ -242,10 +242,12 @@ export default function EditableWideMenu({
                   links: [
                     ...cat.links,
                     {
+                      id: generateCuid(),
                       name: value,
                       href: "#",
                       roles: ["guest"],
                       hasBadge: false,
+                      isPublished: false,
                       order:
                         cat.links.length > 0
                           ? Math.max(...cat.links.map((l) => l.order ?? 0)) + 1

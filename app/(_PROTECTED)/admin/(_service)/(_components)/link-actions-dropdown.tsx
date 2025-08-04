@@ -54,7 +54,7 @@ export function LinkActionsDropdown({
           : {
               ...cat,
               links: cat.links.map((l) =>
-                l.name !== link.name
+                l.id !== link.id
                   ? l
                   : {
                       ...l,
@@ -76,7 +76,7 @@ export function LinkActionsDropdown({
           : {
               ...cat,
               links: cat.links.map((l) =>
-                l.name !== link.name
+                l.id !== link.id
                   ? l
                   : {
                       ...l,
@@ -92,33 +92,31 @@ export function LinkActionsDropdown({
   const isRoleActive = (role: UserRole) => link.roles?.includes(role);
   const isBadgeActive = (badge: BadgeName) => link.hasBadge && link.badgeName === badge;
 
- const handleRename = () => {
-  dialogs.show({
-    type: "edit",
-    title: "Rename link",
-    description: link.name,
-    value: link.name,
-    confirmLabel: "Save changes",
-    onConfirm: (value) => {
-      console.log("!!! [LinkActionsDropdown] onConfirm работает", value);
-      if (!value) return;
-      setCategories((prev) => {
-        const updated = prev.map((cat) =>
-          cat.title !== categoryTitle
-            ? cat
-            : {
-                ...cat,
-                links: cat.links.map((l) =>
-                  l.name === link.name ? { ...l, name: value } : l
-                ),
-              }
-        );
-        console.log("!!! [LinkActionsDropdown] categories обновлены", updated);
-        return updated;
-      });
-    },
-  });
-};
+  const handleRename = () => {
+    dialogs.show({
+      type: "edit",
+      title: "Rename link",
+      description: link.name,
+      value: link.name,
+      confirmLabel: "Save changes",
+      onConfirm: (value) => {
+        if (!value) return;
+        setCategories((prev) => {
+          return prev.map((cat) =>
+            cat.title !== categoryTitle
+              ? cat
+              : {
+                  ...cat,
+                  links: cat.links.map((l) =>
+                    l.id === link.id ? { ...l, name: value } : l
+                  ),
+                }
+          );
+        });
+      },
+    });
+  };
+
   const handleDelete = () => {
     dialogs.show({
       type: "delete",
@@ -132,7 +130,7 @@ export function LinkActionsDropdown({
               ? cat
               : {
                   ...cat,
-                  links: cat.links.filter((l) => l.name !== link.name),
+                  links: cat.links.filter((l) => l.id !== link.id),
                 }
           )
         );

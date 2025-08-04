@@ -19,7 +19,8 @@ export default function MobileMenu({ isOpen, topOffset }: MobileMenuProps) {
   const { role } = useRole();
   const { categories } = useNavigationMenu();
 
-  const getFilteredLinks = (links: MenuLink[]) => links.filter((link) => link.roles.includes(role));
+  const getFilteredLinks = (links: MenuLink[]) =>
+    links.filter((link) => link.roles.includes(role) && link.isPublished);
 
   const roleFilteredCategories = categories
     .map((category) => ({
@@ -31,7 +32,7 @@ export default function MobileMenu({ isOpen, topOffset }: MobileMenuProps) {
   const renderCategoryLinks = (categoryLinks: MenuLink[]) => (
     <ul className="space-y-3 py-2">
       {categoryLinks.map((link) => (
-        <li key={link.name}>
+        <li key={link.id}>
           <a href={link.href ?? '#'} className="flex items-center text-white transition-colors duration-200 relative">
             {link.hasBadge && link.badgeName ? (
               <div className="flex items-center justify-between gap-2 w-full">
