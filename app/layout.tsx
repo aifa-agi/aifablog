@@ -12,8 +12,8 @@ import { DialogsProvider } from './contexts/dialogs-providers'
 import { NavigationMenuProvider } from "@/app/contexts/navigation-menu-provider"
 
 export const metadata: Metadata = {
-  title: 'AIFA NEXTJS BLOG WITH BLOB STARTER ',
-  description: 'Revolutionary Next.js blog starter featuring Vercel Blob content management, role-based access control, and instant deployment.',
+  title: 'NEXTJS BLOG WITH BLOB AND AI VECTOR STORE STARTER - AIFA ',
+  description: 'NextJs Vercel Blob AI starter with ChatGPT, vector store knowledge base integration. Role-based blog platform for premium content & custom chatbots.',
   generator: 'aifa.dev',
   icons: "/logo.png",
 }
@@ -44,9 +44,9 @@ html {
                     <div className="flex items-center">
                       <Link 
                         href="/" 
-                        className="text-white font-bold text-xl hover:text-blue-400 transition-colors duration-150 cursor-pointer"
+                        className="text-white font-bold text-base md:text-xl hover:text-blue-400 transition-colors duration-150 cursor-pointer"
                       >
-                        AIFA BLOG WITH BLOB
+                        AIFA BLOG WITH BLOB AND AI VECTOR STORE
                       </Link>
                     </div>
                     <div className="flex items-center ">
