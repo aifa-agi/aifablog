@@ -8,6 +8,7 @@ import { cn } from '@/lib/utils';
 import { MenuLink } from '@/types/menu-types';
 import { useRole } from '@/app/contexts/role-provider';
 import { useNavigationMenu } from '@/app/contexts/navigation-menu-provider';
+import { humanize } from "@/lib/humanize";
 
 interface WideMenuProps {
   isOpen: boolean;
@@ -64,7 +65,7 @@ export default function WideMenu({ isOpen, setIsOpen }: WideMenuProps) {
                 )}
                 style={{ transition: 'margin 0.2s' }}
               >
-                {link.name}
+                {humanize(link.name)}
               </span>
               {link.hasBadge && link.badgeName && !isHovered && (
                 <Badge className={cn('shadow-none rounded-full px-2.5 py-0.5 text-xs font-semibold h-6 flex items-center')}>
@@ -103,12 +104,12 @@ export default function WideMenu({ isOpen, setIsOpen }: WideMenuProps) {
       defaultColumns.push(
         <div key={`col-group-${i}`} className="w-[180px] flex-shrink-0 pr-4">
           <h3 className="text-gray-400 text-sm font-semibold mb-4 tracking-wider border-b border-gray-700 pb-1">
-            {current.title}
+            {humanize(current.title)}
           </h3>
           {renderCategoryLinks(current.links, MAX_LINKS_PER_COLUMN_DEFAULT)}
           <div className="my-5 h-[2px]" />
           <h3 className="text-gray-400 text-sm font-semibold mb-4 tracking-wider border-b border-gray-700 pb-1">
-            {next.title}
+            {humanize(next.title)}
           </h3>
           {renderCategoryLinks(next.links, MAX_LINKS_PER_COLUMN_DEFAULT)}
         </div>
@@ -118,7 +119,7 @@ export default function WideMenu({ isOpen, setIsOpen }: WideMenuProps) {
       defaultColumns.push(
         <div key={`col-${i}`} className="w-[180px] flex-shrink-0 pr-4">
           <h3 className="text-gray-400 text-sm font-semibold mb-4 tracking-wider border-b border-gray-700 pb-1">
-            {current.title}
+            {humanize(current.title)}
           </h3>
           {renderCategoryLinks(current.links, MAX_LINKS_PER_COLUMN_DEFAULT)}
         </div>
@@ -138,7 +139,7 @@ export default function WideMenu({ isOpen, setIsOpen }: WideMenuProps) {
         <div key={`active-col-${col}`} className="w-[180px] flex-shrink-0 pr-4">
           {col === 0 && (
             <h3 className="text-gray-400 text-sm font-semibold mb-4 tracking-wider border-b border-gray-700 pb-1">
-              {activeCategory.title}
+              {humanize(activeCategory.title)}
             </h3>
           )}
           {renderCategoryLinks(columnLinks, MAX_LINKS_PER_COLUMN_ACTIVE)}
@@ -180,7 +181,7 @@ export default function WideMenu({ isOpen, setIsOpen }: WideMenuProps) {
                     >
                       <CardContent className="flex items-center justify-start p-0">
                         <h4 className="text-white font-semibold text-base line-clamp-1 whitespace-nowrap overflow-hidden">
-                          {category.title}
+                          {humanize(category.title)}
                         </h4>
                       </CardContent>
                     </Card>

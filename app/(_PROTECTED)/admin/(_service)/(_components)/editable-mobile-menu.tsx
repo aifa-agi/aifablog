@@ -10,6 +10,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { MenuCategory, MenuLink } from "@/types/menu-types";
 import { cn } from "@/lib/utils";
+import { humanize } from "@/lib/humanize";
 
 interface EditableMobileMenuProps {
   isOpen: boolean;
@@ -38,7 +39,7 @@ export default function EditableMobileMenu({
             {link.hasBadge && link.badgeName ? (
               <div className="flex items-center justify-between gap-2 w-full">
                 <span className="flex-grow overflow-hidden whitespace-nowrap text-ellipsis flex items-center gap-2">
-                  {link.name}
+                  {humanize(link.name)}
                 </span>
                 <Badge
                   className={cn(
@@ -56,7 +57,7 @@ export default function EditableMobileMenu({
               </div>
             ) : (
               <span className="flex items-center gap-2 overflow-hidden whitespace-nowrap text-ellipsis">
-                {link.name}
+                {humanize(link.name)}
               </span>
             )}
           </a>
@@ -85,7 +86,7 @@ export default function EditableMobileMenu({
             {categories.map((category, index) => (
               <AccordionItem key={category.title} value={`item-${index}`}>
                 <AccordionTrigger className="text-left text-lg flex items-center gap-3">
-                  {category.title}
+                  {humanize(category.title)}
                 </AccordionTrigger>
                 <AccordionContent>
                   {renderCategoryLinks(category.links)}

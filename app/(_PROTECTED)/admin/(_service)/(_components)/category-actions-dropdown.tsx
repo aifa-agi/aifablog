@@ -10,6 +10,8 @@ import {
 import { Pencil } from "lucide-react";
 import { MenuCategory } from "@/types/menu-types";
 import { useDialogs } from "@/app/contexts/dialogs-providers";
+import { toast } from "sonner";
+import { normalizeText } from "@/lib/normalize-text";
 
 interface CategoryActionsDropdownProps {
   categoryTitle: string;
@@ -23,22 +25,37 @@ export function CategoryActionsDropdown({
   const dialogs = useDialogs();
 
   const handleRename = () => {
-    dialogs.show({
-      type: "edit",
-      title: "Rename category",
-      description: categoryTitle,
-      value: categoryTitle,
-      confirmLabel: "Save changes",
-      onConfirm: (value) => {
-        if (!value) return;
-        setCategories((prev) =>
-          prev.map((cat) =>
-            cat.title === categoryTitle ? { ...cat, title: value } : cat
-          )
+  dialogs.show({
+    type: "edit",
+    title: "Rename category",
+    description: categoryTitle,
+    value: categoryTitle,
+    confirmLabel: "Save changes",
+    onConfirm: (value) => {
+      const normalizedValue = normalizeText(value as string);
+      if (!normalizedValue) {
+        toast.error("Category name cannot be empty");
+        return;
+      }
+      const exists = (prevCategories: MenuCategory[]) =>
+        prevCategories.some(
+          (cat) =>
+            normalizeText(cat.title).toLowerCase() === normalizedValue.toLowerCase() &&
+            cat.title !== categoryTitle
         );
-      },
-    });
-  };
+      setCategories((prev) => {
+        if (exists(prev)) {
+          toast.error("Category with this name already exists");
+          return prev;
+        }
+        return prev.map((cat) =>
+          cat.title === categoryTitle ? { ...cat, title: normalizedValue } : cat
+        );
+      });
+    },
+  });
+};
+
 
   const handleDelete = () => {
     dialogs.show({
@@ -66,9 +83,7 @@ export function CategoryActionsDropdown({
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="min-w-[150px]">
-        <DropdownMenuItem onClick={handleRename}>
-          Rename
-        </DropdownMenuItem>
+        <DropdownMenuItem onClick={handleRename}>Rename</DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem className="text-destructive" onClick={handleDelete}>
           Delete

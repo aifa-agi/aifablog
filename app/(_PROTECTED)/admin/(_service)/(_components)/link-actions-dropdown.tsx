@@ -13,6 +13,7 @@ import { UserRole, BadgeName, MenuLink, MenuCategory } from "@/types/menu-types"
 import { Pencil } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useDialogs } from "@/app/contexts/dialogs-providers";
+import { normalizeText } from "@/lib/normalize-text";
 
 interface LinkActionsDropdownProps {
   link: MenuLink;
@@ -93,29 +94,36 @@ export function LinkActionsDropdown({
   const isBadgeActive = (badge: BadgeName) => link.hasBadge && link.badgeName === badge;
 
   const handleRename = () => {
-    dialogs.show({
-      type: "edit",
-      title: "Rename link",
-      description: link.name,
-      value: link.name,
-      confirmLabel: "Save changes",
-      onConfirm: (value) => {
-        if (!value) return;
-        setCategories((prev) => {
-          return prev.map((cat) =>
-            cat.title !== categoryTitle
-              ? cat
-              : {
-                  ...cat,
-                  links: cat.links.map((l) =>
-                    l.id === link.id ? { ...l, name: value } : l
-                  ),
-                }
-          );
-        });
-      },
-    });
-  };
+  dialogs.show({
+    type: "edit",
+    title: "Rename link",
+    description: link.name,
+    value: link.name,
+    confirmLabel: "Save changes",
+    onConfirm: (value) => {
+      if (!value) return;
+      const normalizedName = normalizeText(value);
+      setCategories((prev) => {
+        return prev.map((cat) =>
+          cat.title !== categoryTitle
+            ? cat
+            : {
+                ...cat,
+                links: cat.links.map((l) =>
+                  l.id === link.id
+                    ? {
+                        ...l,
+                        name: normalizedName,
+                        href: "/" + normalizedName,
+                      }
+                    : l
+                ),
+              }
+        );
+      });
+    },
+  });
+};
 
   const handleDelete = () => {
     dialogs.show({

@@ -6,6 +6,7 @@ import { cn } from '@/lib/utils';
 import { MenuLink } from '@/types/menu-types';
 import { useRole } from '@/app/contexts/role-provider';
 import { useNavigationMenu } from '@/app/contexts/navigation-menu-provider';
+import { humanize } from "@/lib/humanize";
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -36,14 +37,18 @@ export default function MobileMenu({ isOpen, topOffset }: MobileMenuProps) {
           <a href={link.href ?? '#'} className="flex items-center text-white transition-colors duration-200 relative">
             {link.hasBadge && link.badgeName ? (
               <div className="flex items-center justify-between gap-2 w-full">
-                <span className="flex-grow overflow-hidden whitespace-nowrap text-ellipsis flex items-center gap-2">{link.name}</span>
+                <span className="flex-grow overflow-hidden whitespace-nowrap text-ellipsis flex items-center gap-2">
+                  {humanize(link.name)}
+                </span>
                 <Badge className={cn('shadow-none rounded-full px-2.5 py-0.5 text-xs font-semibold')}>
                   <div className={cn('h-1.5 w-1.5 rounded-full mr-2', greenDotClass)} />
                   {link.badgeName}
                 </Badge>
               </div>
             ) : (
-              <span className="flex items-center gap-2 overflow-hidden whitespace-nowrap text-ellipsis">{link.name}</span>
+              <span className="flex items-center gap-2 overflow-hidden whitespace-nowrap text-ellipsis">
+                {humanize(link.name)}
+              </span>
             )}
           </a>
         </li>
@@ -69,7 +74,7 @@ export default function MobileMenu({ isOpen, topOffset }: MobileMenuProps) {
                 {roleFilteredCategories.map((category, index) => (
                   <AccordionItem key={category.title} value={`item-${index}`}>
                     <AccordionTrigger className="text-left text-lg flex items-center gap-3">
-                      {category.title}
+                      {humanize(category.title)}
                     </AccordionTrigger>
                     <AccordionContent>
                       {renderCategoryLinks(category.links)}

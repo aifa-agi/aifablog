@@ -5,12 +5,12 @@ export const menuData = {
   categories: [
     {
       order: 0,
-      title: "WEBSITE",
+      title: "Website",
       links: [
         {
           id: "clwn5jb6b0000ufd9ukcrgrjt", 
           order: 0,
-          name: "Dashboard",
+          name: "dashboard",
           href: "/dashboard",
           roles: ["guest", "admin", "editor", "architect"],
           isPublished: false,
@@ -20,7 +20,7 @@ export const menuData = {
         {
           id: "clwn5jb6b0001ufd9ukcrgrjw",
           order: 1,
-          name: "User Management",
+          name: "user-management",
           href: "/user-management",
           roles: ["guest", "admin"],
           hasBadge: true,
@@ -33,12 +33,12 @@ export const menuData = {
     },
     {
       order: 1,
-      title: "COMMERCE",
+      title: "Commerce",
       links: [
         {
           id: "clwn5jb6b0002ufd9ukcrgrj2",
           order: 0,
-          name: "Ecommerce",
+          name: "ecommerce",
           href: "/ecommerce",
           roles: ["guest", "customer"],
           isPublished: false,
@@ -48,7 +48,7 @@ export const menuData = {
         {
           id: "clwn5jb6b0003ufd9ukcrgrj6",
           order: 1,
-          name: "Ecommerce Templates",
+          name: "ecommerce-templates",
           href: "/ecommerce-templates",
           roles: ["guest", "admin"],
           isPublished: true,

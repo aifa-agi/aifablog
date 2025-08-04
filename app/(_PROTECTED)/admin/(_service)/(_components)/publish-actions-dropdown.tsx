@@ -62,18 +62,6 @@ export function PublishActionsDropdown({
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="min-w-[190px]">
-        <DropdownMenuItem onClick={() => handlePublishMode("draft")}>
-          <span className="flex items-center">
-            <span
-              className={cn(
-                "inline-block mr-3 align-middle rounded-full border border-black/30",
-                publishMode === "draft" ? "bg-green-500" : "bg-muted-foreground"
-              )}
-              style={{ width: 12, height: 12, minWidth: 12, minHeight: 12 }}
-            />
-            Draft
-          </span>
-        </DropdownMenuItem>
         <DropdownMenuItem onClick={() => handlePublishMode("published")}>
           <span className="flex items-center">
             <span
@@ -85,7 +73,19 @@ export function PublishActionsDropdown({
             />
             Publish
           </span>
+        </DropdownMenuItem><DropdownMenuItem onClick={() => handlePublishMode("draft")}>
+          <span className="flex items-center">
+            <span
+              className={cn(
+                "inline-block mr-3 align-middle rounded-full border border-black/30",
+                publishMode === "draft" ? "bg-orange-500" : "bg-muted-foreground"
+              )}
+              style={{ width: 12, height: 12, minWidth: 12, minHeight: 12 }}
+            />
+            Draft
+          </span>
         </DropdownMenuItem>
+        
       </DropdownMenuContent>
     </DropdownMenu>
   );

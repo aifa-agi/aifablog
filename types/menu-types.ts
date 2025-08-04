@@ -31,6 +31,7 @@ export interface MenuLink {
 }
 
 export interface MenuCategory {
+  
   title: string;
   links: MenuLink[];
   order?: number; 

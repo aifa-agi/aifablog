@@ -10,6 +10,7 @@ import { MenuCategory, MenuLink } from "@/types/menu-types";
 import { LinkActionsDropdown } from "./link-actions-dropdown";
 import { CategoryActionsDropdown } from "./category-actions-dropdown";
 import { useDialogs } from "@/app/contexts/dialogs-providers";
+import { toast } from "sonner";
 import {
   DndContext,
   closestCenter,
@@ -28,6 +29,8 @@ import { PublishActionsDropdown } from "./publish-actions-dropdown";
 import { VectorStoreActionsDropdown } from "./vector-store-actions-dropdown";
 import { generateCuid } from "@/lib/generate-cuid";
 import { ChatSynchroniseActionDropdown } from "./chat-synchronise-action-dropdown";
+import { normalizeText } from "@/lib/normalize-text";
+import { humanize } from "@/lib/humanize";
 
 const greenDotClass = "bg-emerald-500";
 
@@ -60,6 +63,7 @@ function DraggableCategoryCard({
     transition,
     isDragging,
   } = useSortable({ id: category.title });
+
   return (
     <div
       ref={setNodeRef}
@@ -98,6 +102,7 @@ function DraggableMenuLink({
     transition,
     isDragging,
   } = useSortable({ id: link.id });
+
   return (
     <li
       ref={setNodeRef}
@@ -190,7 +195,7 @@ export default function EditableWideMenu({
             >
               <div className="flex-grow flex items-center gap-2 overflow-hidden">
                 <span className="overflow-hidden text-ellipsis whitespace-nowrap">
-                  {link.name}
+                  {humanize(link.name)}
                 </span>
                 {link.hasBadge && link.badgeName && (
                   <Badge className="shadow-none rounded-full px-2.5 py-0.5 text-xs font-semibold h-6 flex items-center">
@@ -220,8 +225,8 @@ export default function EditableWideMenu({
                   categoryTitle={categoryTitle}
                   setCategories={setCategories}
                 />
-                < ChatSynchroniseActionDropdown 
-                link={link}
+                <ChatSynchroniseActionDropdown
+                  link={link}
                   categoryTitle={categoryTitle}
                   setCategories={setCategories}
                 />
@@ -248,14 +253,27 @@ export default function EditableWideMenu({
       value: "",
       confirmLabel: "Create",
       onConfirm: (value) => {
-        if (!value) return;
+        const normalizedValue = normalizeText(value as string);
+        if (!normalizedValue) {
+          toast.error("Category name cannot be empty");
+          return;
+        }
+        const exists = categories.some(
+          (cat) =>
+            normalizeText(cat.title).toLowerCase() === normalizedValue.toLowerCase()
+        );
+        if (exists) {
+          toast.error("Category with this name already exists");
+          return;
+        }
         const maxOrder = categories.length
           ? Math.max(...categories.map((c) => c.order ?? 0))
           : 0;
         setCategories((prev) => [
           ...prev,
           {
-            title: value,
+            id: generateCuid(),
+            title: normalizedValue,
             links: [],
             order: maxOrder + 1,
           },
@@ -273,6 +291,7 @@ export default function EditableWideMenu({
       confirmLabel: "Create",
       onConfirm: (value) => {
         if (!value) return;
+        const normalizedName = normalizeText(value);
         setCategories((prev) =>
           prev.map((cat) =>
             cat.title === category.title
@@ -282,8 +301,8 @@ export default function EditableWideMenu({
                     ...cat.links,
                     {
                       id: generateCuid(),
-                      name: value,
-                      href: "#",
+                      name: normalizedName,
+                      href: "/" + normalizedName,
                       roles: ["guest"],
                       hasBadge: false,
                       isPublished: false,
@@ -320,7 +339,7 @@ export default function EditableWideMenu({
               >
                 <div className="flex items-center justify-between">
                   <h3 className="text-gray-400 text-base font-semibold tracking-wider border-b border-gray-700 pb-1">
-                    {activeCategory.title}
+                    {humanize(activeCategory.title)}
                   </h3>
                   <Button
                     type="button"
@@ -384,7 +403,7 @@ export default function EditableWideMenu({
                     >
                       <CardContent className="flex items-center justify-between p-0 h-full">
                         <h4 className="text-white font-semibold text-base line-clamp-1 whitespace-nowrap overflow-hidden">
-                          {category.title}
+                          {humanize(category.title)}
                         </h4>
                         <div className="flex items-center gap-1 ml-3">
                           <CategoryActionsDropdown
