@@ -53,13 +53,23 @@ export function PageActionsDropdown({
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="min-w-[190px]">
 
+        
         <DropdownMenuItem onClick={handleAddPageCode}>
-          Add page code
+          Title
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={handleAddPageCode}>
+          Description
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={handleAddPageCode}>
+          Image
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={handleAddPageCode}>
+          Page body
         </DropdownMenuItem>
 
         <DropdownMenuSeparator />
 
-        <DropdownMenuGroup>
+        {/* <DropdownMenuGroup>
           {PAGE_TYPES.map((type) => (
             <DropdownMenuItem
               key={type}
@@ -78,9 +88,9 @@ export function PageActionsDropdown({
               <span>{type}</span>
             </DropdownMenuItem>
           ))}
-        </DropdownMenuGroup>
+        </DropdownMenuGroup> */}
 
-        <DropdownMenuSeparator />
+        {/* <DropdownMenuSeparator /> */}
 
         <DropdownMenuItem className="text-destructive" onClick={handleDelete}>
           Delete

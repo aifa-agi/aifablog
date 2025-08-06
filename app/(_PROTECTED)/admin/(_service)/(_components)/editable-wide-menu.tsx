@@ -311,6 +311,7 @@ export default function EditableWideMenu({
                       href: "/" + normalizedName,
                       roles: ["guest"],
                       hasBadge: false,
+                      type: "simple-blog",
                       isPublished: false,
                       isVectorConnected: false,
                       isChatSynchronized: false,

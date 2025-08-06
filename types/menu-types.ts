@@ -1,5 +1,7 @@
 // @/types/menu-types.ts
 
+import { PageType, SectionType } from "./page-types";
+
 export type UserRole =
   | "guest"
   | "architect"
@@ -24,14 +26,17 @@ export interface MenuLink {
   roles: UserRole[];
   hasBadge?: boolean;
   badgeName?: BadgeName;
+  badgeLink?: string;
   order?: number;
   isPublished: boolean;
   isVectorConnected: boolean;
   isChatSynchronized:boolean;
-}
+  type: PageType ;
+  design?: string;
+  }
 
-export interface MenuCategory {
-  
+
+export interface MenuCategory {  
   title: string;
   links: MenuLink[];
   order?: number; 
