@@ -1,6 +1,6 @@
-// @/types/menu-types.ts
 
-import { PageType, SectionType } from "./page-types";
+
+import { PageType } from "./page-types";
 
 export type UserRole =
   | "guest"

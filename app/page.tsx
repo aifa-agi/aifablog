@@ -1,6 +1,6 @@
-// @/app/(_PUBLIC)/(_routing)/page.tsx
 
-import FakeAuthSelector from "../../(_FAKE_AUTH)/fake-auth-selector";
+
+import FakeAuthSelector from "../components/fake-auth-selector";
 import { Button } from "@/components/ui/button";
 import { ExternalLink } from "lucide-react";
 

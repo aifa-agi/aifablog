@@ -4,7 +4,7 @@ import { ChevronDown, MoreVertical } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import EditableWideMenu from "./editable-wide-menu";
 import EditableMobileMenu from "./editable-mobile-menu";
-import { useNavigationMenu } from "@/app/contexts/navigation-menu-provider";
+import { useNavigationMenu } from "@/app/contexts/nav-bar-provider";
 import { toast } from "sonner";
 
 const HEADER_HEIGHT = 56;

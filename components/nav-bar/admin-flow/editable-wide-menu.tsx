@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Loader2, GripVertical, Plus } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { MenuCategory, MenuLink } from "@/types/menu-types";
-import { LinkActionsDropdown } from "./link-actions-dropdown";
+import { BadgeActionsDropdown } from "./badge-actions-dropdown";
 import { CategoryActionsDropdown } from "./category-actions-dropdown";
 import { useDialogs } from "@/app/contexts/dialogs-providers";
 import { toast } from "sonner";
@@ -32,6 +32,8 @@ import { ChatSynchroniseActionDropdown } from "./chat-synchronise-action-dropdow
 import { normalizeText } from "@/lib/normalize-text";
 import { humanize } from "@/lib/humanize";
 import { PageActionsDropdown } from "./page-actions-dropdown";
+import { PageType } from "@/types/page-types";
+import { LinkActionsDropdown } from "./link-action-dropdown";
 
 const greenDotClass = "bg-emerald-500";
 
@@ -211,7 +213,7 @@ export default function EditableWideMenu({
                 )}
               </div>
               <div className="flex items-center gap-1">
-                <LinkActionsDropdown
+                <BadgeActionsDropdown
                   link={link}
                   categoryTitle={categoryTitle}
                   setCategories={setCategories}
@@ -227,6 +229,11 @@ export default function EditableWideMenu({
                   setCategories={setCategories}
                 />
                 <ChatSynchroniseActionDropdown
+                  link={link}
+                  categoryTitle={categoryTitle}
+                  setCategories={setCategories}
+                />
+                <LinkActionsDropdown
                   link={link}
                   categoryTitle={categoryTitle}
                   setCategories={setCategories}
@@ -311,7 +318,7 @@ export default function EditableWideMenu({
                       href: "/" + normalizedName,
                       roles: ["guest"],
                       hasBadge: false,
-                      type: "simple-blog",
+                      type: "simple-blog" as PageType,
                       isPublished: false,
                       isVectorConnected: false,
                       isChatSynchronized: false,

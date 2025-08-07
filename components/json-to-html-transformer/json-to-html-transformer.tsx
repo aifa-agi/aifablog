@@ -206,6 +206,6 @@ export function JsonToHtmlTransformer({ data }: JsonToHtmlTransformerProps) {
         if (isTypographySection(section)) return renderTypographySection(section);
         return null;
       })}
-    </div>
+    </div> 
   );
 }

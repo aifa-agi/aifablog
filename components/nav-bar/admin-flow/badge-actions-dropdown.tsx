@@ -40,7 +40,7 @@ const ALL_BADGES: BadgeName[] = [
   "RECOMMENDATION",
 ];
 
-export function LinkActionsDropdown({
+export function BadgeActionsDropdown({
   link,
   categoryTitle,
   setCategories,

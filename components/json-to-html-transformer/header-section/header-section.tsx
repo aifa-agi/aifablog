@@ -1,5 +1,3 @@
-// @/app/@right/(_service)/(_components)/page-transformer-components/header-sections-components/header-section.tsx
-
 import { cn } from "@/lib/utils";
 
 import { Announcement } from "./announcement";

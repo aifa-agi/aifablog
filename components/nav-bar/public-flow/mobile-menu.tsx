@@ -5,7 +5,7 @@ import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
 import { MenuLink } from '@/types/menu-types';
 import { useRole } from '@/app/contexts/role-provider';
-import { useNavigationMenu } from '@/app/contexts/navigation-menu-provider';
+import { useNavigationMenu } from '@/app/contexts/nav-bar-provider';
 import { humanize } from "@/lib/humanize";
 
 interface MobileMenuProps {

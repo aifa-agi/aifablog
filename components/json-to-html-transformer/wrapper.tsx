@@ -1,4 +1,3 @@
-// app/@right/(_service)/(_components)/page-transformer-components/wrappers/wrapper.tsx
 
 import React, { HTMLAttributes } from "react";
 import { cn } from "@/lib/utils";

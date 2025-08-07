@@ -1,4 +1,3 @@
-// @/app/layout.tsx
 
 import type { Metadata } from 'next'
 import { GeistSans } from 'geist/font/sans'
@@ -9,7 +8,7 @@ import { Toaster } from 'sonner'
 import NavBarRoleSelector from '@/components/nav-bar-role-selector'
 import { RoleProvider } from "@/app/contexts/role-provider"
 import { DialogsProvider } from './contexts/dialogs-providers'
-import { NavigationMenuProvider } from "@/app/contexts/navigation-menu-provider"
+import { NavigationMenuProvider } from "@/app/contexts/nav-bar-provider"
 
 export const metadata: Metadata = {
   title: 'NEXTJS BLOG WITH BLOB AND AI VECTOR STORE STARTER - AIFA ',
@@ -55,7 +54,7 @@ html {
                   </div>
                 </div>
               </header>
-              <main className="pt-16 h-screen overflow-y-scroll">
+              <main className="pt-16 h-screen overflow-hidden">
                 {children}
               </main>
               <Toaster richColors position="top-center" />

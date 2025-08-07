@@ -1,4 +1,3 @@
-// @/app/(_FAKE_AUTH)/fake-auth-selector.tsx
 
 "use client";
 

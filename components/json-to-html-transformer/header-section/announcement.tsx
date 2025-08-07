@@ -1,5 +1,3 @@
-// @app/@right/(_service)/(_components)/page-transformer-components/header-sections-components/announcement.tsx
-
 "use client";
 
 import { useRouter } from "next/navigation";

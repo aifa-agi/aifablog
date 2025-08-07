@@ -13,6 +13,7 @@ import { cn } from "@/lib/utils";
 import { MenuLink, MenuCategory } from "@/types/menu-types";
 import { useDialogs } from "@/app/contexts/dialogs-providers";
 import { useState } from "react";
+import { Button } from "@/components/ui/button";
 
 const PAGE_TYPES = ["Page", "Blog", "Docs", "Guide", "Shop"] as const;
 
@@ -37,19 +38,23 @@ export function PageActionsDropdown({
 
   const handleDelete = () => {};
 
+  const handleKeyWord = () => {}
+  
+
   // Для выделения текущего режима (если уже сохранён тип страницы в link)
   const selectedType =  pageType;
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <button
-          type="button"
+        <Button
+        variant="ghost"
+          size="icon"
           className="flex items-center justify-center w-8 h-8 rounded transition hover:bg-accent/60"
           tabIndex={-1}
         >
           <FileCode2 className="w-4 h-4 text-primary/80" />
-        </button>
+        </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="min-w-[190px]">
 
@@ -62,6 +67,9 @@ export function PageActionsDropdown({
         </DropdownMenuItem>
         <DropdownMenuItem onClick={handleAddPageCode}>
           Image
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={handleKeyWord}>
+          Key Word
         </DropdownMenuItem>
         <DropdownMenuItem onClick={handleAddPageCode}>
           Page body
