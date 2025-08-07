@@ -5,10 +5,10 @@ import { GeistMono } from 'geist/font/mono'
 import './globals.css'
 import Link from "next/link"
 import { Toaster } from 'sonner'
-import NavBarRoleSelector from '@/components/nav-bar-role-selector'
-import { RoleProvider } from "@/app/contexts/role-provider"
-import { DialogsProvider } from './contexts/dialogs-providers'
-import { NavigationMenuProvider } from "@/app/contexts/nav-bar-provider"
+import NavBarRoleSelector from '@/app/(_service)/components/nav-bar-role-selector'
+import { RoleProvider } from "@/app/(_service)/contexts/role-provider"
+import { DialogsProvider } from './(_service)/contexts/dialogs-providers'
+import { NavigationMenuProvider } from "@/app/(_service)/contexts/nav-bar-provider"
 
 export const metadata: Metadata = {
   title: 'NEXTJS BLOG WITH BLOB AND AI VECTOR STORE STARTER - AIFA ',
@@ -54,7 +54,7 @@ html {
                   </div>
                 </div>
               </header>
-              <main className="pt-16 h-screen overflow-hidden">
+              <main className="pt-16 px-8 h-screen overflow-y-scroll">
                 {children}
               </main>
               <Toaster richColors position="top-center" />

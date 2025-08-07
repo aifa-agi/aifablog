@@ -1,4 +1,4 @@
-import { MenuCategory } from "@/types/menu-types";
+import { MenuCategory } from "@/app/config/menu-types";
 
 // Эти cuid'ы сгенерированы заранее вручную для примера
 export const menuData = {
@@ -6,7 +6,7 @@ export const menuData = {
     {
       order: 0,
       title: "Website",
-      links: [
+      pages: [
         {
           id: "clwn5jb6b0000ufd9ukcrgrjt", 
           order: 0,
@@ -34,7 +34,7 @@ export const menuData = {
     {
       order: 1,
       title: "Commerce",
-      links: [
+      pages: [
         {
           id: "clwn5jb6b0002ufd9ukcrgrj2",
           order: 0,
