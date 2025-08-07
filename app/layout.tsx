@@ -55,7 +55,7 @@ html {
                   </div>
                 </div>
               </header>
-              <main className="pt-16 h-screen overflow-hidden">
+              <main className="pt-16 h-screen overflow-y-scroll">
                 {children}
               </main>
               <Toaster richColors position="top-center" />

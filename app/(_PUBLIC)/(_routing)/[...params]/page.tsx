@@ -3,7 +3,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { menuData } from "../../../config.ts/menu-data";
+import { menuData } from "../../../config/menu-data";
 import { getStoredRole, Role, ROLE_LABELS } from "@/lib/utils";
 import { MenuCategory, MenuLink } from "@/types/menu-types";
 

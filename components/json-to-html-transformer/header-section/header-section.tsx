@@ -3,7 +3,6 @@
 import { cn } from "@/lib/utils";
 
 import { Announcement } from "./announcement";
-import { TypographyLead } from "../typography-sections";
 import { HeaderTitle } from "./header-title";
 import { HeaderSection as HeaderSectionType } from "@/types/page-types";
 
@@ -39,9 +38,9 @@ export function HeaderSection({
           >
             {title}
           </HeaderTitle>
-          <TypographyLead className={customDescriptionCss}>
+          <p className="text-muted-foreground text-xl">
             {description}
-          </TypographyLead>
+          </p>
         </div>
       </div>
     </section>

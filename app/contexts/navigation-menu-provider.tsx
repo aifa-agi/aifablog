@@ -1,7 +1,7 @@
 "use client";
 import React, { createContext, useContext, useState, useCallback, useRef, useEffect } from "react";
 import { MenuCategory } from "@/types/menu-types";
-import { menuData } from "@/app/config.ts/menu-data";
+import { menuData } from "@/app/config/menu-data";
 
 interface NavigationMenuContextProps {
   categories: MenuCategory[];
