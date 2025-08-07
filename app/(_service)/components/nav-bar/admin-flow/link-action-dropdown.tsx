@@ -10,7 +10,7 @@ import {
 } from "@/app/(_service)/components/ui/dropdown-menu";
 import { Button } from "@/app/(_service)/components/ui/button";
 import { Link2 } from "lucide-react"; 
-import { MenuCategory } from "@/app/config/menu-types";
+import { MenuCategory } from "@/app/(_service)/types/menu-types";
 import { PageData } from "@/app/(_service)/types/page-types";
 
 interface LinkManagementDropdownProps {

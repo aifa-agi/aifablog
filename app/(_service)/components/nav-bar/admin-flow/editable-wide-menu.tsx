@@ -6,7 +6,7 @@ import { Badge } from "@/app/(_service)/components/ui/badge";
 import { Button } from "@/app/(_service)/components/ui/button";
 import { Loader2, GripVertical, Plus } from "lucide-react";
 import { cn } from "@/app/(_service)/lib/utils";
-import { MenuCategory } from "@/app/config/menu-types";
+import { MenuCategory } from "@/app/(_service)/types/menu-types";
 import { BadgeActionsDropdown } from "./badge-actions-dropdown";
 import { CategoryActionsDropdown } from "./category-actions-dropdown";
 import { useDialogs } from "@/app/(_service)/contexts/dialogs-providers";
@@ -295,7 +295,7 @@ export default function EditableWideMenu({
     });
   };
 
-  const handleAddLink = (category: MenuCategory) => {
+  const handleAddPage = (category: MenuCategory) => {
     dialogs.show({
       type: "create",
       title: "New singlePage",
@@ -360,7 +360,7 @@ export default function EditableWideMenu({
                     variant="outline"
                     size="icon"
                     className="ml-2 border-green-500 border-2 rounded-full hover:bg-green-950/30 text-green-400 focus-visible:ring-green-400"
-                    onClick={() => handleAddLink(activeCategory)}
+                    onClick={() => handleAddPage(activeCategory)}
                     title="Add singlePage"
                   >
                     <Plus className="w-4 h-4" />

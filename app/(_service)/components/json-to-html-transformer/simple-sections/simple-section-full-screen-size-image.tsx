@@ -77,7 +77,7 @@ export const SimpleSectionFullScreenSizeImage: React.FC<SimpleSectionFullScreenS
     };
 
     return (
-      <div className="pb-6 sm:pb-16">
+      <div className="py-6 sm:pb-16 ">
         <div className="container max-w-6xl">
           <div className={outerClass}>
             <div className={imgWrapperClass}>

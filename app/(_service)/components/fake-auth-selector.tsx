@@ -4,7 +4,7 @@
 import React from "react";
 import { useRole } from "@/app/(_service)/contexts/role-provider";
 import { ROLE_LABELS } from "@/app/(_service)/lib/utils";
-import type { UserRole } from "@/app/config/menu-types";
+import type { UserRole } from "@/app/(_service)/types/menu-types";
 import { toast } from "sonner";
 
 export default function FakeAuthSelector() {

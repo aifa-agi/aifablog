@@ -4,7 +4,7 @@ import React from "react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/app/(_service)/components/ui/dropdown-menu";
 import { Database } from "lucide-react";
 import { cn } from "@/app/(_service)/lib/utils";
-import { MenuCategory } from "@/app/config/menu-types";
+import { MenuCategory } from "@/app/(_service)/types/menu-types";
 import { PageData } from "@/app/(_service)/types/page-types";
 
 interface VectorStoreActionsDropdownProps {

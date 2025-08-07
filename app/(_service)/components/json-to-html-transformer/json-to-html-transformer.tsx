@@ -255,7 +255,7 @@ function renderTypographySection(section: TypographySection) {
 export function JsonToHtmlTransformer({ data }: JsonToHtmlTransformerProps) {
   if (!data?.sections?.length) return null;
   return (
-    <div className="page-content">
+    <div className="page-content pb-8">
       {data.sections.map((section, idx) => {
         if (isStepSection(section)) return renderStepSection(section);
         if (isSimpleSection(section)) return renderSimpleSection(section);

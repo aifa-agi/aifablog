@@ -8,8 +8,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/app/(_service)/components/ui/dropdown-menu";
-import {  FileCode2 } from "lucide-react";
-import {  MenuCategory } from "@/app/config/menu-types";
+import { FileCode2 } from "lucide-react";
+import { MenuCategory } from "@/app/(_service)/types/menu-types";
 import { useDialogs } from "@/app/(_service)/contexts/dialogs-providers";
 import { useState } from "react";
 import { Button } from "@/app/(_service)/components/ui/button";
@@ -31,24 +31,31 @@ export function PageActionsDropdown({
 
   const handleSetPageType = (type: string) => {
     setPageType(type);
-    
   };
+
+  const handleAddTitle = () => {};
+
+  const handleAddDescription = () => {};
+
+  const handleAddImages = () => {};
 
   const handleAddPageCode = () => {};
 
   const handleDelete = () => {};
 
-  const handleKeyWord = () => {}
-  
+  const handleKeyWord = () => {};
 
+  const handleAuthors = () => {};
 
-  const selectedType =  pageType;
+  const handleTags = () => {};
+
+  const selectedType = pageType;
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
-        variant="ghost"
+          variant="ghost"
           size="icon"
           className="flex items-center justify-center w-8 h-8 rounded transition hover:bg-accent/60"
           tabIndex={-1}
@@ -57,20 +64,15 @@ export function PageActionsDropdown({
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="min-w-[190px]">
-
-        
-        <DropdownMenuItem onClick={handleAddPageCode}>
-          Title
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={handleAddPageCode}>
+        <DropdownMenuItem onClick={handleAddTitle}>Title</DropdownMenuItem>
+        <DropdownMenuItem onClick={handleAddDescription}>
           Description
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={handleAddPageCode}>
-          Image
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={handleKeyWord}>
-          Key Word
-        </DropdownMenuItem>
+        <DropdownMenuItem onClick={handleAddImages}>Images</DropdownMenuItem>
+        <DropdownMenuItem onClick={handleKeyWord}>Key Word</DropdownMenuItem>
+        <DropdownMenuItem onClick={handleTags}>Tags</DropdownMenuItem>
+        <DropdownMenuItem onClick={handleAuthors}>Authors</DropdownMenuItem>
+        <DropdownMenuSeparator />
         <DropdownMenuItem onClick={handleAddPageCode}>
           Page body
         </DropdownMenuItem>
@@ -103,7 +105,6 @@ export function PageActionsDropdown({
         <DropdownMenuItem className="text-destructive" onClick={handleDelete}>
           Delete
         </DropdownMenuItem>
-
       </DropdownMenuContent>
     </DropdownMenu>
   );

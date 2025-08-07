@@ -22,7 +22,7 @@ export function Wrapper({
       className={cn(
         "wrapper-container",
         showSeparator && "border-t border-muted pt-8 mt-8",
-        isFirstItem && "header-section",
+        isFirstItem && "header-section mb-4",
         className
       )}
       {...props}

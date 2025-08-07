@@ -8,7 +8,7 @@ import {
   AccordionTrigger,
 } from "@/app/(_service)/components/ui/accordion";
 import { Badge } from "@/app/(_service)/components/ui/badge";
-import { MenuCategory} from "@/app/config/menu-types";
+import { MenuCategory} from "@/app/(_service)/types/menu-types";
 import { cn } from "@/app/(_service)/lib/utils";
 import { humanize } from "@/app/(_service)/lib/humanize";
 import { PageData } from "@/app/(_service)/types/page-types";

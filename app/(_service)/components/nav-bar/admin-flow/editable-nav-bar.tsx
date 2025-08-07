@@ -47,7 +47,7 @@ export default function EditableNavBar() {
   const handleUpdate = async () => {
     try {
       await updateCategories();
-      toast.success("All changes pushed to fake server");
+      
     } catch {
       toast.error("Error updating on server");
     }

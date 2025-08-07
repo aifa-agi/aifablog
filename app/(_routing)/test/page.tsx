@@ -7,7 +7,7 @@ import { JsonToHtmlTransformer } from "@/app/(_service)/components/json-to-html-
 
 export default function TestPage() {
   return (
-    <main>
+    <main >
       <JsonToHtmlTransformer data={paromyTenerifePageData} />
     </main>
   );

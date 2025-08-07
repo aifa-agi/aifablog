@@ -1,4 +1,4 @@
-import { PageData } from "../(_service)/types/page-types";
+import { PageData } from "./page-types";
 
 
 export type UserRole =

@@ -9,7 +9,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/app/(_service)/components/ui/dropdown-menu";
-import { UserRole, BadgeName,MenuCategory } from "@/app/config/menu-types";
+import { UserRole, BadgeName,MenuCategory } from "@/app/(_service)/types/menu-types";
 import { Pencil } from "lucide-react";
 import { cn } from "@/app/(_service)/lib/utils";
 import { useDialogs } from "@/app/(_service)/contexts/dialogs-providers";
