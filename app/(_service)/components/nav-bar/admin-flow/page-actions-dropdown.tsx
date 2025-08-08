@@ -362,7 +362,7 @@ export function PageActionsDropdown({
             ))}
           </DropdownMenuGroup>
         </div>
-        <DropdownMenuSeparator />
+        
       </DropdownMenuContent>
     </DropdownMenu>
   );

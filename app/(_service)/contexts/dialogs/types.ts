@@ -1,6 +1,12 @@
 // @/app/(_service)/contexts/dialogs/types.ts
 
-export type DialogType = "create" | "edit" | "delete";
+export type DialogType = 
+  | "create"     
+  | "edit"       
+  | "confirm"   
+  | "alert"      
+  | "custom"
+  | "delete"
 export type InputType = "input" | "textarea" | "keywords" | "images";
 
 export interface PageImages {

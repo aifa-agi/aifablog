@@ -3,10 +3,10 @@
 import { useEffect, useState } from "react";
 import { ChevronDown, MoreVertical } from "lucide-react";
 import { Button } from "@/app/(_service)/components/ui/button";
-import EditableWideMenu from "./editable-wide-menu";
 import EditableMobileMenu from "./editable-mobile-menu";
 import { useNavigationMenu, useMenuOperations } from "@/app/(_service)/contexts/nav-bar-provider";
 import { DialogsProvider } from "@/app/(_service)/contexts/dialogs";
+import { EditableWideMenu } from "./editable-wide-menu";
 
 const HEADER_HEIGHT = 56;
 const MOBILE_MENU_OFFSET = 40;
