@@ -1,3 +1,5 @@
+// @/app/(_service)/components/nav-bar/admin-flow/editable-wide-menu/category-section/page-list.tsx
+
 "use client";
 
 import React from "react";
@@ -10,15 +12,12 @@ import { PageListItem } from "./page-list-item";
 interface PageListProps {
   pages: PageData[];
   categoryTitle: string;
-  categories: MenuCategory[]; // ✅ Добавляем недостающий проп
-  setCategories: React.Dispatch<React.SetStateAction<MenuCategory[]>>; // ✅ Добавляем недостающий проп
+  categories: MenuCategory[]; 
+  setCategories: React.Dispatch<React.SetStateAction<MenuCategory[]>>; 
   onPageDragEnd: (activeId: string, overId: string) => void;
 }
 
-/**
- * Компонент списка страниц с поддержкой drag & drop
- * Отображает все страницы в выбранной категории
- */
+
 export function PageList({ 
   pages, 
   categoryTitle, 
@@ -37,7 +36,7 @@ export function PageList({
     }
   };
 
-  // Если нет страниц, показываем placeholder
+  
   if (!pages.length) {
     return (
       <div className="flex items-center justify-center h-32 text-gray-500 italic">

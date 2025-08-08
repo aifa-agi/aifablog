@@ -2,7 +2,7 @@
 
 import React from "react";
 import {
-  PageConfig,
+  PageData,
   ExtendedSection,
   StepSection,
   SimpleSection,
@@ -31,7 +31,7 @@ import {
 } from "./typography-markdown";
 
 interface JsonToHtmlTransformerProps {
-  data: PageConfig;
+  data: PageData;
 }
 
 function isStepSection(section: ExtendedSection): section is StepSection {

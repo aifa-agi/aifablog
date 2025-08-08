@@ -110,7 +110,7 @@ export function BadgeActionsDropdown({
         });
       },
       onCancel: () => {
-        // Действие при отмене (опционально)
+        
       }
     });
   };

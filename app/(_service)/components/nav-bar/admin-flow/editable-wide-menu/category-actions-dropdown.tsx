@@ -1,3 +1,5 @@
+// @/app/(_service)/components/nav-bar/admin-flow/editable-wide-menu/category-actions-dropdown.tsx
+
 "use client";
 
 import React from "react";

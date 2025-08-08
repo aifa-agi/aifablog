@@ -1,3 +1,5 @@
+// @/app/(_service)/components/nav-bar/admin-flow/editable-wide-menu/category-section/page-section.tsx
+
 "use client";
 
 import React from "react";
@@ -9,15 +11,13 @@ import { PageList } from "./page-list";
 
 interface PageSectionProps {
   activeCategory: MenuCategory | null;
-  categories: MenuCategory[]; // ✅ Добавляем categories
-  setCategories: React.Dispatch<React.SetStateAction<MenuCategory[]>>; // ✅ Добавляем setCategories
+  categories: MenuCategory[]; 
+  setCategories: React.Dispatch<React.SetStateAction<MenuCategory[]>>; 
   onAddPage: (category: MenuCategory) => void;
   onPageDragEnd: (activeId: string, overId: string) => void;
 }
 
-/**
- * Секция отображения и управления страницами выбранной категории
- */
+
 export function PageSection({ 
   activeCategory, 
   categories,
@@ -29,7 +29,6 @@ export function PageSection({
     <div className="flex-1 p-8 pb-12 flex flex-col custom-scrollbar">
       {activeCategory ? (
         <div className="relative flex-1 flex flex-col h-full min-h-0">
-          {/* Заголовок с кнопкой добавления страницы */}
           <div
             className="sticky top-0 left-0 right-0 z-10 bg-black/90 backdrop-blur-sm pb-2 mb-2"
             style={{ paddingBottom: 12, marginBottom: 8 }}
@@ -51,13 +50,12 @@ export function PageSection({
             </div>
           </div>
 
-          {/* Список страниц */}
           <div className="flex-1 min-h-0 overflow-y-auto custom-scrollbar">
             <PageList
               pages={activeCategory.pages}
               categoryTitle={activeCategory.title}
-              categories={categories} // ✅ Передаем categories
-              setCategories={setCategories} // ✅ Передаем setCategories
+              categories={categories} 
+              setCategories={setCategories} 
               onPageDragEnd={onPageDragEnd}
             />
           </div>

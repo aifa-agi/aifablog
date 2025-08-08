@@ -435,6 +435,7 @@ interface PageImages {
   href?: string;
 }
 export interface PageData {
+  metadata?: Metadata;
   id: string;
   linkName: string;
   title?:string;
@@ -456,13 +457,10 @@ export interface PageData {
   linksData?: LinksData[];
   createdAt?: string;           
   updatedAt?: string; 
-}
-
-export interface PageConfig {
-  metadata?: Metadata;
-  pagedata: PageData;  
   sections?: ExtendedSection[];
 }
+
+
 
 /**
  * =============================================================================
