@@ -12,21 +12,17 @@ import {
 import { MenuCategory } from "@/app/(_service)/types/menu-types";
 import { Pencil } from "lucide-react";
 import { cn } from "@/app/(_service)/lib/utils";
-import { useDialogs } from "@/app/(_service)/contexts/dialogs-providers";
 import { normalizeText } from "@/app/(_service)/lib/normalize-text";
 import { PageData } from "@/app/(_service)/types/page-types";
 import { ALL_ROLES, UserRole } from "@/app/config/user-roles";
 import { ALL_BADGES, BadgeName } from "@/app/config/badge-config";
+import { useDialogs } from "@/app/(_service)/contexts/dialogs";
 
 interface LinkActionsDropdownProps {
   singlePage: PageData;
   categoryTitle: string;
   setCategories: React.Dispatch<React.SetStateAction<MenuCategory[]>>;
 }
-
-
-
-
 
 export function BadgeActionsDropdown({
   singlePage,
@@ -82,43 +78,50 @@ export function BadgeActionsDropdown({
   const isBadgeActive = (badge: BadgeName) => singlePage.hasBadge && singlePage.badgeName === badge;
 
   const handleRename = () => {
-  dialogs.show({
-    type: "edit",
-    title: "Rename link name",
-    description: singlePage.linkName,
-    value: singlePage.linkName,
-    confirmLabel: "Save changes",
-    onConfirm: (value) => {
-      if (!value) return;
-      const normalizedName = normalizeText(value);
-      setCategories((prev) => {
-        return prev.map((cat) =>
-          cat.title !== categoryTitle
-            ? cat
-            : {
-                ...cat,
-                pages: cat.pages.map((l) =>
-                  l.id === singlePage.id
-                    ? {
-                        ...l,
-                        linkName: normalizedName,
-                        href: "/" + normalizedName,
-                      }
-                    : l
-                ),
-              }
-        );
-      });
-    },
-  });
-};
+    dialogs.show({
+      type: "edit",
+      inputType: "input",
+      title: "Rename link name",
+      description: singlePage.linkName,
+      value: singlePage.linkName,
+      placeholder: "Enter new link name...",
+      confirmLabel: "Save changes",
+      cancelLabel: "Cancel",
+      onConfirm: (value) => {
+        if (!value?.trim()) return;
+        const normalizedName = normalizeText(value);
+        setCategories((prev) => {
+          return prev.map((cat) =>
+            cat.title !== categoryTitle
+              ? cat
+              : {
+                  ...cat,
+                  pages: cat.pages.map((l) =>
+                    l.id === singlePage.id
+                      ? {
+                          ...l,
+                          linkName: normalizedName,
+                          href: "/" + normalizedName,
+                        }
+                      : l
+                  ),
+                }
+          );
+        });
+      },
+      onCancel: () => {
+        // Действие при отмене (опционально)
+      }
+    });
+  };
 
   const handleDelete = () => {
     dialogs.show({
       type: "delete",
-      title: "Delete singlePage",
-      description: `Are you sure you want to delete singlePage "${singlePage.linkName}"?`,
+      title: "Delete page",
+      description: `Are you sure you want to delete page "${singlePage.linkName}"? This action cannot be undone.`,
       confirmLabel: "Delete",
+      cancelLabel: "Cancel",
       onConfirm: () => {
         setCategories((prev) =>
           prev.map((cat) =>
@@ -131,6 +134,9 @@ export function BadgeActionsDropdown({
           )
         );
       },
+      onCancel: () => {
+        // Действие при отмене (опционально)
+      }
     });
   };
 

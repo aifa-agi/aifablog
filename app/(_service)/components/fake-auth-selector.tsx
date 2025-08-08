@@ -10,7 +10,7 @@ export default function FakeAuthSelector() {
 
   const switchRole = (nextRole: UserRole) => {
     setRole(nextRole);
-    // Используем саму роль для отображения, так как ALL_ROLES - это массив
+    
     toast.info(`Your current role: ${nextRole}`);
   };
 

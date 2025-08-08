@@ -10,7 +10,7 @@ import {
 import { Badge } from "@/app/(_service)/components/ui/badge";
 import { MenuCategory} from "@/app/(_service)/types/menu-types";
 import { cn } from "@/app/(_service)/lib/utils";
-import { humanize } from "@/app/(_service)/lib/humanize";
+import { humanize } from "@/app/api/menu/persist/humanize";
 import { PageData } from "@/app/(_service)/types/page-types";
 
 interface EditableMobileMenuProps {

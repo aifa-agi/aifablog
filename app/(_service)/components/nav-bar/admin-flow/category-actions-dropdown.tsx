@@ -9,9 +9,9 @@ import {
 } from "@/app/(_service)/components/ui/dropdown-menu";
 import { Pencil } from "lucide-react";
 import { MenuCategory } from "@/app/(_service)/types/menu-types";
-import { useDialogs } from "@/app/(_service)/contexts/dialogs-providers";
 import { toast } from "sonner";
 import { normalizeText } from "@/app/(_service)/lib/normalize-text";
+import { useDialogs } from "@/app/(_service)/contexts/dialogs";
 
 interface CategoryActionsDropdownProps {
   categoryTitle: string;

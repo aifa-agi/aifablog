@@ -2,11 +2,11 @@
 
 "use client";
 
-import { getStoredRole, ROLE_LABELS,  } from "@/app/(_service)/lib/utils";
+
 import { MenuCategory } from "@/app/(_service)/types/menu-types";
 import { PageData } from "@/app/(_service)/types/page-types";
 import { contentData } from "@/app/config/content-data";
-import { UserRole } from "@/app/config/user-roles";
+import { ALL_ROLES, UserRole } from "@/app/config/user-roles";
 import React, { useEffect, useState } from "react";
 
 // Helper function for type guard of usableParams
@@ -90,7 +90,7 @@ export default function CatchAllPage({ params }: ParamsType) {
     <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 to-black">
       <section className="bg-black/90 border border-gray-700 shadow-2xl rounded-2xl px-8 py-10 flex flex-col items-center w-full max-w-sm">
         <div className="text-2xl font-bold text-white mb-2">
-          Hi, {ROLE_LABELS[role]}!
+          Hi, !
         </div>
         <div className="text-gray-300 text-lg mb-3 text-center">
           You are in the{" "}

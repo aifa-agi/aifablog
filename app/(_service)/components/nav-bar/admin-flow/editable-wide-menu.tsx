@@ -9,7 +9,6 @@ import { cn } from "@/app/(_service)/lib/utils";
 import { MenuCategory } from "@/app/(_service)/types/menu-types";
 import { BadgeActionsDropdown } from "./badge-actions-dropdown";
 import { CategoryActionsDropdown } from "./category-actions-dropdown";
-import { useDialogs } from "@/app/(_service)/contexts/dialogs-providers";
 import { toast } from "sonner";
 import {
   DndContext,
@@ -30,10 +29,11 @@ import { VectorStoreActionsDropdown } from "./vector-store-actions-dropdown";
 import { generateCuid } from "@/app/(_service)/lib/generate-cuid";
 import { ChatSynchroniseActionDropdown } from "./chat-synchronise-action-dropdown";
 import { normalizeText } from "@/app/(_service)/lib/normalize-text";
-import { humanize } from "@/app/(_service)/lib/humanize";
+import { humanize } from "@/app/api/menu/persist/humanize";
 import { PageActionsDropdown } from "./page-actions-dropdown";
 import { PageData, PageType } from "@/app/(_service)/types/page-types";
 import { LinkActionsDropdown } from "./link-action-dropdown";
+import { useDialogs } from "@/app/(_service)/contexts/dialogs";
 
 const greenDotClass = "bg-emerald-500";
 
@@ -252,6 +252,8 @@ export default function EditableWideMenu({
                 />
                 <PageActionsDropdown
                   singlePage={singlePage}
+                  categoryTitle={categoryTitle} // Добавить эту строку
+                  categories={categories} // Добавить эту строку
                   setCategories={setCategories}
                 />
                 <span
@@ -330,7 +332,7 @@ export default function EditableWideMenu({
                       href: "/" + normalizedName,
                       roles: ["guest"],
                       hasBadge: false,
-                      type: "simple-blog" as PageType,
+                      type: "blog" as PageType,
                       isPublished: false,
                       isVectorConnected: false,
                       isChatSynchronized: false,
@@ -467,60 +469,60 @@ export default function EditableWideMenu({
             </SortableContext>
           </DndContext>
           <div className="flex flex-col gap-2 mt-4">
-        {/* Main update button */}
-        <Button
-          type="button"
-          className="w-full"
-          onClick={onUpdate}
-          variant={loading ? "default" : dirty ? "default" : "secondary"}
-          disabled={!dirty || loading}
-        >
-          {loading ? (
-            <>
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              Please wait
-            </>
-          ) : dirty ? (
-            <>Update changes</>
-          ) : (
-            <>No changes</>
-          )}
-        </Button>
+            {/* Main update button */}
+            <Button
+              type="button"
+              className="w-full"
+              onClick={onUpdate}
+              variant={loading ? "default" : dirty ? "default" : "secondary"}
+              disabled={!dirty || loading}
+            >
+              {loading ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Please wait
+                </>
+              ) : dirty ? (
+                <>Update changes</>
+              ) : (
+                <>No changes</>
+              )}
+            </Button>
 
-        {/* Retry button - shown only when retry is possible */}
-        {canRetry && lastError && !loading && onRetry && (
-          <Button
-            type="button"
-            variant="outline"
-            className="w-full"
-            onClick={onRetry}
-          >
-            <RotateCcw className="mr-2 h-4 w-4" />
-            Retry Update {retryCount > 0 && `(Attempt ${retryCount + 1})`}
-          </Button>
-        )}
-
-        {/* Error information display */}
-        {lastError && !loading && (
-          <div className="p-3 bg-red-50 border border-red-200 rounded-md">
-            <p className="text-red-700 text-sm font-medium">
-              {lastError.message}
-            </p>
-            {lastError.canRetry && (
-              <p className="text-red-600 text-xs mt-1">
-                This error can be retried. Click the retry button above.
-              </p>
+            {/* Retry button - shown only when retry is possible */}
+            {canRetry && lastError && !loading && onRetry && (
+              <Button
+                type="button"
+                variant="outline"
+                className="w-full"
+                onClick={onRetry}
+              >
+                <RotateCcw className="mr-2 h-4 w-4" />
+                Retry Update {retryCount > 0 && `(Attempt ${retryCount + 1})`}
+              </Button>
             )}
-          </div>
-        )}
 
-        {/* Status information */}
-        <div className="text-xs text-gray-500 text-center">
-          {dirty && "• You have unsaved changes"}
-          {!dirty && "• All changes saved"}
-          {retryCount > 0 && ` • ${retryCount} retry attempts`}
-        </div>
-      </div>
+            {/* Error information display */}
+            {lastError && !loading && (
+              <div className="p-3 bg-red-50 border border-red-200 rounded-md">
+                <p className="text-red-700 text-sm font-medium">
+                  {lastError.message}
+                </p>
+                {lastError.canRetry && (
+                  <p className="text-red-600 text-xs mt-1">
+                    This error can be retried. Click the retry button above.
+                  </p>
+                )}
+              </div>
+            )}
+
+            {/* Status information */}
+            <div className="text-xs text-gray-500 text-center">
+              {dirty && "• You have unsaved changes"}
+              {!dirty && "• All changes saved"}
+              {retryCount > 0 && ` • ${retryCount} retry attempts`}
+            </div>
+          </div>
         </div>
       </div>
     </div>

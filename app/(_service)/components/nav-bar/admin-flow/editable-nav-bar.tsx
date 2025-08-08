@@ -6,6 +6,7 @@ import { Button } from "@/app/(_service)/components/ui/button";
 import EditableWideMenu from "./editable-wide-menu";
 import EditableMobileMenu from "./editable-mobile-menu";
 import { useNavigationMenu, useMenuOperations } from "@/app/(_service)/contexts/nav-bar-provider";
+import { DialogsProvider } from "@/app/(_service)/contexts/dialogs";
 
 const HEADER_HEIGHT = 56;
 const MOBILE_MENU_OFFSET = 40;
@@ -71,6 +72,7 @@ export default function EditableNavBar() {
 
   return (
     <>
+    <DialogsProvider>
       <div className="relative">
         <div
           className="flex items-center px-4 h-[56px]"
@@ -137,6 +139,7 @@ export default function EditableNavBar() {
           aria-hidden="true"
         />
       )}
+      </DialogsProvider>
     </>
   );
 }
