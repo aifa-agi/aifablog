@@ -1,3 +1,5 @@
+// @/app/(_service)/components/nav-bar/public-flow/static-nav-bar.tsx
+
 'use client'
 import { useEffect, useState } from 'react';
 import { ChevronDown, MoreVertical } from 'lucide-react';

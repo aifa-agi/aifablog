@@ -1,3 +1,5 @@
+// @/app/api/menu/route.ts
+
 import { NextResponse } from "next/server";
 import { contentData } from "@/app/config/content-data";
 import type { MenuCategory } from "@/app/(_service)/types/menu-types";

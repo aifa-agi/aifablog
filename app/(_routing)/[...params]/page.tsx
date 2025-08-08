@@ -2,11 +2,11 @@
 
 "use client";
 
-import React, { useEffect, useState } from "react";
 import { getStoredRole, Role, ROLE_LABELS } from "@/app/(_service)/lib/utils";
-import { MenuCategory, } from "@/app/(_service)/types/menu-types";
-import { menuData } from "../../config/content-data";
+import { MenuCategory } from "@/app/(_service)/types/menu-types";
 import { PageData } from "@/app/(_service)/types/page-types";
+import { contentData } from "@/app/config/content-data";
+import React, { useEffect, useState } from "react";
 
 // Helper function for type guard of usableParams
 function isUsableParams(obj: any): obj is { params: string[] } {
@@ -30,7 +30,7 @@ function findCategoryAndPage(
   }
   const href = "/" + params.join("-");
   console.log("[findCategoryAndPage] href to match:", href);
-  for (const category of menuData.categories) {
+  for (const category of contentData.categories) {
     for (const link of category.pages) {
       if (link.roles.includes(role) && link.href === href) {
         console.log("[findCategoryAndPage] FOUND:", {

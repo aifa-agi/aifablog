@@ -1,3 +1,5 @@
+// @/app/(_service)/lib/fetch-menu.ts
+
 import type { MenuCategory } from "@/app/(_service)/types/menu-types";
 
 export async function fetchMenuCategories(): Promise<{

@@ -4,7 +4,7 @@ import React, { useState, useMemo } from "react";
 import { Card, CardContent } from "@/app/(_service)/components/ui/card";
 import { Badge } from "@/app/(_service)/components/ui/badge";
 import { Button } from "@/app/(_service)/components/ui/button";
-import { Loader2, GripVertical, Plus } from "lucide-react";
+import { Loader2, GripVertical, Plus, RotateCcw } from "lucide-react";
 import { cn } from "@/app/(_service)/lib/utils";
 import { MenuCategory } from "@/app/(_service)/types/menu-types";
 import { BadgeActionsDropdown } from "./badge-actions-dropdown";
@@ -44,7 +44,15 @@ interface WideMenuProps {
   setCategories: React.Dispatch<React.SetStateAction<MenuCategory[]>>;
   dirty: boolean;
   loading: boolean;
-  onUpdate: () => void;
+  onUpdate: () => Promise<void>;
+  onRetry?: () => Promise<void>;
+  canRetry?: boolean;
+  retryCount?: number;
+  lastError?: {
+    status: string;
+    message: string;
+    canRetry: boolean;
+  } | null;
 }
 
 function DraggableCategoryCard({
@@ -134,6 +142,10 @@ export default function EditableWideMenu({
   dirty,
   loading,
   onUpdate,
+  onRetry,
+  canRetry = false,
+  retryCount = 0,
+  lastError,
 }: WideMenuProps) {
   const dialogs = useDialogs();
   const [activeCategoryTitle, setActiveCategoryTitle] = useState<string | null>(
@@ -454,24 +466,61 @@ export default function EditableWideMenu({
               </div>
             </SortableContext>
           </DndContext>
+          <div className="flex flex-col gap-2 mt-4">
+        {/* Main update button */}
+        <Button
+          type="button"
+          className="w-full"
+          onClick={onUpdate}
+          variant={loading ? "default" : dirty ? "default" : "secondary"}
+          disabled={!dirty || loading}
+        >
+          {loading ? (
+            <>
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              Please wait
+            </>
+          ) : dirty ? (
+            <>Update changes</>
+          ) : (
+            <>No changes</>
+          )}
+        </Button>
+
+        {/* Retry button - shown only when retry is possible */}
+        {canRetry && lastError && !loading && onRetry && (
           <Button
             type="button"
-            className="w-full mt-4"
-            onClick={onUpdate}
-            variant={loading ? "default" : dirty ? "default" : "secondary"}
-            disabled={!dirty || loading}
+            variant="outline"
+            className="w-full"
+            onClick={onRetry}
           >
-            {loading ? (
-              <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Please wait
-              </>
-            ) : dirty ? (
-              <>Update changes</>
-            ) : (
-              <>No changes</>
-            )}
+            <RotateCcw className="mr-2 h-4 w-4" />
+            Retry Update {retryCount > 0 && `(Attempt ${retryCount + 1})`}
           </Button>
+        )}
+
+        {/* Error information display */}
+        {lastError && !loading && (
+          <div className="p-3 bg-red-50 border border-red-200 rounded-md">
+            <p className="text-red-700 text-sm font-medium">
+              {lastError.message}
+            </p>
+            {lastError.canRetry && (
+              <p className="text-red-600 text-xs mt-1">
+                This error can be retried. Click the retry button above.
+              </p>
+            )}
+          </div>
+        )}
+
+        {/* Status information */}
+        <div className="text-xs text-gray-500 text-center">
+          {dirty && "• You have unsaved changes"}
+          {!dirty && "• All changes saved"}
+          {retryCount > 0 && ` • ${retryCount} retry attempts`}
+        </div>
+      </div>
         </div>
       </div>
     </div>

@@ -3,8 +3,40 @@ import { MenuCategory } from "@/app/(_service)/types/menu-types";
 export const contentData = {
   categories: [
   {
+    "order": 1,
+    "title": "commerce1234",
+    "pages": [
+      {
+        "id": "clwn5jb6b0002ufd9ukcrgrj2",
+        "order": 0,
+        "name": "ecommerce",
+        "href": "/ecommerce",
+        "roles": [
+          "guest",
+          "customer"
+        ],
+        "isPublished": false,
+        "isVectorConnected": false,
+        "isChatSynchronized": true
+      },
+      {
+        "id": "clwn5jb6b0003ufd9ukcrgrj6",
+        "order": 1,
+        "name": "ecommerce-templates",
+        "href": "/ecommerce-templates",
+        "roles": [
+          "guest",
+          "admin"
+        ],
+        "isPublished": true,
+        "isVectorConnected": true,
+        "isChatSynchronized": false
+      }
+    ]
+  },
+  {
     "order": 0,
-    "title": "website",
+    "title": "website123",
     "pages": [
       {
         "id": "clwn5jb6b0000ufd9ukcrgrjt",
@@ -34,38 +66,6 @@ export const contentData = {
         "badgeName": "ADMIN",
         "isPublished": true,
         "isVectorConnected": false,
-        "isChatSynchronized": false
-      }
-    ]
-  },
-  {
-    "order": 1,
-    "title": "commerce123",
-    "pages": [
-      {
-        "id": "clwn5jb6b0002ufd9ukcrgrj2",
-        "order": 0,
-        "name": "ecommerce",
-        "href": "/ecommerce",
-        "roles": [
-          "guest",
-          "customer"
-        ],
-        "isPublished": false,
-        "isVectorConnected": false,
-        "isChatSynchronized": true
-      },
-      {
-        "id": "clwn5jb6b0003ufd9ukcrgrj6",
-        "order": 1,
-        "name": "ecommerce-templates",
-        "href": "/ecommerce-templates",
-        "roles": [
-          "guest",
-          "admin"
-        ],
-        "isPublished": true,
-        "isVectorConnected": true,
         "isChatSynchronized": false
       }
     ]

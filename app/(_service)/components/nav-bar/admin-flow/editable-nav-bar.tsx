@@ -1,11 +1,11 @@
+// @/app/(_service)/components/nav-bar/admin-flow/editable-nav-bar.tsx
 "use client";
 import { useEffect, useState } from "react";
 import { ChevronDown, MoreVertical } from "lucide-react";
 import { Button } from "@/app/(_service)/components/ui/button";
 import EditableWideMenu from "./editable-wide-menu";
 import EditableMobileMenu from "./editable-mobile-menu";
-import { useNavigationMenu } from "@/app/(_service)/contexts/nav-bar-provider";
-import { toast } from "sonner";
+import { useNavigationMenu, useMenuOperations } from "@/app/(_service)/contexts/nav-bar-provider";
 
 const HEADER_HEIGHT = 56;
 const MOBILE_MENU_OFFSET = 40;
@@ -18,9 +18,17 @@ export default function EditableNavBar() {
     categories,
     setCategories,
     loading,
-    dirty,
-    updateCategories
+    dirty
   } = useNavigationMenu();
+
+  // Use the new menu operations hook
+  const { 
+    handleUpdate, 
+    handleRetry, 
+    canRetry, 
+    retryCount,
+    lastError 
+  } = useMenuOperations();
 
   useEffect(() => {
     const handleResize = () => setIsLargeScreen(window.innerWidth >= 1024);
@@ -44,12 +52,20 @@ export default function EditableNavBar() {
   const handleButtonClick = () => setIsOpen((v) => !v);
   const handleOverlayClick = () => setIsOpen(false);
 
-  const handleUpdate = async () => {
-    try {
-      await updateCategories();
-      
-    } catch {
-      toast.error("Error updating on server");
+  // Updated handleUpdate function
+  const onUpdateClick = async () => {
+    const success = await handleUpdate();
+    
+    // Optional: additional handling if needed
+    if (!success && lastError) {
+      console.log("Update failed in navbar:", lastError);
+    }
+  };
+
+  const onRetryClick = async () => {
+    const success = await handleRetry();
+    if (!success) {
+      console.log("Retry also failed in navbar");
     }
   };
 
@@ -91,7 +107,11 @@ export default function EditableNavBar() {
             setCategories={setCategories}
             dirty={dirty}
             loading={loading}
-            onUpdate={handleUpdate}
+            onUpdate={onUpdateClick}
+            onRetry={onRetryClick}
+            canRetry={canRetry}
+            retryCount={retryCount}
+            lastError={lastError}
           />
         ) : (
           <EditableMobileMenu
