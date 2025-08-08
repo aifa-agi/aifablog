@@ -14,6 +14,7 @@ import { useDialogs } from "@/app/(_service)/contexts/dialogs-providers";
 import { useState } from "react";
 import { Button } from "@/app/(_service)/components/ui/button";
 import { PageData } from "@/app/(_service)/types/page-types";
+import { cn } from "@/app/(_service)/lib/utils";
 
 const PAGE_TYPES = ["Page", "Blog", "Docs", "Guide", "Shop"] as const;
 
@@ -39,15 +40,9 @@ export function PageActionsDropdown({
 
   const handleAddImages = () => {};
 
-  const handleAddPageCode = () => {};
-
-  const handleDelete = () => {};
-
   const handleKeyWord = () => {};
 
-  const handleAuthors = () => {};
-
-  const handleTags = () => {};
+  const handleAddPageCode = () => {};
 
   const selectedType = pageType;
 
@@ -70,8 +65,6 @@ export function PageActionsDropdown({
         </DropdownMenuItem>
         <DropdownMenuItem onClick={handleAddImages}>Images</DropdownMenuItem>
         <DropdownMenuItem onClick={handleKeyWord}>Key Word</DropdownMenuItem>
-        <DropdownMenuItem onClick={handleTags}>Tags</DropdownMenuItem>
-        <DropdownMenuItem onClick={handleAuthors}>Authors</DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={handleAddPageCode}>
           Page body
@@ -79,7 +72,7 @@ export function PageActionsDropdown({
 
         <DropdownMenuSeparator />
 
-        {/* <DropdownMenuGroup>
+        <DropdownMenuGroup>
           {PAGE_TYPES.map((type) => (
             <DropdownMenuItem
               key={type}
@@ -98,13 +91,9 @@ export function PageActionsDropdown({
               <span>{type}</span>
             </DropdownMenuItem>
           ))}
-        </DropdownMenuGroup> */}
+        </DropdownMenuGroup>
 
-        {/* <DropdownMenuSeparator /> */}
 
-        <DropdownMenuItem className="text-destructive" onClick={handleDelete}>
-          Delete
-        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );

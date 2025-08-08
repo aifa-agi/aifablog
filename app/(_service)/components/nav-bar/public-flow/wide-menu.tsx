@@ -65,7 +65,7 @@ export default function WideMenu({ isOpen, setIsOpen }: WideMenuProps) {
                 )}
                 style={{ transition: 'margin 0.2s' }}
               >
-                {humanize(singlePage.name)}
+                {humanize(singlePage.linkName)}
               </span>
               {singlePage.hasBadge && singlePage.badgeName && !isHovered && (
                 <Badge className={cn('shadow-none rounded-full px-2.5 py-0.5 text-xs font-semibold h-6 flex items-center')}>

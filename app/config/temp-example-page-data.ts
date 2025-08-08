@@ -24,9 +24,9 @@ export const paromyTenerifePageData: PageConfig =
   },
   "pagedata": {
     "id": "tenerife-ferries-guide-2025",
-    "name": "Паромы на Тенерифе 2025",
+    "linkName": "Паромы на Тенерифе 2025",
     "href": "/blog/tenerife-ferries-guide-2025",
-    "roles": ["guest", "authUser", "subscriber"],
+    "roles": ["guest",  "admin"],
     "hasBadge": true,
     "badgeName": "UPDATED",
     "order": 1,

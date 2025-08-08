@@ -210,7 +210,7 @@ export default function EditableWideMenu({
             >
               <div className="flex-grow flex items-center gap-2 overflow-hidden">
                 <span className="overflow-hidden text-ellipsis whitespace-nowrap">
-                  {humanize(singlePage.name)}
+                  {humanize(singlePage.linkName)}
                 </span>
                 {singlePage.hasBadge && singlePage.badgeName && (
                   <Badge className="shadow-none rounded-full px-2.5 py-0.5 text-xs font-semibold h-6 flex items-center">
@@ -326,7 +326,7 @@ export default function EditableWideMenu({
                     ...cat.pages,
                     {
                       id: generateCuid(),
-                      name: normalizedName,
+                      linkName: normalizedName,
                       href: "/" + normalizedName,
                       roles: ["guest"],
                       hasBadge: false,

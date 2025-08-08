@@ -2,10 +2,11 @@
 
 "use client";
 
-import { getStoredRole, Role, ROLE_LABELS } from "@/app/(_service)/lib/utils";
+import { getStoredRole, ROLE_LABELS,  } from "@/app/(_service)/lib/utils";
 import { MenuCategory } from "@/app/(_service)/types/menu-types";
 import { PageData } from "@/app/(_service)/types/page-types";
 import { contentData } from "@/app/config/content-data";
+import { UserRole } from "@/app/config/user-roles";
 import React, { useEffect, useState } from "react";
 
 // Helper function for type guard of usableParams
@@ -22,7 +23,7 @@ function capitalizeWord(str: string) {
 // Find the matching category/link for current params/role
 function findCategoryAndPage(
   params: string[] | undefined,
-  role: Role
+  role: UserRole
 ): { category?: MenuCategory; link?: PageData } {
   if (!params || params.length === 0) {
     console.log("[findCategoryAndPage] params undefined or empty:", params);
@@ -35,7 +36,7 @@ function findCategoryAndPage(
       if (link.roles.includes(role) && link.href === href) {
         console.log("[findCategoryAndPage] FOUND:", {
           category: category.title,
-          link: link.name,
+          link: link.linkName,
         });
         return { category, link };
       }
@@ -54,18 +55,9 @@ export default function CatchAllPage({ params }: ParamsType) {
   const paramArray: string[] = isUsableParams(usableParams) ? usableParams.params : [];
 
   // Используем локальный стейт для роли и синхронизируем с localStorage
-  const [role, setRole] = useState<Role>("guest");
+  const [role, setRole] = useState<UserRole>("guest");
 
-  // При маунте и изменении URL подхватываем актуальную роль из localStorage
-  useEffect(() => {
-    setRole(getStoredRole());
-    // Позволяет автоматически реагировать, если в другой вкладке сменится роль
-    const onStorage = (e: StorageEvent) => {
-      if (e.key === "aifa-role") setRole(getStoredRole());
-    };
-    window.addEventListener("storage", onStorage);
-    return () => window.removeEventListener("storage", onStorage);
-  }, []);
+ 
 
  
 
@@ -105,7 +97,7 @@ export default function CatchAllPage({ params }: ParamsType) {
           <span className="font-semibold text-blue-400">{category.title}</span> category
         </div>
         <div className="text-gray-200 text-base mb-2 text-center">
-          on the <span className="font-semibold text-yellow-300">{link.name}</span> page
+          on the <span className="font-semibold text-yellow-300">{link.linkName}</span> page
         </div>
         {badgeText && (
           <span className="inline-block px-4 py-1 mt-2 bg-emerald-600 text-white rounded-full font-semibold text-sm shadow">

@@ -9,8 +9,8 @@ export const contentData = {
       {
         "id": "clwn5jb6b0002ufd9ukcrgrj2",
         "order": 0,
-        "name": "ecommerce",
-        "href": "/ecommerce",
+        "linkName": "ecommerce123",
+        "href": "/ecommerce123",
         "roles": [
           "guest",
           "customer"
@@ -22,7 +22,7 @@ export const contentData = {
       {
         "id": "clwn5jb6b0003ufd9ukcrgrj6",
         "order": 1,
-        "name": "ecommerce-templates",
+        "linkName": "ecommerce-templates",
         "href": "/ecommerce-templates",
         "roles": [
           "guest",
@@ -41,7 +41,7 @@ export const contentData = {
       {
         "id": "clwn5jb6b0000ufd9ukcrgrjt",
         "order": 0,
-        "name": "dashboard10101",
+        "linkName": "dashboard10101",
         "href": "/dashboard10101",
         "roles": [
           "editor",
@@ -56,7 +56,7 @@ export const contentData = {
       {
         "id": "clwn5jb6b0001ufd9ukcrgrjw",
         "order": 1,
-        "name": "user-management",
+        "linkName": "user-management",
         "href": "/user-management",
         "roles": [
           "guest",

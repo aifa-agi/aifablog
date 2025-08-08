@@ -9,12 +9,14 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/app/(_service)/components/ui/dropdown-menu";
-import { UserRole, BadgeName,MenuCategory } from "@/app/(_service)/types/menu-types";
+import { MenuCategory } from "@/app/(_service)/types/menu-types";
 import { Pencil } from "lucide-react";
 import { cn } from "@/app/(_service)/lib/utils";
 import { useDialogs } from "@/app/(_service)/contexts/dialogs-providers";
 import { normalizeText } from "@/app/(_service)/lib/normalize-text";
 import { PageData } from "@/app/(_service)/types/page-types";
+import { ALL_ROLES, UserRole } from "@/app/config/user-roles";
+import { ALL_BADGES, BadgeName } from "@/app/config/badge-config";
 
 interface LinkActionsDropdownProps {
   singlePage: PageData;
@@ -22,24 +24,9 @@ interface LinkActionsDropdownProps {
   setCategories: React.Dispatch<React.SetStateAction<MenuCategory[]>>;
 }
 
-const ALL_ROLES: UserRole[] = [
-  "guest",
-  "architect",
-  "admin",
-  "editor",
-  "authUser",
-  "subscriber",
-  "customer",
-  "apiUser",
-];
 
-const ALL_BADGES: BadgeName[] = [
-  "NEW",
-  "AD",
-  "UPDATED",
-  "IMPORTANT",
-  "RECOMMENDATION",
-];
+
+
 
 export function BadgeActionsDropdown({
   singlePage,
@@ -97,9 +84,9 @@ export function BadgeActionsDropdown({
   const handleRename = () => {
   dialogs.show({
     type: "edit",
-    title: "Rename singlePage",
-    description: singlePage.name,
-    value: singlePage.name,
+    title: "Rename link name",
+    description: singlePage.linkName,
+    value: singlePage.linkName,
     confirmLabel: "Save changes",
     onConfirm: (value) => {
       if (!value) return;
@@ -114,7 +101,7 @@ export function BadgeActionsDropdown({
                   l.id === singlePage.id
                     ? {
                         ...l,
-                        name: normalizedName,
+                        linkName: normalizedName,
                         href: "/" + normalizedName,
                       }
                     : l
@@ -130,7 +117,7 @@ export function BadgeActionsDropdown({
     dialogs.show({
       type: "delete",
       title: "Delete singlePage",
-      description: `Are you sure you want to delete singlePage "${singlePage.name}"?`,
+      description: `Are you sure you want to delete singlePage "${singlePage.linkName}"?`,
       confirmLabel: "Delete",
       onConfirm: () => {
         setCategories((prev) =>

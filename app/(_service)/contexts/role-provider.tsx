@@ -1,7 +1,7 @@
 
 
 'use client'
-import { UserRole } from "@/app/(_service)/types/menu-types";
+import { UserRole } from "@/app/config/user-roles";
 import { createContext, useContext, useState, ReactNode } from "react";
 
 

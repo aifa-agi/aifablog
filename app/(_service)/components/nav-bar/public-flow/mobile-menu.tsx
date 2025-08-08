@@ -38,7 +38,7 @@ export default function MobileMenu({ isOpen, topOffset }: MobileMenuProps) {
             {singlePage.hasBadge && singlePage.badgeName ? (
               <div className="flex items-center justify-between gap-2 w-full">
                 <span className="flex-grow overflow-hidden whitespace-nowrap text-ellipsis flex items-center gap-2">
-                  {humanize(singlePage.name)}
+                  {humanize(singlePage.linkName)}
                 </span>
                 <Badge className={cn('shadow-none rounded-full px-2.5 py-0.5 text-xs font-semibold')}>
                   <div className={cn('h-1.5 w-1.5 rounded-full mr-2', greenDotClass)} />
@@ -47,7 +47,7 @@ export default function MobileMenu({ isOpen, topOffset }: MobileMenuProps) {
               </div>
             ) : (
               <span className="flex items-center gap-2 overflow-hidden whitespace-nowrap text-ellipsis">
-                {humanize(singlePage.name)}
+                {humanize(singlePage.linkName)}
               </span>
             )}
           </a>

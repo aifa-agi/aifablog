@@ -261,18 +261,10 @@ interface SEOOptimization {
 
 import { ImageProps } from "next/image";
 import { Metadata } from "next";
+import { UserRole } from "@/app/config/user-roles";
+import { BadgeName } from "@/app/config/badge-config";
 
-type UserRole =
-  | "guest"
-  | "architect" 
-  | "admin"
-  | "editor"
-  | "authUser"
-  | "subscriber"
-  | "customer"
-  | "apiUser";
 
-type BadgeName = "NEW" | "AD" | "UPDATED" | "IMPORTANT" | "RECOMMENDATION";
 
 export type PageType =
   | "homePage"
@@ -283,21 +275,7 @@ export type PageType =
   | "guide"
   | "shopItem";
 
-export interface PageData {
-  id: string;
-  name: string;
-  href?: string;
-  roles: UserRole[];
-  hasBadge?: boolean;
-  badgeName?: BadgeName;
-  badgeLink?: string;
-  order?: number;
-  isPublished: boolean;
-  isVectorConnected: boolean;
-  isChatSynchronized: boolean;
-  type: PageType;
-  design?: string;
-}
+
 
 export type StandartSection = "";
 export type CustomSection = "";
@@ -451,20 +429,39 @@ export interface Activities {
   bookmarksCount: number;       
 }
 
-
-export interface PageConfig {
-  metadata: Metadata;
-  pagedata: PageData;
+interface PageImages {
+  id: string;
+  alt?: string;
+  href?: string;
+}
+export interface PageData {
+  id: string;
+  linkName: string;
+  title?:string;
+  description?:string
+  images?:PageImages[]
+  keyWords?: string[]
+  href?: string;
+  roles: UserRole[];
+  hasBadge?: boolean;
+  badgeName?: BadgeName;
+  badgeLink?: string;
+  order?: number;
+  isPublished: boolean;
+  isVectorConnected: boolean;
+  isChatSynchronized: boolean;
+  type: PageType;
+  design?: string;
   summaryData?: SummaryData[];
   linksData?: LinksData[];
-  authorData?: string[];
-  tagsData?: string[];
-  activities?: Activities[];
   createdAt?: string;           
-  updatedAt?: string;           
-  authors?: string[];
-  editors?: string[];
-  sections: ExtendedSection[];
+  updatedAt?: string; 
+}
+
+export interface PageConfig {
+  metadata?: Metadata;
+  pagedata: PageData;  
+  sections?: ExtendedSection[];
 }
 
 /**

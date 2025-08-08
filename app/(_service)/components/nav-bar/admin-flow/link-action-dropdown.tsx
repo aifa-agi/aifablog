@@ -27,19 +27,19 @@ export function LinkActionsDropdown({
   
   const handleGetLinks = () => {
     // Логика для получения ссылок
-    console.log("Get pages for:", singlePage.name);
+    console.log("Get pages for:", singlePage.linkName);
     // Добавьте здесь вашу логику
   };
 
   const handleCreateLinks = () => {
     // Логика для создания ссылок
-    console.log("Create pages for:", singlePage.name);
+    console.log("Create pages for:", singlePage.linkName);
     // Добавьте здесь вашу логику
   };
 
   const handleExternalLinks = () => {
     // Логика для внешних ссылок
-    console.log("External pages for:", singlePage.name);
+    console.log("External pages for:", singlePage.linkName);
     // Добавьте здесь вашу логику
   };
 
