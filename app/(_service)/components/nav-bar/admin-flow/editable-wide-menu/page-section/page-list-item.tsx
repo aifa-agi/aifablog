@@ -12,11 +12,11 @@ import { useSortable } from "@dnd-kit/sortable";
 
 import { MenuCategory } from "@/app/(_service)/types/menu-types";
 import { BadgeActionsDropdown } from "../../badge-actions-dropdown";
-import { ChatSynchroniseActionDropdown } from "../../chat-synchronise-action-dropdown";
 import { LinkActionsDropdown } from "../../link-action-dropdown";
 import { PageActionsDropdown } from "../../page-actions-dropdown";
 import { PublishActionsDropdown } from "../../publish-actions-dropdown/components/publish-actions-dropdown";
 import { VectorStoreActionsDropdown } from "../../vecror-store-actions-dropdown";
+import { ChatSynchroniseActionDropdown } from "../../chat-synchronise-action-dropdown";
 
 const greenDotClass = "bg-emerald-500";
 
