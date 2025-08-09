@@ -14,8 +14,8 @@ export function StatusIndicator({
   className 
 }: StatusIndicatorProps) {
   const sizeConfig = {
-    sm: { width: 8, height: 8, minWidth: 8, minHeight: 8 },
-    md: { width: 12, height: 12, minWidth: 12, minHeight: 12 },
+    sm: { width: 4, height: 4, minWidth: 4, minHeight: 4 },
+    md: { width: 4, height: 4, minWidth: 4, minHeight: 4 },
   };
 
   const dimensions = sizeConfig[size];

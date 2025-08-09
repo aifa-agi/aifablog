@@ -11,12 +11,12 @@ import { humanize } from "@/app/api/menu/persist/humanize";
 import { useSortable } from "@dnd-kit/sortable";
 
 import { MenuCategory } from "@/app/(_service)/types/menu-types";
-import { BadgeActionsDropdown } from "../../badge-actions-dropdown";
-import { LinkActionsDropdown } from "../../link-action-dropdown";
-import { PageActionsDropdown } from "../../page-actions-dropdown";
-import { PublishActionsDropdown } from "../../publish-actions-dropdown/components/publish-actions-dropdown";
-import { VectorStoreActionsDropdown } from "../../vecror-store-actions-dropdown";
-import { ChatSynchroniseActionDropdown } from "../../chat-synchronise-action-dropdown";
+import { PageActionsDropdown } from "../components/page-actions-dropdown";
+import { PublishActionsDropdown } from "../components/publish-actions-dropdown/components/publish-actions-dropdown";
+import { VectorStoreActionsDropdown } from "../components/vecror-store-actions-dropdown";
+import { ChatSynchroniseActionDropdown } from "../components/chat-synchronise-action-dropdown";
+import { LinksActionsDropdown } from "../components/links-action-dropdown";
+import { BadgesActionsDropdown } from "../components/badges-actions-dropdown";
 
 const greenDotClass = "bg-emerald-500";
 
@@ -71,7 +71,7 @@ export function PageListItem({
         )}
       </div>
       <div className="flex items-center gap-1">
-        <BadgeActionsDropdown
+        <BadgesActionsDropdown
           singlePage={page}
           categoryTitle={categoryTitle}
           setCategories={setCategories}
@@ -97,7 +97,7 @@ export function PageListItem({
           categoryTitle={categoryTitle}
           setCategories={setCategories}
         />
-        <LinkActionsDropdown
+        <LinksActionsDropdown
           singlePage={page}
           categoryTitle={categoryTitle}
           setCategories={setCategories}

@@ -89,7 +89,7 @@ export function useMenuOperations(
     dialogs.show({
       type: "create",
       title: "New page",
-      description: `Enter page name for "${category.title}"`,
+      description: `Enter link name for "${category.title}"`,
       value: "",
       confirmLabel: "Create",
       onConfirm: (value) => {

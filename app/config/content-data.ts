@@ -9,13 +9,12 @@ export const contentData = {
       {
         "id": "vcln0phubwqtrg1ujz80o1lr",
         "order": 0,
-        "linkName": "dashboard101012233 Copy",
-        "href": "/dashboard101012233-copy",
+        "linkName": "dashboard1",
+        "href": "/dashboard1",
         "roles": [
           "editor",
           "architect",
-          "admin",
-          "guest"
+          "admin"
         ],
         "isPublished": true,
         "isVectorConnected": true,
@@ -98,7 +97,26 @@ export const contentData = {
         ],
         "keyWords": [
           "asdf"
-        ]
+        ],
+        "linkConfiguration": {
+          "outgoing": "active",
+          "incoming": "active",
+          "external": "active"
+        }
+      },
+      {
+        "id": "p26k9rz82xcqvamls8cch6c9",
+        "linkName": "zzdfsazdf",
+        "href": "/zzdfsazdf",
+        "roles": [
+          "guest"
+        ],
+        "hasBadge": false,
+        "type": "blog",
+        "isPublished": false,
+        "isVectorConnected": false,
+        "isChatSynchronized": false,
+        "order": 2
       }
     ]
   },

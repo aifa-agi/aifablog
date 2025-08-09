@@ -5,7 +5,7 @@
 import React from "react";
 import { MenuCategory } from "@/app/(_service)/types/menu-types";
 import { CategorySection } from "./category-section/category-section";
-import { useMenuOperations } from "@/app/(_service)/hooks/use-menu-operations";
+import { useMenuOperations } from "@/app/(_service)/components/nav-bar/admin-flow/editable-wide-menu/hooks/use-menu-operations";
 import { PageSection } from "./page-section/page-section";
 
 interface WideMenuProps {

@@ -1,25 +1,25 @@
-// @/app/(_service)/components/nav-bar/admin-flow/editable-wide-menu/page-section/chat-synchronise-action-dropdown/components/chat-sync-status-indicator.tsx
+// @/app/(_service)/components/nav-bar/admin-flow/editable-wide-menu/page-section/vector-store-actions-dropdown/components/vector-status-indicator.tsx
 
 "use client";
 
 import React from "react";
 import { cn } from "@/app/(_service)/lib/utils";
-import { ChatSyncStatusIndicatorProps } from "../types";
+import { VectorStoreStatusIndicatorProps } from "../types";
 
 /**
- * Status indicator circle for chat sync mode selection
+ * Status indicator circle for vector store mode selection
  */
-export function ChatSyncStatusIndicator({
+export function VectorStoreStatusIndicator({
   mode,
   isActive
-}: ChatSyncStatusIndicatorProps) {
+}: VectorStoreStatusIndicatorProps) {
   const getIndicatorColor = () => {
     if (!isActive) return "bg-muted-foreground";
    
     switch (mode) {
-      case "ChatSyncOn":
+      case "VectorStoreOn":
         return "bg-green-500";
-      case "ChatSyncOff":
+      case "VectorStoreOff":
         return "bg-orange-500";
       default:
         return "bg-muted-foreground";
@@ -33,10 +33,10 @@ export function ChatSyncStatusIndicator({
         getIndicatorColor()
       )}
       style={{
-        width: 12,
-        height: 12,
-        minWidth: 12,
-        minHeight: 12
+        width: 4,
+        height: 4,
+        minWidth: 4,
+        minHeight: 4
       }}
     />
   );

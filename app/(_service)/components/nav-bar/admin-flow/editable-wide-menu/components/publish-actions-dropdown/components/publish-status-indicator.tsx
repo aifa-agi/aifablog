@@ -33,10 +33,10 @@ export function PublishStatusIndicator({
         getIndicatorColor()
       )}
       style={{ 
-        width: 12, 
-        height: 12, 
-        minWidth: 12, 
-        minHeight: 12 
+        width: 4, 
+        height: 4, 
+        minWidth: 4, 
+        minHeight: 4
       }}
     />
   );
