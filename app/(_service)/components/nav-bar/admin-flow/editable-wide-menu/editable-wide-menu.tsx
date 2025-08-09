@@ -6,7 +6,7 @@ import React from "react";
 import { MenuCategory } from "@/app/(_service)/types/menu-types";
 import { CategorySection } from "./category-section/category-section";
 import { useMenuOperations } from "@/app/(_service)/hooks/use-menu-operations";
-import { PageSection } from "./category-section/page-section";
+import { PageSection } from "./page-section/page-section";
 
 interface WideMenuProps {
   isOpen: boolean;

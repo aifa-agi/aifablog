@@ -1,13 +1,12 @@
-// @/app/(_service)/components/nav-bar/admin-flow/editable-wide-menu/category-section/page-section.tsx
+// @/app/(_service)/components/nav-bar/admin-flow/editable-wide-menu/page-section/page-section.tsx
 
 "use client";
 
 import React from "react";
-import { Button } from "@/app/(_service)/components/ui/button";
-import { Plus } from "lucide-react";
 import { MenuCategory } from "@/app/(_service)/types/menu-types";
 import { humanize } from "@/app/api/menu/persist/humanize";
 import { PageList } from "./page-list";
+import { AddPageButton } from "./add-page-button";
 
 interface PageSectionProps {
   activeCategory: MenuCategory | null;
@@ -16,7 +15,6 @@ interface PageSectionProps {
   onAddPage: (category: MenuCategory) => void;
   onPageDragEnd: (activeId: string, overId: string) => void;
 }
-
 
 export function PageSection({ 
   activeCategory, 
@@ -37,16 +35,11 @@ export function PageSection({
               <h3 className="text-gray-400 text-base font-semibold tracking-wider border-b border-gray-700 pb-1">
                 {humanize(activeCategory.title)}
               </h3>
-              <Button
-                type="button"
-                variant="outline"
-                size="icon"
-                className="ml-2 border-green-500 border-2 rounded-full hover:bg-green-950/30 text-green-400 focus-visible:ring-green-400"
-                onClick={() => onAddPage(activeCategory)}
-                title="Add page"
-              >
-                <Plus className="w-4 h-4" />
-              </Button>
+              <AddPageButton
+                category={activeCategory}
+                onAddPage={onAddPage}
+                className="ml-2"
+              />
             </div>
           </div>
 

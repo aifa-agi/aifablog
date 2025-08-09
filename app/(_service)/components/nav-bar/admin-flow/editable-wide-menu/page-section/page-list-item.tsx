@@ -1,4 +1,4 @@
-// @/app/(_service)/components/nav-bar/admin-flow/editable-wide-menu/category-section/page-list-item.tsx
+// @/app/(_service)/components/nav-bar/admin-flow/editable-wide-menu/page-section/page-list-item.tsx
 
 "use client";
 
@@ -13,11 +13,11 @@ import { useSortable } from "@dnd-kit/sortable";
 
 import { MenuCategory } from "@/app/(_service)/types/menu-types";
 import { BadgeActionsDropdown } from "../../badge-actions-dropdown";
-import { PublishActionsDropdown } from "../../publish-actions-dropdown";
 import { VectorStoreActionsDropdown } from "../../vector-store-actions-dropdown";
 import { ChatSynchroniseActionDropdown } from "../../chat-synchronise-action-dropdown";
 import { LinkActionsDropdown } from "../../link-action-dropdown";
 import { PageActionsDropdown } from "../../page-actions-dropdown";
+import { PublishActionsDropdown } from "../../publish-actions-dropdown/components/publish-actions-dropdown";
 
 const greenDotClass = "bg-emerald-500";
 

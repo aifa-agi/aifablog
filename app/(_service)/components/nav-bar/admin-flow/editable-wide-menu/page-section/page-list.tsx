@@ -1,4 +1,4 @@
-// @/app/(_service)/components/nav-bar/admin-flow/editable-wide-menu/category-section/page-list.tsx
+// @/app/(_service)/components/nav-bar/admin-flow/editable-wide-menu/page-section/page-list.tsx
 
 "use client";
 
