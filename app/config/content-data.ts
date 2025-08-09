@@ -17,7 +17,7 @@ export const contentData = {
           "admin",
           "guest"
         ],
-        "isPublished": false,
+        "isPublished": true,
         "isVectorConnected": true,
         "isChatSynchronized": true,
         "images": [
@@ -32,24 +32,22 @@ export const contentData = {
             "href": "https://images.unsplash.com/1/irish-hands.jpg?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           }
         ],
-        
-        sections: [
-    {
-      id: "hero-title",
-      order: "1",
-      bodyContent: {
-        type: "TypographyH1",
-        props: {
-          children:
-            "# Паромы на **Тенерифе**: Полный гид по морским перевозкам 2025",
-          className: "text-5xl font-bold leading-tight",
-          style: {
-            fontSize: "48px",
-          },
-        },
-      },
-    },
-  ],
+        "sections": [
+          {
+            "id": "hero-title",
+            "order": "1",
+            "bodyContent": {
+              "type": "TypographyH1",
+              "props": {
+                "children": "# Паромы на **Тенерифе**: Полный гид по морским перевозкам 2025",
+                "className": "text-5xl font-bold leading-tight",
+                "style": {
+                  "fontSize": "48px"
+                }
+              }
+            }
+          }
+        ],
         "hasBadge": true,
         "badgeName": "NEW",
         "type": "homePage",
@@ -57,8 +55,7 @@ export const contentData = {
         "description": "sdfgsdfg",
         "keyWords": [
           "sdfgsdfg"
-        ],
-        
+        ]
       },
       {
         "id": "ts360avslnh1ltiinqexdpc7",

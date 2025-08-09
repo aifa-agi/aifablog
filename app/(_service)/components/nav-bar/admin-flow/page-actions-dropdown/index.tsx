@@ -72,7 +72,7 @@ export function PageActionsDropdown({
         return "text-orange-500 hover:text-orange-600";
       case "default":
       default:
-        return "text-muted-foreground hover:text-muted-foreground/80";
+        return "text-primary/80";
     }
   };
 

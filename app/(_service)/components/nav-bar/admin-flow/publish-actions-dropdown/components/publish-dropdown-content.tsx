@@ -10,6 +10,7 @@ import { PublishStatusIndicator } from "./publish-status-indicator";
 /**
  * Dropdown menu content with publish/draft options
  */
+
 export function PublishDropdownContent({ 
   currentMode, 
   onModeChange 

@@ -4,39 +4,56 @@ import { PageData } from "@/app/(_service)/types/page-types";
 import { PublishState, PublishMode } from "./types";
 
 export const globeColors: Record<PublishState, string> = {
-  inactive: "text-muted-foreground", // Changed from text-gray-400
-  pending: "text-orange-400",
-  active: "text-green-500",
+  inactive: "text-muted-foreground", // Gray - content not ready
+  pending: "text-orange-400",        // Orange - ready draft
+  active: "text-green-500",          // Green - published
 };
 
 /**
- * Check if page has required content for publishing
+ * Check if page has all required content for publishing
  */
 export function hasPageContent(page: PageData): boolean {
   const hasBasicContent = Boolean(
     page.title && 
+    page.title.trim().length > 0 &&
     page.description && 
-    page.images && page.images.length > 0 &&
-    page.keyWords && page.keyWords.length > 0 &&
-    page.sections && page.sections.length > 0
+    page.description.trim().length > 0 &&
+    page.images && 
+    page.images.length > 0 &&
+    page.keyWords && 
+    page.keyWords.length > 0 &&
+    page.sections && 
+    page.sections.length > 0
   );
   
   return hasBasicContent;
 }
 
 /**
- * Determine publish state based on page data
+ * Determine publish state based on page data and content availability
  */
 export function getPublishState(page: PageData): PublishState {
+  const hasContent = hasPageContent(page);
+  
+  // If no content, always inactive regardless of isPublished flag
+  if (!hasContent) {
+    return "inactive";
+  }
+  
+  // If has content and published, show as active
   if (page.isPublished) {
     return "active";
   }
   
-  if (hasPageContent(page)) {
-    return "pending";
-  }
-  
-  return "inactive";
+  // If has content but not published, show as pending (draft ready)
+  return "pending";
+}
+
+/**
+ * Check if dropdown should be interactive based on publish state
+ */
+export function isDropdownInteractive(publishState: PublishState): boolean {
+  return publishState === "pending" || publishState === "active";
 }
 
 /**
@@ -44,4 +61,11 @@ export function getPublishState(page: PageData): PublishState {
  */
 export function getPublishMode(isPublished: boolean): PublishMode {
   return isPublished ? "published" : "draft";
+}
+
+/**
+ * Determine if page should be automatically unpublished due to missing content
+ */
+export function shouldAutoUnpublish(page: PageData): boolean {
+  return page.isPublished && !hasPageContent(page);
 }

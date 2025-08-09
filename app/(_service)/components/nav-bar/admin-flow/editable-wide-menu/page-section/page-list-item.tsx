@@ -10,7 +10,6 @@ import { PageData } from "@/app/(_service)/types/page-types";
 import { humanize } from "@/app/api/menu/persist/humanize";
 import { useSortable } from "@dnd-kit/sortable";
 
-
 import { MenuCategory } from "@/app/(_service)/types/menu-types";
 import { BadgeActionsDropdown } from "../../badge-actions-dropdown";
 import { VectorStoreActionsDropdown } from "../../vector-store-actions-dropdown";
@@ -25,12 +24,15 @@ interface PageListItemProps {
   page: PageData;
   categoryTitle: string;
   categories: MenuCategory[];
-    setCategories: React.Dispatch<React.SetStateAction<MenuCategory[]>>;
+  setCategories: React.Dispatch<React.SetStateAction<MenuCategory[]>>;
 }
 
-export function PageListItem({ page, categoryTitle, categories, setCategories }: PageListItemProps) {
- 
-  
+export function PageListItem({
+  page,
+  categoryTitle,
+  categories,
+  setCategories,
+}: PageListItemProps) {
   const {
     setNodeRef,
     attributes,
@@ -62,10 +64,7 @@ export function PageListItem({ page, categoryTitle, categories, setCategories }:
         {page.hasBadge && page.badgeName && (
           <Badge className="shadow-none rounded-full px-2.5 py-0.5 text-xs font-semibold h-6 flex items-center">
             <div
-              className={cn(
-                "h-1.5 w-1.5 rounded-full mr-2",
-                greenDotClass
-              )}
+              className={cn("h-1.5 w-1.5 rounded-full mr-2", greenDotClass)}
             />
             {page.badgeName}
           </Badge>
@@ -75,6 +74,12 @@ export function PageListItem({ page, categoryTitle, categories, setCategories }:
         <BadgeActionsDropdown
           singlePage={page}
           categoryTitle={categoryTitle}
+          setCategories={setCategories}
+        />
+        <PageActionsDropdown
+          singlePage={page}
+          categoryTitle={categoryTitle}
+          categories={categories}
           setCategories={setCategories}
         />
         <PublishActionsDropdown
@@ -97,12 +102,7 @@ export function PageListItem({ page, categoryTitle, categories, setCategories }:
           categoryTitle={categoryTitle}
           setCategories={setCategories}
         />
-        <PageActionsDropdown
-          singlePage={page}
-          categoryTitle={categoryTitle}
-          categories={categories}
-          setCategories={setCategories}
-        />
+
         <span
           className="flex items-center justify-center w-8 h-8 cursor-grab rounded hover:bg-accent/60 ml-1"
           tabIndex={-1}
