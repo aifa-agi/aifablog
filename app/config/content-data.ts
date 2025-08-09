@@ -3,7 +3,7 @@ import { MenuCategory } from "@/app/(_service)/types/menu-types";
 export const contentData = {
   categories: [
   {
-    "title": "website1234-new",
+    "title": "website1234",
     "order": 5,
     "pages": [
       {
@@ -70,7 +70,35 @@ export const contentData = {
         "badgeName": "ADMIN",
         "isPublished": false,
         "isVectorConnected": false,
-        "isChatSynchronized": false
+        "isChatSynchronized": false,
+        "title": "asdf",
+        "description": "asdf",
+        "images": [
+          {
+            "id": "ae2332cw6v5fqugr23eqwpo6",
+            "alt": "asdfasd",
+            "href": "asdf"
+          }
+        ],
+        "sections": [
+          {
+            "id": "hero-title",
+            "order": "1",
+            "bodyContent": {
+              "type": "TypographyH1",
+              "props": {
+                "children": "# Паромы на **Тенерифе**: Полный гид по морским перевозкам 2025",
+                "className": "text-5xl font-bold leading-tight",
+                "style": {
+                  "fontSize": "48px"
+                }
+              }
+            }
+          }
+        ],
+        "keyWords": [
+          "asdf"
+        ]
       }
     ]
   },

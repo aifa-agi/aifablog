@@ -22,10 +22,7 @@ interface CategoryActionsDropdownProps {
   setCategories: React.Dispatch<React.SetStateAction<MenuCategory[]>>;
 }
 
-/**
- * Компонент выпадающего меню с действиями для категорий
- * Содержит действия: переименование и удаление
- */
+
 export function CategoryActionsDropdown({
   categoryTitle,
   setCategories,
@@ -73,12 +70,12 @@ export function CategoryActionsDropdown({
         });
       },
       onCancel: () => {
-        // Действие при отмене переименования (опционально)
+        
       }
     });
   };
 
-  // Обработчик удаления категории
+
   const handleDelete = () => {
     dialogs.show({
       type: "delete",
@@ -94,7 +91,7 @@ export function CategoryActionsDropdown({
         });
       },
       onCancel: () => {
-        // Действие при отмене удаления (опционально)
+        
       }
     });
   };
