@@ -6,7 +6,7 @@ import { GeistMono } from "geist/font/mono";
 import "./globals.css";
 import Link from "next/link";
 import { Toaster } from "sonner";
-import NavBarRoleSelector from "@/app/(_service)/components/nav-bar-role-selector";
+import NavBar from "@/app/(_service)/components/nav-bar-role-selector";
 import { RoleProvider } from "@/app/(_service)/contexts/role-provider";
 import { NavigationMenuProvider } from "@/app/(_service)/contexts/nav-bar-provider";
 
@@ -49,7 +49,7 @@ html {
                       </Link>
                     </div>
                     <div className="flex items-center ">
-                      <NavBarRoleSelector />
+                      <NavBar />
                     </div>
                   </div>
                 </div>

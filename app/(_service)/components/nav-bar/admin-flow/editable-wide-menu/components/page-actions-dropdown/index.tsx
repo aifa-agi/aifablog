@@ -15,6 +15,7 @@ import { PageActionsDropdownProps } from "./types";
 import { usePageData } from "./hooks/use-page-data";
 import { usePageActions } from "./hooks/use-page-actions";
 import { useIconStatus } from "./hooks/use-icon-status";
+import { useNavigationMenu } from "@/app/(_service)/contexts/nav-bar-provider";
 import { PageActionsMenu } from "./components/page-actions-menu";
 import { PageTypeMenu } from "./components/page-type-menu";
 
@@ -25,7 +26,7 @@ export function PageActionsDropdown({
   setCategories,
 }: PageActionsDropdownProps) {
  
-  // Обработка ошибок для отсутствующих обязательных props
+  // Error handling for missing required props
   if (!categoryTitle || !categories) {
     return (
       <div className="p-4 bg-red-100 border border-red-400 rounded">
@@ -42,7 +43,10 @@ export function PageActionsDropdown({
     );
   }
 
-  // Кастомные хуки для управления данными и действиями
+  // Get navigation menu context for dirty state
+  const { dirty: hasUnsavedChanges } = useNavigationMenu();
+
+  // Custom hooks for data and actions management
   const { currentPageData, dataStatus, getCurrentPageData } = usePageData({
     singlePage,
     categoryTitle,
@@ -57,13 +61,13 @@ export function PageActionsDropdown({
     getCurrentPageData,
   });
 
-  // Новый хук для определения статуса иконки
+  // Hook for determining icon status
   const { iconStatus } = useIconStatus({
     currentPageData,
     dataStatus,
   });
 
-  // Функция для получения CSS класса иконки на основе статуса
+  // Function to get icon CSS class based on status
   const getIconColorClass = () => {
     switch (iconStatus) {
       case "complete":
@@ -72,7 +76,7 @@ export function PageActionsDropdown({
         return "text-orange-500 hover:text-orange-600";
       case "default":
       default:
-        return "text-primary/80";
+        return "text-primary hover:text-primary/80";
     }
   };
 
@@ -85,11 +89,11 @@ export function PageActionsDropdown({
           className="flex items-center justify-center w-8 h-8 rounded transition hover:bg-accent/60"
           tabIndex={-1}
         >
-          <FileCode2 
+          <FileCode2
             className={cn(
               "w-4 h-4 transition-colors",
               getIconColorClass()
-            )} 
+            )}
           />
         </Button>
       </DropdownMenuTrigger>
@@ -98,6 +102,8 @@ export function PageActionsDropdown({
         <PageActionsMenu
           {...dataStatus}
           {...pageActions}
+          currentPageData={currentPageData}
+          hasUnsavedChanges={hasUnsavedChanges}
         />
        
         <PageTypeMenu
@@ -109,5 +115,5 @@ export function PageActionsDropdown({
   );
 }
 
-// Ре-экспорт типов для удобства
+// Re-export types for convenience
 export type { PageActionsDropdownProps } from "./types";

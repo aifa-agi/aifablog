@@ -28,3 +28,4 @@ export interface PageActionsHook {
 }
 
 export type IconStatus = "default" | "partial" | "complete";
+export type PageBodyStatus = "inactive" | "ready" | "complete" | "blocked";

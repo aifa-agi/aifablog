@@ -34,7 +34,7 @@ export function useLinkLogic({
   setCategories,
 }: UseLinkLogicProps): UseLinkLogicReturn {
  
-  const linkState = getLinkState(singlePage);
+  const linkState = getLinkState(singlePage); 
   const linkConfiguration = getLinkConfiguration(singlePage);
   const isInteractive = isDropdownInteractive(linkState);
 

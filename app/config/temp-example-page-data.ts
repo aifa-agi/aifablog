@@ -67,7 +67,7 @@ export const paromyTenerifePageData: PageData = {
       bodyContent: {
         type: "SimpleSectionFullScreenSizeImage",
         props: {
-          src: "/public/tenerife-ferry-terminal-2025.jpg",
+          src: "https://9d8adypzz8xutnay.public.blob.vercel-storage.com/AI%20vs%20messenger-TL5G6UIqrnzdX6WwYEw8DoROtfpHvy.png",
           alt: "Современный паромный терминал Тенерифе с паромом компании Fred Olsen",
           width: 1200,
           height: 600,

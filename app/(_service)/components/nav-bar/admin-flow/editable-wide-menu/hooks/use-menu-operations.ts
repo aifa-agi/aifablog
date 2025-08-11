@@ -75,7 +75,6 @@ export function useMenuOperations(
         setCategories((prev) => [
           ...prev,
           {
-            id: generateCuid(),
             title: normalizedValue,
             pages: [],
             order: maxOrder + 1,

@@ -314,7 +314,7 @@ export interface Section {
   headerContent: HeaderSection;
   bodyContent?: React.ReactNode;
   footerContent?: FooterSection;
-  linksData?: LinksData[];
+  linkConfiguration?: LinkConfiguration;
   videoUrl?: string;
   imageUrl?: string;
   sectionClassName?: string;
@@ -366,7 +366,6 @@ export type TypographySectionTypeName = keyof TypographySectionTypes;
 export interface SimpleSection {
   id: string;
   order?: string;
-  linksData?: LinksData[];
   bodyContent: {
     type: SimpleSectionTypeName;
     props: SimpleSectionTypes[SimpleSectionTypeName];
@@ -376,7 +375,7 @@ export interface SimpleSection {
 export interface TypographySection {
   id: string;
   order?: string;
-  linksData?: LinksData[];
+  linkConfiguration?: LinkConfiguration;
   bodyContent: {
     type: TypographySectionTypeName;
     props: TypographySectionTypes[TypographySectionTypeName];
@@ -385,8 +384,8 @@ export interface TypographySection {
 
 export interface StepSection {
   id: string;
-  linksData?: LinksData[];
   order?: string;
+  linkConfiguration?: LinkConfiguration;
   bodyContent: (
     | {
         sectionType: "Simple";
@@ -416,11 +415,12 @@ export interface SummaryData {
   selfSummary: string;
 }
 
+export type LinkItemState = "pending" | "active";
 
-export interface LinksData {
-  outgoingLinks: string[];      
-  incomingLinks: string[];      
-  externalLinks: string[];      
+export interface LinkConfiguration {
+  outgoing: LinkItemState;      
+  incoming: LinkItemState;     
+  external: LinkItemState;     
 }
 
 
@@ -454,7 +454,7 @@ export interface PageData {
   type: PageType;
   design?: string;
   summaryData?: SummaryData[];
-  linksData?: LinksData[];
+  linkConfiguration?: LinkConfiguration;
   createdAt?: string;           
   updatedAt?: string; 
   sections?: ExtendedSection[];

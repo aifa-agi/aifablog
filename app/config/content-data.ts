@@ -3,111 +3,12 @@ import { MenuCategory } from "@/app/(_service)/types/menu-types";
 export const contentData = {
   categories: [
   {
-    "title": "website1234",
-    "order": 5,
+    "title": "canary-islands",
     "pages": [
       {
-        "id": "vcln0phubwqtrg1ujz80o1lr",
-        "order": 0,
-        "linkName": "dashboard1",
-        "href": "/dashboard1",
-        "roles": [
-          "editor",
-          "architect",
-          "admin"
-        ],
-        "isPublished": true,
-        "isVectorConnected": true,
-        "isChatSynchronized": true,
-        "images": [
-          {
-            "id": "xxgkehkjphinpxflk6x0bd6r",
-            "alt": "rub",
-            "href": "https://images.unsplash.com/1/irish-hands.jpg?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          },
-          {
-            "id": "f7ggc0jk18o9osfyi2v8wmes",
-            "alt": "sdreresdrere",
-            "href": "https://images.unsplash.com/1/irish-hands.jpg?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          }
-        ],
-        "sections": [
-          {
-            "id": "hero-title",
-            "order": "1",
-            "bodyContent": {
-              "type": "TypographyH1",
-              "props": {
-                "children": "# Паромы на **Тенерифе**: Полный гид по морским перевозкам 2025",
-                "className": "text-5xl font-bold leading-tight",
-                "style": {
-                  "fontSize": "48px"
-                }
-              }
-            }
-          }
-        ],
-        "hasBadge": true,
-        "badgeName": "NEW",
-        "type": "homePage",
-        "title": "fdgsdfg",
-        "description": "sdfgsdfg",
-        "keyWords": [
-          "sdfgsdfg"
-        ]
-      },
-      {
-        "id": "ts360avslnh1ltiinqexdpc7",
-        "order": 1,
-        "linkName": "user-management Copy",
-        "href": "/user-management-copy",
-        "roles": [
-          "guest",
-          "admin"
-        ],
-        "hasBadge": true,
-        "badgeName": "ADMIN",
-        "isPublished": false,
-        "isVectorConnected": false,
-        "isChatSynchronized": false,
-        "title": "asdf",
-        "description": "asdf",
-        "images": [
-          {
-            "id": "ae2332cw6v5fqugr23eqwpo6",
-            "alt": "asdfasd",
-            "href": "asdf"
-          }
-        ],
-        "sections": [
-          {
-            "id": "hero-title",
-            "order": "1",
-            "bodyContent": {
-              "type": "TypographyH1",
-              "props": {
-                "children": "# Паромы на **Тенерифе**: Полный гид по морским перевозкам 2025",
-                "className": "text-5xl font-bold leading-tight",
-                "style": {
-                  "fontSize": "48px"
-                }
-              }
-            }
-          }
-        ],
-        "keyWords": [
-          "asdf"
-        ],
-        "linkConfiguration": {
-          "outgoing": "active",
-          "incoming": "active",
-          "external": "active"
-        }
-      },
-      {
-        "id": "p26k9rz82xcqvamls8cch6c9",
-        "linkName": "zzdfsazdf",
-        "href": "/zzdfsazdf",
+        "id": "rh9jy75u98gtea7trilycm7a",
+        "linkName": "asdfasd",
+        "href": "/asdfasd",
         "roles": [
           "guest"
         ],
@@ -116,15 +17,59 @@ export const contentData = {
         "isPublished": false,
         "isVectorConnected": false,
         "isChatSynchronized": false,
-        "order": 2
+        "order": 3
+      },
+      {
+        "id": "vv50djnvcin3px5335dhay42",
+        "linkName": "paromy-na-tenerife",
+        "href": "/paromy-na-tenerife",
+        "roles": [
+          "guest"
+        ],
+        "hasBadge": true,
+        "type": "blog",
+        "isPublished": true,
+        "isVectorConnected": true,
+        "isChatSynchronized": true,
+        "order": 2,
+        "title": "Паромы на Тенерифе",
+        "description": "Паромы на Тенерифе: Полный гид по морским перевозкам 2025",
+        "sections": [
+          {
+            "id": "hero-title",
+            "order": "1",
+            "bodyContent": {
+              "type": "TypographyH1",
+              "props": {
+                "children": "# Паромы на **Тенерифе**: Полный гид по морским перевозкам 2025",
+                "className": "text-5xl font-bold leading-tight",
+                "style": {
+                  "fontSize": "48px"
+                }
+              }
+            }
+          }
+        ],
+        "keyWords": [
+          "Паромы на Тенерифе",
+          "Паромы"
+        ],
+        "images": [
+          {
+            "id": "pf6aetbo97ni1bhzu9cl0oq5",
+            "alt": "Паромы на Тенерифе: Полный гид по морским перевозкам 2025",
+            "href": "https://9d8adypzz8xutnay.public.blob.vercel-storage.com/AI%20vs%20messenger-TL5G6UIqrnzdX6WwYEw8DoROtfpHvy.png"
+          }
+        ],
+        "linkConfiguration": {
+          "outgoing": "active",
+          "incoming": "active",
+          "external": "active"
+        },
+        "badgeName": "NEW"
       }
-    ]
-  },
-  {
-    "id": "sjdbw625o55k2qkxtfzvtysi",
-    "title": "roma",
-    "pages": [],
-    "order": 6
+    ],
+    "order": 2
   }
 ]
 } as { categories: MenuCategory[] };
