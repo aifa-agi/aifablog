@@ -6,6 +6,9 @@ import { useAdminPagesNav } from "../(_context)/admin-pages-nav-context";
 import { AdminPageInfo } from "./admin-pages/admin-page-info";
 import { AdminPagePrompt } from "./admin-pages/admin-page-prompt";
 import { AdminPageData } from "./admin-pages/admin-page-data";
+import { AdminPageN8N } from "./admin-pages/admin-page-n8n";
+import { AdminPagePreview } from "./admin-pages/admin-page-preview";
+import { AdminPageSections } from "./admin-pages/admin-page-sections";
 
 
 export function AdminPageContent() {
@@ -18,6 +21,12 @@ export function AdminPageContent() {
       return <AdminPagePrompt slug={slug} />;
     case "data":
       return <AdminPageData slug={slug} />;
+      case "n8n":
+      return <AdminPageN8N slug={slug} />;
+      case "sections":
+      return <AdminPageSections slug={slug} />;
+      case "preview":
+      return <AdminPagePreview slug={slug} />;
     default:
       return <AdminPageInfo slug={slug} />;
   }

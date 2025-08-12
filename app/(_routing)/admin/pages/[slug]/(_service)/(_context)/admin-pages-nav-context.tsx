@@ -6,7 +6,7 @@
 import { createContext, useContext, useState, ReactNode } from "react";
 
 // Определяем возможные типы вкладок
-export type AdminPageTab = "info" | "prompt" | "data" | "n8n";
+export type AdminPageTab = "info" | "prompt" | "data" | "n8n" | "preview" | "sections";
 
 // Интерфейс для контекста
 interface AdminPagesNavContextType {

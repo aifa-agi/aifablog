@@ -21,6 +21,8 @@ export default function AdminPagesNavBar() {
     { key: "prompt", label: "Prompt" },
     { key: "data", label: "Data" },
     { key: "n8n", label: "N8N" },
+    { key: "sections", label: "Sections" },
+    { key: "preview", label: "Preview" },
   ];
 
   return (

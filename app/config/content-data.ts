@@ -28,7 +28,7 @@ export const contentData = {
         ],
         "hasBadge": true,
         "type": "blog",
-        "isPublished": false,
+        "isPublished": true,
         "isVectorConnected": true,
         "isChatSynchronized": false,
         "order": 2,
