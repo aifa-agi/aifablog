@@ -7,9 +7,15 @@ import { usePathname, useRouter } from "next/navigation";
 import { ChevronDown, MoreVertical, Loader2, ArrowLeft } from "lucide-react";
 import { Button } from "@/app/(_service)/components/ui/button";
 import EditableMobileMenu from "./editable-mobile-menu";
-import { useNavigationMenu, useMenuOperations } from "@/app/(_service)/contexts/nav-bar-provider";
+import {
+  useNavigationMenu,
+  useMenuOperations,
+} from "@/app/(_service)/contexts/nav-bar-provider";
 import { DialogsProvider } from "@/app/(_service)/contexts/dialogs";
-import { ModalProvider, useModal } from "@/app/(_service)/contexts/modal-context";
+import {
+  ModalProvider,
+  useModal,
+} from "@/app/(_service)/contexts/modal-context";
 import { EditableWideMenu } from "./editable-wide-menu";
 
 const HEADER_HEIGHT = 56;
@@ -18,29 +24,19 @@ const MOBILE_MENU_OFFSET = 40;
 function EditableNavBarContent() {
   const [isLargeScreen, setIsLargeScreen] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
-  
+
   const pathname = usePathname();
   const router = useRouter();
-  
+
   // Use modal context instead of local state
   const { isOpen, openModal, closeModal, toggleModal } = useModal();
-  
-  const {
-    categories,
-    setCategories,
-    loading,
-    dirty
-  } = useNavigationMenu();
 
-  const { 
-    handleUpdate, 
-    handleRetry, 
-    canRetry, 
-    retryCount,
-    lastError 
-  } = useMenuOperations();
+  const { categories, setCategories, loading, dirty } = useNavigationMenu();
 
-  const isAdminPagesRoute = pathname?.startsWith('/admin/pages') || false;
+  const { handleUpdate, handleRetry, canRetry, retryCount, lastError } =
+    useMenuOperations();
+
+  const isAdminPagesRoute = pathname?.startsWith("/admin/pages") || false;
 
   useEffect(() => {
     const handleResize = () => setIsLargeScreen(window.innerWidth >= 1024);
@@ -55,7 +51,7 @@ function EditableNavBarContent() {
   const handleMainButtonClick = async () => {
     if (!isAdminPagesRoute) {
       toggleModal();
-      
+
       return;
     }
 
@@ -80,7 +76,7 @@ function EditableNavBarContent() {
 
   const onUpdateClick = async () => {
     const success = await handleUpdate();
-    
+
     if (!success && lastError) {
       console.log("Update failed in navbar:", lastError);
     }
@@ -97,11 +93,11 @@ function EditableNavBarContent() {
     if (!isAdminPagesRoute) {
       return "destructive";
     }
-    
+
     if (dirty) {
       return "default";
     }
-    
+
     return "default";
   };
 
@@ -109,11 +105,11 @@ function EditableNavBarContent() {
     if (!isAdminPagesRoute) {
       return "";
     }
-    
+
     if (dirty) {
       return "bg-orange-600 hover:bg-orange-700 text-white";
     }
-    
+
     return "bg-green-600 hover:bg-green-700 text-white";
   };
 
@@ -145,7 +141,9 @@ function EditableNavBarContent() {
     if (isLargeScreen) {
       return (
         <ChevronDown
-          className={`w-4 h-4 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
+          className={`w-4 h-4 transition-transform duration-300 ${
+            isOpen ? "rotate-180" : ""
+          }`}
         />
       );
     }
@@ -168,8 +166,8 @@ function EditableNavBarContent() {
               className={`flex items-center gap-2 whitespace-nowrap px-4 ${getButtonClassName()}`}
               disabled={isSaving}
             >
-              <span>{getButtonText()}</span>
               {getButtonIcon()}
+              <span>{getButtonText()}</span>
             </Button>
           ) : (
             <Button
@@ -183,36 +181,36 @@ function EditableNavBarContent() {
             </Button>
           )}
         </div>
-        
+
         {(!isAdminPagesRoute || isOpen) && (
           <>
             {isLargeScreen ? (
-                <EditableWideMenu
-                  isOpen={isOpen}
-                  setIsOpen={()=>toggleModal()}
-                  categories={categories}
-                  setCategories={setCategories}
-                  dirty={dirty}
-                  loading={loading}
-                  onUpdate={onUpdateClick}
-                  onRetry={onRetryClick}
-                  canRetry={canRetry}
-                  retryCount={retryCount}
-                  lastError={lastError}
-                />
-              ) : (
-                <EditableMobileMenu
-                  isOpen={isOpen}
-                  setIsOpen={()=>toggleModal()}
-                  topOffset={mobileMenuTopOffset}
-                  categories={categories}
-                  setCategories={setCategories}
-                />
-              )}
+              <EditableWideMenu
+                isOpen={isOpen}
+                setIsOpen={() => toggleModal()}
+                categories={categories}
+                setCategories={setCategories}
+                dirty={dirty}
+                loading={loading}
+                onUpdate={onUpdateClick}
+                onRetry={onRetryClick}
+                canRetry={canRetry}
+                retryCount={retryCount}
+                lastError={lastError}
+              />
+            ) : (
+              <EditableMobileMenu
+                isOpen={isOpen}
+                setIsOpen={() => toggleModal()}
+                topOffset={mobileMenuTopOffset}
+                categories={categories}
+                setCategories={setCategories}
+              />
+            )}
           </>
         )}
       </div>
-      
+
       {isOpen && (
         <div
           className={`
