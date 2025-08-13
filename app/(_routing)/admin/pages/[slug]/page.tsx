@@ -2,7 +2,7 @@
 
 import { Suspense } from "react";
 import { LoadingSpinner } from "@/app/(_service)/components/ui/loading-spinner";
-import { AdminPagesNavBarProvider } from "./(_service)/(_context)/admin-pages-nav-context";
+import { AdminPagesNavBarProvider } from "./(_service)/(_components)/(_context)/admin-pages-nav-context";
 import { AdminPageContent } from "./(_service)/(_components)/admin-page-content";
 import AdminPagesNavBar from "./(_service)/(_components)/admin-page-nav-bar";
 

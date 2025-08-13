@@ -18,8 +18,8 @@ export interface LinksData {
 }
 export interface SectionInfo {
   id: string;
-  summary: SummaryData;
-  linksData: LinksData[];
+  summary?: SummaryData;
+  linksData?: LinksData[];
 }
 export interface SummaryData {
   id: string;

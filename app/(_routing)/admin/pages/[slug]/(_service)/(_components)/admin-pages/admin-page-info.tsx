@@ -15,7 +15,8 @@ import {
   CardTitle,
 } from "@/app/(_service)/components/ui/card";
 import { LoadingSpinner } from "@/app/(_service)/components/ui/loading-spinner";
-import { AlertCircle, FileText, Globe, Eye, EyeOff, Shield } from "lucide-react";
+import { AlertCircle, FileText, Globe, Eye, EyeOff, Shield, Home } from "lucide-react";
+import { Button } from "@/app/(_service)/components/ui/button";
 
 interface AdminPageInfoProps {
   slug: string;
@@ -56,28 +57,40 @@ export function AdminPageInfo({ slug }: AdminPageInfoProps) {
     return null;
   };
 
-  // Show access denied state if user is not admin
-  if (role !== "admin") {
-    return (
-      <div className="flex bg-background items-center justify-center py-12">
-        <div className="text-center">
-          <Shield className="mx-auto h-12 w-12 text-destructive mb-4" />
-          <h3 className="text-lg font-semibold text-foreground mb-2">
-            Access Denied
-          </h3>
-          <p className="text-muted-foreground mb-4">
-            You don't have permission to access this admin page
-          </p>
-          <p className="text-sm text-muted-foreground">
-            Required role: <span className="font-mono bg-muted px-2 py-1 rounded">Admin</span>
-          </p>
-          <p className="text-sm text-muted-foreground">
-            Your role: <span className="font-mono bg-muted px-2 py-1 rounded">{role}</span>
-          </p>
-        </div>
+ if (role !== "admin") {
+  
+
+  return (
+    <div className="flex bg-background items-center justify-center py-12">
+      <div className="text-center">
+        <Shield className="mx-auto h-12 w-12 text-destructive mb-4" />
+        <h3 className="text-lg font-semibold text-foreground mb-2">
+          Access Denied
+        </h3>
+        <p className="text-muted-foreground mb-4">
+          You don't have permission to access this admin page
+        </p>
+        <p className="text-sm text-muted-foreground mb-2">
+          Required role: <span className="font-mono bg-muted px-2 py-1 rounded">Admin</span>
+        </p>
+        <p className="text-sm text-muted-foreground mb-6">
+          Your role: <span className="font-mono bg-muted px-2 py-1 rounded">{role}</span>
+        </p>
+        
+        {/* Кнопка для перехода на главную страницу */}
+        <Button 
+          onClick={() => router.push("/")}
+          variant="outline"
+          className="gap-2"
+        >
+          <Home className="h-4 w-4" />
+          Go to Home Page
+        </Button>
       </div>
-    );
-  }
+    </div>
+  );
+}
+
 
   // Show loading state with theme-aware colors
   if (loading || !initialized) {

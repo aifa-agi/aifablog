@@ -133,7 +133,5 @@ export type ExtendedSection =
 
 
 export interface PageSections {
-  pageId: string; //pageData firld href
   sections: ExtendedSection[];
-  updatedAt: string;
 }

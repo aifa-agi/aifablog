@@ -2,7 +2,7 @@
 
 "use client";
 
-import { useAdminPagesNav } from "../(_context)/admin-pages-nav-context";
+import { useAdminPagesNav } from "./(_context)/admin-pages-nav-context";
 import { AdminPageInfo } from "./admin-pages/admin-page-info";
 import { AdminPagePrompt } from "./admin-pages/admin-page-prompt";
 import { AdminPageData } from "./admin-pages/admin-page-data";
