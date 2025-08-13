@@ -105,7 +105,7 @@ export function useMenuOperations(
                     {
                       id: generateCuid(),
                       linkName: normalizedName,
-                      href: "/" + normalizedName,
+                      href: `/${category.title}/${normalizedName}`,
                       roles: ["guest"],
                       hasBadge: false,
                       type: "blog" as PageType,

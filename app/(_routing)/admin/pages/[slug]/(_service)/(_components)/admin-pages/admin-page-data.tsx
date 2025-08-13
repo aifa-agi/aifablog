@@ -31,7 +31,7 @@ interface AdminPageInfoProps {
  * Added role-based access control - redirects non-admin users to home page
  */
 export function AdminPageData({ slug }: AdminPageInfoProps) {
-  const { categories, loading, initialized } = useNavigationMenu();
+  const { categories, setCategories, loading, initialized } = useNavigationMenu();
   const { role } = useRole(); // Получаем роль пользователя из контекста
   const router = useRouter();
 

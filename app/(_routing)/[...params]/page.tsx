@@ -5,7 +5,7 @@
 
 import { MenuCategory } from "@/app/(_service)/types/menu-types";
 import { PageData } from "@/app/(_service)/types/page-types";
-import { contentData } from "@/app/config/content-data";
+import { contentData } from "@/app/config/content/content-data";
 import { ALL_ROLES, UserRole } from "@/app/config/user-roles";
 import React, { useEffect, useState } from "react";
 
