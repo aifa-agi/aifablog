@@ -12,6 +12,7 @@ import { PageListItem } from "./page-list-item";
 interface PageListProps {
   pages: PageData[];
   categoryTitle: string;
+  setIsOpen: (open: boolean) => void;
   categories: MenuCategory[]; 
   setCategories: React.Dispatch<React.SetStateAction<MenuCategory[]>>; 
   onPageDragEnd: (activeId: string, overId: string) => void;
@@ -21,7 +22,8 @@ interface PageListProps {
 export function PageList({ 
   pages, 
   categoryTitle, 
-  categories, 
+  categories,
+  setIsOpen,
   setCategories, 
   onPageDragEnd 
 }: PageListProps) {
@@ -63,6 +65,7 @@ export function PageList({
               categoryTitle={categoryTitle}
               categories={categories}
               setCategories={setCategories} 
+              setIsOpen={setIsOpen}
             />
           ))}
         </ul>

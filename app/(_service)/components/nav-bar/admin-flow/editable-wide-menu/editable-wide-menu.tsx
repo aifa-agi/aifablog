@@ -55,6 +55,7 @@ export default function EditableWideMenu({
           setCategories={setCategories} 
           onAddPage={menuOperations.handleAddPage}
           onPageDragEnd={menuOperations.handlePageDragEnd}
+          setIsOpen={setIsOpen}
         />
         
         <CategorySection

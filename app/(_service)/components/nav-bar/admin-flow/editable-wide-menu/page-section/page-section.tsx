@@ -10,6 +10,7 @@ import { AddPageButton } from "./add-page-button";
 
 interface PageSectionProps {
   activeCategory: MenuCategory | null;
+  setIsOpen: (open: boolean) => void;
   categories: MenuCategory[]; 
   setCategories: React.Dispatch<React.SetStateAction<MenuCategory[]>>; 
   onAddPage: (category: MenuCategory) => void;
@@ -19,6 +20,7 @@ interface PageSectionProps {
 export function PageSection({ 
   activeCategory, 
   categories,
+  setIsOpen,
   setCategories,
   onAddPage, 
   onPageDragEnd 
@@ -50,6 +52,7 @@ export function PageSection({
               categories={categories} 
               setCategories={setCategories} 
               onPageDragEnd={onPageDragEnd}
+              setIsOpen={setIsOpen}
             />
           </div>
         </div>

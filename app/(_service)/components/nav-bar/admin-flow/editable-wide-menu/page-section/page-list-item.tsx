@@ -25,6 +25,7 @@ interface PageListItemProps {
   page: PageData;
   categoryTitle: string;
   categories: MenuCategory[];
+  setIsOpen: (open: boolean) => void;
   setCategories: React.Dispatch<React.SetStateAction<MenuCategory[]>>;
 }
 
@@ -33,9 +34,10 @@ export function PageListItem({
   categoryTitle,
   categories,
   setCategories,
+  setIsOpen,
 }: PageListItemProps) {
   const router = useRouter();
-  
+
   const {
     setNodeRef,
     attributes,
@@ -49,6 +51,7 @@ export function PageListItem({
   const handlePageClick = () => {
     if (categoryTitle.toLowerCase() === "admin") {
       router.push(`/admin/${page.linkName}`);
+      setIsOpen(false);
     }
   };
 
@@ -71,10 +74,11 @@ export function PageListItem({
       {...listeners}
     >
       <div className="flex-grow flex items-center gap-2 overflow-hidden">
-        <span 
+        <span
           className={cn(
             "overflow-hidden text-ellipsis whitespace-nowrap",
-            isAdminCategory && "cursor-pointer hover:text-primary hover:underline"
+            isAdminCategory &&
+              "cursor-pointer hover:text-primary hover:underline"
           )}
           onClick={handlePageClick}
         >
@@ -89,7 +93,7 @@ export function PageListItem({
           </Badge>
         )}
       </div>
-      
+
       {/* Показываем действия только если категория не "admin" */}
       {!isAdminCategory && (
         <div className="flex items-center gap-1">
@@ -133,7 +137,7 @@ export function PageListItem({
       >
         <GripVertical className="w-4 h-4 text-primary/80" />
       </span>
-      
+
       <div className="absolute left-0 bottom-0 w-full h-px bg-border opacity-50 pointer-events-none" />
     </li>
   );
