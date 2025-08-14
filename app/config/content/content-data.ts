@@ -3,6 +3,11 @@ import { MenuCategory } from "@/app/(_service)/types/menu-types";
 export const contentData = {
   categories: [
   {
+    "title": "new-category123",
+    "pages": [],
+    "order": 3
+  },
+  {
     "title": "canary-islands",
     "pages": [
       {
@@ -80,11 +85,6 @@ export const contentData = {
       }
     ],
     "order": 2
-  },
-  {
-    "title": "new-category",
-    "pages": [],
-    "order": 3
   },
   {
     "title": "admin",
