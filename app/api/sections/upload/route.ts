@@ -6,26 +6,47 @@ import { join } from 'path';
 import { existsSync } from 'fs';
 import { ExtendedSection } from '@/app/(_service)/types/section-types';
 
-// Интерфейсы для типизации запроса и ответа
 interface UploadRequestBody {
-  href: string; // Изменено с category/filename на href
+  href: string;
   sections: ExtendedSection[];
 }
 
-interface FileSystemResponse {
+interface SectionUploadResponse {
   success: boolean;
   message: string;
   filePath?: string;
+  environment: 'development' | 'production';
+  error?: string;
+  errorCode?: string;
+  details?: string;
 }
 
-// Парсинг href в компоненты пути
+enum OperationStatus {
+  SUCCESS = 'success',
+  GITHUB_API_ERROR = 'github_api_error',
+  FILESYSTEM_ERROR = 'filesystem_error',
+  VALIDATION_ERROR = 'validation_error',
+  NETWORK_ERROR = 'network_error',
+  UNKNOWN_ERROR = 'unknown_error'
+}
+
+enum ErrorCode {
+  GITHUB_TOKEN_INVALID = 'github_token_invalid',
+  GITHUB_API_UNAVAILABLE = 'github_api_unavailable',
+  NETWORK_ERROR = 'network_error',
+  FILE_WRITE_FAILED = 'file_write_failed',
+  INVALID_DATA_FORMAT = 'invalid_data_format',
+  DIRECTORY_CREATION_FAILED = 'directory_creation_failed',
+  VALIDATION_ERROR = 'validation_error',
+  UNKNOWN_ERROR = 'unknown_error'
+}
+
+function isProduction() {
+  return process.env.NODE_ENV === "production";
+}
+
 function parseHref(href: string): { firstPartHref: string; secondPartHref: string } {
-  console.log('🔍 Parsing href:', href);
-  
-  // Очищаем href от начального слеша
   const cleanHref = href.startsWith('/') ? href.slice(1) : href;
-  
-  // Разделяем по слешу
   const parts = cleanHref.split('/').filter(part => part.length > 0);
   
   if (parts.length < 2) {
@@ -35,22 +56,16 @@ function parseHref(href: string): { firstPartHref: string; secondPartHref: strin
   const firstPartHref = parts[0];
   const secondPartHref = parts[1];
   
-  console.log('📁 Parsed parts:', { firstPartHref, secondPartHref });
-  
   return { firstPartHref, secondPartHref };
 }
 
-// Валидация входных данных
 function validateRequestBody(body: any): body is UploadRequestBody {
-  console.log('✅ Validating request body...');
-  
   if (!body || typeof body !== 'object') {
     throw new Error('Request body must be an object');
   }
 
   const { href, sections } = body;
 
-  // Проверка наличия обязательных полей
   if (!href || typeof href !== 'string' || href.trim() === '') {
     throw new Error('href is required and must be a non-empty string');
   }
@@ -59,13 +74,11 @@ function validateRequestBody(body: any): body is UploadRequestBody {
     throw new Error('sections must be an array');
   }
 
-  // Валидация формата href
   const hrefRegex = /^\/[a-zA-Z0-9_-]+\/[a-zA-Z0-9_-]+$/;
   if (!hrefRegex.test(href)) {
     throw new Error('href must match format "/category/subcategory" with only letters, numbers, hyphens, and underscores');
   }
 
-  // Базовая валидация структуры секций
   for (let i = 0; i < sections.length; i++) {
     const section = sections[i];
     if (!section || typeof section !== 'object') {
@@ -79,11 +92,9 @@ function validateRequestBody(body: any): body is UploadRequestBody {
     }
   }
 
-  console.log('✅ Request body validation passed');
   return true;
 }
 
-// Валидация имени файла/директории (безопасность)
 function validateSafeName(name: string, fieldName: string): void {
   const safeNameRegex = /^[a-zA-Z0-9_-]+$/;
   if (!safeNameRegex.test(name)) {
@@ -91,14 +102,10 @@ function validateSafeName(name: string, fieldName: string): void {
   }
 }
 
-// Генерация содержимого TypeScript файла
 function generateTypeScriptFile(filename: string, sections: ExtendedSection[]): string {
   const importStatement = `import { ExtendedSection } from "@/app/(_service)/types/section-types";`;
-  
-  // Используем camelCase для имени переменной
   const variableName = filename.replace(/-/g, '');
   const dataVariable = `const ${variableName}Sections: ExtendedSection[] = ${JSON.stringify(sections, null, 2)};`;
-  
   const exportStatement = `export default ${variableName}Sections;`;
   
   const fileContent = [
@@ -117,63 +124,201 @@ function generateTypeScriptFile(filename: string, sections: ExtendedSection[]): 
   return fileContent;
 }
 
-// Создание директории если она не существует
 async function ensureDirectoryExists(dirPath: string): Promise<void> {
   if (!existsSync(dirPath)) {
-    console.log('📁 Creating directory:', dirPath);
     await mkdir(dirPath, { recursive: true });
   }
 }
 
-// POST handler для загрузки секций
-export async function POST(request: NextRequest): Promise<NextResponse<FileSystemResponse>> {
-  console.log('🔄 API Route: /api/admin/sections/upload');
-  console.log('📝 Request method:', request.method);
-  console.log('🌐 Request URL:', request.url);
-  console.log('📋 Request headers:', Object.fromEntries(request.headers.entries()));
-
+async function saveToGitHub(
+  firstPartHref: string,
+  secondPartHref: string,
+  sections: ExtendedSection[]
+): Promise<SectionUploadResponse> {
   try {
-    // Парсинг тела запроса
+    const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
+    const GITHUB_REPO = process.env.GITHUB_REPO;
+    const GITHUB_SECTIONS_BASE_PATH = process.env.GITHUB_SECTIONS_BASE_PATH || 'config/content/sections';
+
+    if (!GITHUB_TOKEN) {
+      return {
+        success: false,
+        message: "GitHub token is not configured",
+        error: "GitHub token is missing in environment variables",
+        errorCode: ErrorCode.GITHUB_TOKEN_INVALID,
+        environment: 'production'
+      };
+    }
+
+    if (!GITHUB_REPO) {
+      return {
+        success: false,
+        message: "GitHub repository is not configured",
+        error: "GitHub repository is missing in environment variables",
+        errorCode: ErrorCode.GITHUB_API_UNAVAILABLE,
+        environment: 'production'
+      };
+    }
+
+    const fileContents = generateTypeScriptFile(secondPartHref, sections);
+    const encodedContent = Buffer.from(fileContents).toString('base64');
+    const filePath = `${GITHUB_SECTIONS_BASE_PATH}/${firstPartHref}/${secondPartHref}.ts`;
+
+    const getFileResponse = await fetch(
+      `https://api.github.com/repos/${GITHUB_REPO}/contents/${filePath}`,
+      {
+        headers: {
+          'Authorization': `token ${GITHUB_TOKEN}`,
+          'Accept': 'application/vnd.github.v3+json',
+        },
+      }
+    );
+
+    let sha: string | undefined;
+    if (getFileResponse.ok) {
+      const fileData = await getFileResponse.json();
+      sha = fileData.sha;
+    }
+
+    const updateResponse = await fetch(
+      `https://api.github.com/repos/${GITHUB_REPO}/contents/${filePath}`,
+      {
+        method: 'PUT',
+        headers: {
+          'Authorization': `token ${GITHUB_TOKEN}`,
+          'Accept': 'application/vnd.github.v3+json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          message: `Update sections file: ${firstPartHref}/${secondPartHref}.ts - ${new Date().toISOString()}`,
+          content: encodedContent,
+          ...(sha && { sha })
+        }),
+      }
+    );
+
+    if (!updateResponse.ok) {
+      const errorData = await updateResponse.json().catch(() => ({}));
+      return {
+        success: false,
+        message: "Failed to update file on GitHub",
+        error: `GitHub API returned ${updateResponse.status}: ${errorData.message || 'Unknown error'}`,
+        errorCode: updateResponse.status === 401 ? ErrorCode.GITHUB_TOKEN_INVALID : ErrorCode.GITHUB_API_UNAVAILABLE,
+        environment: 'production',
+        details: JSON.stringify(errorData)
+      };
+    }
+
+    return {
+      success: true,
+      message: "Successfully updated sections file on GitHub",
+      filePath: filePath,
+      environment: 'production'
+    };
+
+  } catch (error: any) {
+    return {
+      success: false,
+      message: "Network error while connecting to GitHub",
+      error: error.message || "Unknown network error",
+      errorCode: ErrorCode.NETWORK_ERROR,
+      environment: 'production'
+    };
+  }
+}
+
+async function saveToFileSystem(
+  firstPartHref: string,
+  secondPartHref: string,
+  sections: ExtendedSection[]
+): Promise<SectionUploadResponse> {
+  try {
+    const contentDir = join(process.cwd(), 'app', 'config', 'content', 'sections');
+    const firstPartDir = join(contentDir, firstPartHref);
+    const filePath = join(firstPartDir, `${secondPartHref}.ts`);
+    const relativeFilePath = `app/config/content/sections/${firstPartHref}/${secondPartHref}.ts`;
+
+    await ensureDirectoryExists(contentDir);
+    await ensureDirectoryExists(firstPartDir);
+
+    const fileContent = generateTypeScriptFile(secondPartHref, sections);
+    await writeFile(filePath, fileContent, 'utf-8');
+
+    return {
+      success: true,
+      message: "Successfully saved sections file to filesystem",
+      filePath: relativeFilePath,
+      environment: 'development'
+    };
+
+  } catch (error: any) {
+    if (error.message.includes('EACCES')) {
+      return {
+        success: false,
+        message: "Permission denied: Unable to write to file system",
+        error: error.message,
+        errorCode: ErrorCode.FILE_WRITE_FAILED,
+        environment: 'development'
+      };
+    }
+
+    if (error.message.includes('ENOSPC')) {
+      return {
+        success: false,
+        message: "No space left on device",
+        error: error.message,
+        errorCode: ErrorCode.FILE_WRITE_FAILED,
+        environment: 'development'
+      };
+    }
+
+    return {
+      success: false,
+      message: "Failed to save file to local filesystem",
+      error: error.message || "Unknown filesystem error",
+      errorCode: ErrorCode.FILE_WRITE_FAILED,
+      environment: 'development'
+    };
+  }
+}
+
+export async function POST(request: NextRequest): Promise<NextResponse<SectionUploadResponse>> {
+  try {
     let body;
     let rawBody: string;
     
     try {
       rawBody = await request.text();
-      console.log('📦 Request body length:', rawBody.length);
-      console.log('📦 Request body preview:', rawBody.substring(0, 200) + '...');
-      
       body = JSON.parse(rawBody);
-      console.log('✅ JSON parsed successfully');
     } catch (error) {
-      console.error('❌ JSON parse error:', error);
       return NextResponse.json(
         {
           success: false,
           message: 'Invalid JSON in request body',
-          details: error instanceof Error ? error.message : 'Unknown parsing error'
+          error: error instanceof Error ? error.message : 'Unknown parsing error',
+          errorCode: ErrorCode.INVALID_DATA_FORMAT,
+          environment: isProduction() ? 'production' : 'development'
         },
         { status: 400 }
       );
     }
 
-    // Валидация данных
     try {
       validateRequestBody(body);
     } catch (error) {
-      console.error('❌ Validation error:', error);
       return NextResponse.json(
         {
           success: false,
-          message: error instanceof Error ? error.message : 'Validation failed'
+          message: error instanceof Error ? error.message : 'Validation failed',
+          errorCode: ErrorCode.VALIDATION_ERROR,
+          environment: isProduction() ? 'production' : 'development'
         },
         { status: 400 }
       );
     }
 
     const { href, sections } = body as UploadRequestBody;
-    console.log('📊 Sections count:', sections.length);
 
-    // Парсинг href в компоненты пути
     let firstPartHref: string;
     let secondPartHref: string;
 
@@ -182,136 +327,59 @@ export async function POST(request: NextRequest): Promise<NextResponse<FileSyste
       firstPartHref = parsed.firstPartHref;
       secondPartHref = parsed.secondPartHref;
     } catch (error) {
-      console.error('❌ Href parsing error:', error);
       return NextResponse.json(
         {
           success: false,
-          message: error instanceof Error ? error.message : 'Invalid href format'
+          message: error instanceof Error ? error.message : 'Invalid href format',
+          errorCode: ErrorCode.INVALID_DATA_FORMAT,
+          environment: isProduction() ? 'production' : 'development'
         },
         { status: 400 }
       );
     }
 
-    // Валидация безопасности имен
     try {
       validateSafeName(firstPartHref, 'First part of href');
       validateSafeName(secondPartHref, 'Second part of href');
     } catch (error) {
-      console.error('❌ Name validation error:', error);
       return NextResponse.json(
         {
           success: false,
-          message: error instanceof Error ? error.message : 'Invalid name format'
+          message: error instanceof Error ? error.message : 'Invalid name format',
+          errorCode: ErrorCode.INVALID_DATA_FORMAT,
+          environment: isProduction() ? 'production' : 'development'
         },
         { status: 400 }
       );
     }
 
-    // Определение путей для сохранения
-    const contentDir = join(process.cwd(), 'app', 'config', 'content', 'sections');
-    const firstPartDir = join(contentDir, firstPartHref);
-    const filePath = join(firstPartDir, `${secondPartHref}.ts`);
-    const relativeFilePath = `app/config/content/sections/${firstPartHref}/${secondPartHref}.ts`;
+    const result: SectionUploadResponse = isProduction()
+      ? await saveToGitHub(firstPartHref, secondPartHref, sections)
+      : await saveToFileSystem(firstPartHref, secondPartHref, sections);
 
-    console.log('📁 Target directory:', firstPartDir);
-    console.log('📄 Target file:', filePath);
-
-    // Создание директорий если не существуют
-    try {
-      await ensureDirectoryExists(contentDir);
-      await ensureDirectoryExists(firstPartDir);
-    } catch (error) {
-      console.error('❌ Directory creation error:', error);
-      return NextResponse.json(
-        {
-          success: false,
-          message: 'Failed to create directories'
-        },
-        { status: 500 }
-      );
-    }
-
-    // Генерация содержимого файла
-    const fileContent = generateTypeScriptFile(secondPartHref, sections);
-
-    // Сохранение файла
-    try {
-      await writeFile(filePath, fileContent, 'utf-8');
-      console.log('✅ File saved successfully:', relativeFilePath);
-    } catch (error) {
-      console.error('❌ File write error:', error);
-      throw error; // Передаем ошибку для обработки в общем catch блоке
-    }
-
-    console.log('✅ Processing completed successfully');
-
-    // Успешный ответ
-    return NextResponse.json(
-      {
-        success: true,
-        message: `Sections successfully saved to ${relativeFilePath}`,
-        filePath: relativeFilePath
-      },
-      { 
-        status: 200,
-        headers: {
-          'Content-Type': 'application/json',
-        }
-      }
-    );
-
-  } catch (error) {
-    console.error('❌ Server error:', error);
+    const httpStatus = result.success ? 200 : 500;
     
-    // Обработка специфичных ошибок файловой системы
-    if (error instanceof Error) {
-      if (error.message.includes('EACCES')) {
-        return NextResponse.json(
-          {
-            success: false,
-            message: 'Permission denied: Unable to write to file system'
-          },
-          { status: 500 }
-        );
+    return NextResponse.json(result, { 
+      status: httpStatus,
+      headers: {
+        'Content-Type': 'application/json',
       }
+    });
 
-      if (error.message.includes('ENOSPC')) {
-        return NextResponse.json(
-          {
-            success: false,
-            message: 'No space left on device'
-          },
-          { status: 500 }
-        );
-      }
-
-      if (error.message.includes('ENOTDIR')) {
-        return NextResponse.json(
-          {
-            success: false,
-            message: 'Directory path is invalid'
-          },
-          { status: 500 }
-        );
-      }
-    }
-
-    // Общая ошибка
-    return NextResponse.json(
-      {
-        success: false,
-        message: error instanceof Error ? error.message : 'Internal server error',
-        details: error instanceof Error ? error.stack : undefined
-      },
-      { status: 500 }
-    );
+  } catch (error: any) {
+    const errorResponse: SectionUploadResponse = {
+      success: false,
+      message: "An unexpected error occurred",
+      error: error.message || "Unknown error",
+      errorCode: ErrorCode.UNKNOWN_ERROR,
+      environment: isProduction() ? 'production' : 'development'
+    };
+    
+    return NextResponse.json(errorResponse, { status: 500 });
   }
 }
 
-// GET handler для получения информации о существующих файлах
 export async function GET(request: NextRequest): Promise<NextResponse> {
-  console.log('🔄 GET /api/admin/sections/upload');
-  
   try {
     const { searchParams } = new URL(request.url);
     const href = searchParams.get('href');
@@ -320,37 +388,38 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
       return NextResponse.json(
         { 
           success: false, 
-          message: 'href parameter is required' 
+          message: 'href parameter is required',
+          environment: isProduction() ? 'production' : 'development'
         },
         { status: 400 }
       );
     }
 
-    // Парсим href
     const { firstPartHref } = parseHref(href);
-    const categoryDir = join(process.cwd(), 'app', 'config', 'content', 'sections', firstPartHref);
     
-    if (!existsSync(categoryDir)) {
+    if (isProduction()) {
       return NextResponse.json({
         success: true,
-        message: 'Category directory does not exist',
-        files: []
+        message: 'GitHub environment - file existence check not implemented',
+        environment: 'production'
+      });
+    } else {
+      const categoryDir = join(process.cwd(), 'app', 'config', 'content', 'sections', firstPartHref);
+      
+      return NextResponse.json({
+        success: true,
+        message: existsSync(categoryDir) ? 'Directory exists' : 'Directory does not exist',
+        categoryDir: categoryDir,
+        environment: 'development'
       });
     }
 
-    // Получение списка файлов в категории (опционально)
-    return NextResponse.json({
-      success: true,
-      message: 'Directory exists',
-      categoryDir: categoryDir
-    });
-
-  } catch (error) {
-    console.error('❌ Error in GET sections:', error);
+  } catch (error: any) {
     return NextResponse.json(
       {
         success: false,
-        message: error instanceof Error ? error.message : 'Internal server error'
+        message: error.message || 'Internal server error',
+        environment: isProduction() ? 'production' : 'development'
       },
       { status: 500 }
     );

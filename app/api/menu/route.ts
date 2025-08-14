@@ -2,7 +2,6 @@
 
 import { NextResponse } from "next/server";
 import { contentData } from "@/app/config/content/content-data";
-import type { MenuCategory } from "@/app/(_service)/types/menu-types";
 
 export async function GET() {
   try {

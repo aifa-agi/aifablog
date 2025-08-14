@@ -1,5 +1,5 @@
 // Auto-generated file - do not edit manually
-// Generated on: 2025-08-13T23:05:56.308Z
+// Generated on: 2025-08-14T09:30:55.376Z
 // Source href: paromy-na-tenerife
 
 import { ExtendedSection } from "@/app/(_service)/types/section-types";

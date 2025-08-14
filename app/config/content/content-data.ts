@@ -14,9 +14,9 @@ export const contentData = {
         ],
         "hasBadge": false,
         "type": "blog",
-        "isPublished": true,
+        "isPublished": false,
         "isVectorConnected": true,
-        "isChatSynchronized": true,
+        "isChatSynchronized": false,
         "order": 1,
         "title": "Паромы на Тенерифе",
         "description": ": Полный гид по морским перевозкам 2025",
@@ -30,6 +30,7 @@ export const contentData = {
             "href": "https://9d8adypzz8xutnay.public.blob.vercel-storage.com/Screenshot%202023-12-14%20193752-iLFevnFZR8YF77PoIZRUXcusgSutpX.png"
           }
         ],
+        "updatedAt": "2025-08-14T09:30:55.427Z",
         "sections": [
           {
             "id": "section-1"
@@ -40,8 +41,7 @@ export const contentData = {
           {
             "id": "section-3"
           }
-        ],
-        "updatedAt": "2025-08-13T23:05:58.027Z"
+        ]
       }
     ],
     "order": 2

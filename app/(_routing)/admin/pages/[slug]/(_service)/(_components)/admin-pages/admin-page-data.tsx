@@ -4,7 +4,7 @@
 
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { useNavigationMenu } from "@/app/(_service)/contexts/nav-bar-provider";
+import { useNavigationMenu, useMenuOperations } from "@/app/(_service)/contexts/nav-bar-provider";
 import { useRole } from "@/app/(_service)/contexts/role-provider";
 import { MenuCategory } from "@/app/(_service)/types/menu-types";
 import { ExtendedSection } from "@/app/(_service)/types/section-types";
@@ -30,6 +30,7 @@ import {
   CheckCircle,
   Info,
   RefreshCw,
+  Save,
 } from "lucide-react";
 import { toast } from "sonner";
 import { SectionInfo } from "@/app/(_service)/types/page-types";
@@ -49,19 +50,17 @@ interface FileSystemResponse {
 }
 
 export function AdminPageData({ slug }: AdminPageInfoProps) {
-  const { categories, setCategories, loading, initialized } =
+  const { categories, setCategories, loading, initialized, dirty } =
     useNavigationMenu();
+  const { handleUpdate, loading: savingCategories } = useMenuOperations();
   const { role } = useRole();
   const router = useRouter();
 
-  // State management for JSON upload functionality
   const [jsonContent, setJsonContent] = useState<string>("");
   const [isUploading, setIsUploading] = useState<boolean>(false);
-  const [isCopied, setIsCopied] = useState<boolean>(false);
   const [uploadError, setUploadError] = useState<string>("");
   const [uploadSuccess, setUploadSuccess] = useState<string>("");
 
-  // Instructions for JSON upload
   const uploadInstructions = `Follow these steps to upload your generated JSON file:
 
 1. Copy the generated JSON content from your AI model in format: { "sections": ExtendedSection[] }
@@ -70,21 +69,17 @@ export function AdminPageData({ slug }: AdminPageInfoProps) {
 4. The system will validate the JSON structure and save it to the file system
 5. File will be saved based on the page href to: app/config/content/sections/[firstPart]/[secondPart].ts
 6. Page metadata will be automatically updated with section IDs
+7. Click "Save Categories" to persist changes to the server
 
 Make sure the JSON follows the required format: { "sections": ExtendedSection[] }`;
 
-  // Role-based access control
   useEffect(() => {
     if (role !== "admin") {
-      console.warn(
-        "Access denied: User role is not Admin, redirecting to home page"
-      );
       router.push("/");
       return;
     }
   }, [role, router]);
 
-  // Find page by slug across all categories
   const findPageBySlug = (categories: MenuCategory[], targetSlug: string) => {
     for (const category of categories) {
       const page = category.pages.find((page) => page.linkName === targetSlug);
@@ -95,10 +90,8 @@ Make sure the JSON follows the required format: { "sections": ExtendedSection[] 
     return null;
   };
 
-  // Parse href to get target file path for display
   const getTargetFilePath = (href: string): string => {
     try {
-      // Remove leading slash if present
       const cleanHref = href.startsWith('/') ? href.slice(1) : href;
       const parts = cleanHref.split('/').filter(part => part.length > 0);
       
@@ -113,7 +106,6 @@ Make sure the JSON follows the required format: { "sections": ExtendedSection[] 
     }
   };
 
-  // Validate sections data structure
   const validateSectionsData = (data: any): data is SectionsUploadData => {
     if (!data || typeof data !== 'object') {
       throw new Error('Data must be an object');
@@ -123,7 +115,6 @@ Make sure the JSON follows the required format: { "sections": ExtendedSection[] 
       throw new Error('Data must contain "sections" array');
     }
     
-    // Basic validation of sections structure
     for (let i = 0; i < data.sections.length; i++) {
       const section = data.sections[i];
       if (!section || typeof section !== 'object') {
@@ -140,7 +131,6 @@ Make sure the JSON follows the required format: { "sections": ExtendedSection[] 
     return true;
   };
 
-  // Validate href format
   const validateHrefFormat = (href: string): void => {
     const hrefRegex = /^\/[a-zA-Z0-9_-]+\/[a-zA-Z0-9_-]+$/;
     if (!hrefRegex.test(href)) {
@@ -148,79 +138,45 @@ Make sure the JSON follows the required format: { "sections": ExtendedSection[] 
     }
   };
 
-  /**
-   * Convert ExtendedSection[] to SectionInfo[]
-   * Extracts only section IDs for page metadata
-   * 
-   * @param sections - Array of ExtendedSection from uploaded JSON
-   * @returns Array of SectionInfo with only id field populated
-   */
   const extractSectionIds = (sections: ExtendedSection[]): SectionInfo[] => {
-    console.log('🔄 Extracting section IDs from uploaded sections...');
-    
     const sectionInfos: SectionInfo[] = sections.map(section => ({
       id: section.id,
-      // summary and linksData are intentionally omitted (optional fields)
     }));
 
-    console.log('📋 Extracted section IDs:', sectionInfos.map(s => s.id));
     return sectionInfos;
   };
 
-  /**
-   * Update page metadata with section information
-   * Updates the categories state with new section IDs
-   * 
-   * @param categoryTitle - Title of the category containing the page
-   * @param pageLinkName - Link name of the page to update
-   * @param sectionInfos - Array of section info to set
-   */
   const updatePageSections = (
     categoryTitle: string,
     pageLinkName: string,
     sectionInfos: SectionInfo[]
   ): void => {
-    console.log('🔄 Updating page sections in categories...');
-    console.log('📂 Target category:', categoryTitle);
-    console.log('📄 Target page:', pageLinkName);
-    console.log('📊 Sections to update:', sectionInfos.length);
-
     setCategories(prevCategories => {
       return prevCategories.map(category => {
         if (category.title !== categoryTitle) {
-          return category; // Return unchanged if not target category
+          return category;
         }
 
         return {
           ...category,
           pages: category.pages.map(page => {
             if (page.linkName !== pageLinkName) {
-              return page; // Return unchanged if not target page
+              return page;
             }
-
-            console.log('✅ Updating sections for page:', page.linkName);
-            console.log('📋 Previous sections count:', page.sections?.length || 0);
-            console.log('📋 New sections count:', sectionInfos.length);
 
             return {
               ...page,
               sections: sectionInfos,
-              // Optionally update other metadata
               updatedAt: new Date().toISOString(),
-              isVectorConnected: true, // Mark as having content
+              isVectorConnected: true,
             };
           })
         };
       });
     });
-
-    console.log('✅ Categories updated successfully');
   };
 
-  // Handle JSON content upload
   const handleJsonUpload = async () => {
-    console.log('🔄 Starting JSON upload process...');
-    
     if (!jsonContent.trim()) {
       toast.error("Please paste your JSON content before uploading.");
       return;
@@ -231,59 +187,41 @@ Make sure the JSON follows the required format: { "sections": ExtendedSection[] 
     setUploadSuccess("");
 
     try {
-      // Find the current page to get href information
       const pageResult = findPageBySlug(categories, slug);
       if (!pageResult) {
         throw new Error(`Page with slug "${slug}" not found`);
       }
 
       const { page, category } = pageResult;
-      console.log('📄 Found page:', page.linkName, 'in category:', category.title);
       
-      // Check if href exists
       if (!page.href) {
         throw new Error(`Page "${page.linkName}" does not have href property`);
       }
       
-      console.log('🔗 Page href:', page.href);
-      
-      // Validate href format
       try {
         validateHrefFormat(page.href);
       } catch (error) {
         throw new Error(`Invalid href format: ${error instanceof Error ? error.message : 'Unknown error'}`);
       }
 
-      // Validate JSON format
       let parsedJson;
       try {
         parsedJson = JSON.parse(jsonContent);
-        console.log('✅ JSON parsed successfully');
       } catch (error) {
         throw new Error(`Invalid JSON format: ${error instanceof Error ? error.message : 'Unknown parsing error'}`);
       }
       
-      // Validate sections structure
       try {
         validateSectionsData(parsedJson);
-        console.log('✅ Sections data validated successfully');
-        console.log('📊 Sections count:', parsedJson.sections.length);
       } catch (error) {
         throw new Error(`Invalid sections data: ${error instanceof Error ? error.message : 'Unknown validation error'}`);
       }
 
-      // Prepare payload for API
       const payload = {
         href: page.href,
         sections: parsedJson.sections,
       };
 
-      console.log('📦 Sending payload:', {
-        href: payload.href,
-        sectionsCount: payload.sections.length
-      });
-
-      // Send data to API endpoint for file system save
       const response = await fetch('/api/sections/upload', {
         method: 'POST',
         headers: {
@@ -292,27 +230,18 @@ Make sure the JSON follows the required format: { "sections": ExtendedSection[] 
         body: JSON.stringify(payload),
       });
 
-      console.log('📥 API Response status:', response.status);
-
-      // Get response as text first for better error handling
       const responseText = await response.text();
-      console.log('📥 Raw response preview:', responseText.substring(0, 200));
 
-      // Check if we received HTML instead of JSON
       if (responseText.startsWith('<!DOCTYPE') || responseText.startsWith('<html')) {
-        console.error('❌ Server returned HTML instead of JSON');
         throw new Error('Server returned HTML instead of JSON. Check server logs for routing issues.');
       }
 
-      // Parse JSON response
       let apiResult: FileSystemResponse;
       try {
         apiResult = JSON.parse(responseText);
       } catch (error) {
         throw new Error(`Failed to parse API response: ${responseText.substring(0, 100)}...`);
       }
-
-      console.log('📋 Parsed API result:', apiResult);
 
       if (!response.ok) {
         throw new Error(apiResult.message || `HTTP ${response.status}: ${response.statusText}`);
@@ -322,48 +251,54 @@ Make sure the JSON follows the required format: { "sections": ExtendedSection[] 
         throw new Error(apiResult.message || 'Upload failed');
       }
 
-      // ============================================================================
-      // UPDATE PAGE METADATA WITH SECTION IDS AFTER SUCCESSFUL UPLOAD
-      // ============================================================================
-      
       try {
-        console.log('🔄 Starting page metadata update...');
-        
-        // Extract section IDs from uploaded sections
         const sectionInfos = extractSectionIds(parsedJson.sections);
-        
-        // Update page sections in categories
         updatePageSections(category.title, page.linkName, sectionInfos);
-        
-        console.log('✅ Page metadata updated successfully');
-        
       } catch (metadataError) {
-        console.error('⚠️ Failed to update page metadata:', metadataError);
-        // Don't fail the entire process, just warn
         toast.error(`Upload successful, but failed to update page metadata: ${metadataError instanceof Error ? metadataError.message : 'Unknown error'}`);
       }
 
-      // Success message
       const successMessage = `JSON data uploaded successfully! File saved to: ${apiResult.filePath}. Page metadata updated with ${parsedJson.sections.length} section(s).`;
       setUploadSuccess(successMessage);
       toast.success("Upload completed successfully!");
 
-      console.log('✅ Upload completed successfully:', apiResult.filePath);
-
-      // Clear the textarea after successful upload
       setJsonContent("");
       
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : "Invalid JSON format or upload failed";
       setUploadError(errorMessage);
       toast.error(`Upload failed: ${errorMessage}`);
-      console.error('❌ Upload error:', error);
     } finally {
       setIsUploading(false);
     }
   };
 
-  // Show access denied state if user is not admin
+  const handleSaveCategories = async () => {
+    try {
+      const success = await handleUpdate();
+      
+      if (success) {
+        toast.success("Categories saved successfully!");
+        setUploadSuccess("");
+        setUploadError("");
+      }
+    } catch (error) {
+      toast.error('Failed to save categories');
+    }
+  };
+
+  const getRefreshIconColor = (page: any): string => {
+    if (!page.sections || page.sections.length === 0) {
+      return "text-gray-400";
+    }
+    
+    if (dirty) {
+      return "text-orange-500";
+    }
+    
+    return "text-green-600";
+  };
+
   if (role !== "admin") {
     return (
       <div className="flex bg-background items-center justify-center py-12">
@@ -397,7 +332,6 @@ Make sure the JSON follows the required format: { "sections": ExtendedSection[] 
     );
   }
 
-  // Show loading state with theme-aware colors
   if (loading || !initialized) {
     return (
       <div className="flex items-center justify-center py-12">
@@ -409,7 +343,6 @@ Make sure the JSON follows the required format: { "sections": ExtendedSection[] 
 
   const pageData = findPageBySlug(categories, slug);
 
-  // Show error state if page not found with theme-aware styling
   if (!pageData) {
     return (
       <div className="flex bg-background items-center justify-center py-12">
@@ -435,13 +368,11 @@ Make sure the JSON follows the required format: { "sections": ExtendedSection[] 
 
   const { page, category } = pageData;
 
-  // Get target path info for display
   const targetPath = page.href ? getTargetFilePath(page.href) : "Page href is not defined";
   const isValidHref = page.href && /^\/[a-zA-Z0-9_-]+\/[a-zA-Z0-9_-]+$/.test(page.href);
 
   return (
     <div className="space-y-6">
-      {/* Admin Access Indicator */}
       <div className="bg-muted/50 border border-border rounded-lg px-4 py-3">
         <div className="flex items-center gap-2 text-sm">
           <Shield className="h-5 w-5 text-primary" />
@@ -452,7 +383,6 @@ Make sure the JSON follows the required format: { "sections": ExtendedSection[] 
         </div>
       </div>
 
-      {/* Page Information */}
       <Card>
         <CardHeader>
           <CardTitle className="text-lg flex items-center gap-2">
@@ -460,6 +390,11 @@ Make sure the JSON follows the required format: { "sections": ExtendedSection[] 
             {page.sections && page.sections.length > 0 && (
               <Badge variant="secondary" className="text-xs">
                 {page.sections.length} sections
+              </Badge>
+            )}
+            {dirty && (
+              <Badge variant="outline" className="text-xs text-orange-600 border-orange-300">
+                Unsaved changes
               </Badge>
             )}
           </CardTitle>
@@ -494,7 +429,6 @@ Make sure the JSON follows the required format: { "sections": ExtendedSection[] 
             <code className="bg-muted px-2 py-1 rounded text-xs flex-1">{targetPath}</code>
           </div>
 
-          {/* Current Sections Information */}
           <div className="flex items-start gap-2">
             <span className="text-muted-foreground">Current sections:</span>
             <div className="flex-1">
@@ -504,19 +438,25 @@ Make sure the JSON follows the required format: { "sections": ExtendedSection[] 
                     <Badge variant="outline" className="text-xs">
                       {page.sections.length} sections loaded
                     </Badge>
-                    <RefreshCw className="h-3 w-3 text-green-600" />
+                    <RefreshCw className={`h-3 w-3 ${getRefreshIconColor(page)}`} />
                   </div>
-                  
+                  <div className="text-xs text-muted-foreground">
+                    Status: {!dirty ? 'Saved' : 'Pending save'} | 
+                    IDs: {page.sections.slice(0, 3).map(s => s.id).join(", ")}
+                    {page.sections.length > 3 && ` ... +${page.sections.length - 3} more`}
+                  </div>
                 </div>
               ) : (
-                <Badge variant="secondary" className="text-xs">
-                  No sections loaded
-                </Badge>
+                <div className="flex items-center gap-2">
+                  <Badge variant="secondary" className="text-xs">
+                    No sections loaded
+                  </Badge>
+                  <RefreshCw className={`h-3 w-3 ${getRefreshIconColor(page)}`} />
+                </div>
               )}
             </div>
           </div>
           
-          {/* Href validation warning */}
           {page.href && !isValidHref && (
             <div className="bg-amber-50 border border-amber-200 rounded-lg p-3 dark:bg-amber-950 dark:border-amber-800">
               <div className="flex items-start gap-2">
@@ -535,7 +475,6 @@ Make sure the JSON follows the required format: { "sections": ExtendedSection[] 
         </CardContent>
       </Card>
 
-      {/* JSON Upload Section */}
       <Card>
         <CardHeader>
           <div className="flex items-center gap-3">
@@ -559,7 +498,6 @@ Make sure the JSON follows the required format: { "sections": ExtendedSection[] 
         </CardHeader>
 
         <CardContent className="space-y-4">
-          {/* Upload Instructions */}
           <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 dark:bg-blue-950 dark:border-blue-800">
             <div className="flex items-start gap-3">
               <Lightbulb className="h-5 w-5 text-blue-600 dark:text-blue-400 mt-0.5 flex-shrink-0" />
@@ -576,7 +514,6 @@ Make sure the JSON follows the required format: { "sections": ExtendedSection[] 
             </div>
           </div>
 
-          {/* API Information */}
           <div className="bg-gray-50 border border-gray-200 rounded-lg p-3 dark:bg-gray-950 dark:border-gray-800">
             <div className="flex items-start gap-2">
               <Info className="h-4 w-4 text-gray-600 dark:text-gray-400 mt-0.5 flex-shrink-0" />
@@ -585,7 +522,7 @@ Make sure the JSON follows the required format: { "sections": ExtendedSection[] 
                   API Information:
                 </h5>
                 <div className="text-gray-700 dark:text-gray-300 space-y-1">
-                  <p>Endpoint: <code className="bg-gray-200 dark:bg-gray-800 px-1 rounded">/api/sections/upload</code></p>
+                  <p>Endpoint: <code className="bg-gray-200 dark:bg-gray-800 px-1 rounded">/api/admin/sections/upload</code></p>
                   <p>Method: POST</p>
                   <p>Payload: <code className="bg-gray-200 dark:bg-gray-800 px-1 rounded">{"{ href: string, sections: ExtendedSection[] }"}</code></p>
                   <p>Target: <code className="bg-gray-200 dark:bg-gray-800 px-1 rounded">{targetPath}</code></p>
@@ -595,7 +532,6 @@ Make sure the JSON follows the required format: { "sections": ExtendedSection[] 
             </div>
           </div>
 
-          {/* JSON Input Area */}
           <div className="space-y-3">
             <Label htmlFor="json-content" className="text-sm font-medium">
               Paste Generated JSON Content
@@ -621,14 +557,13 @@ Make sure the JSON follows the required format: { "sections": ExtendedSection[] 
               value={jsonContent}
               onChange={(e) => {
                 setJsonContent(e.target.value);
-                setUploadError(""); // Clear error when user types
-                setUploadSuccess(""); // Clear success when user types
+                setUploadError("");
+                setUploadSuccess("");
               }}
               className="min-h-[200px] resize-y font-mono text-sm"
-              disabled={!isValidHref}
+              disabled={!isValidHref || dirty}
             />
 
-            {/* Href validation error */}
             {!isValidHref && (
               <div className="bg-red-50 border border-red-200 rounded-lg p-3 dark:bg-red-950 dark:border-red-800">
                 <div className="flex items-start gap-2">
@@ -645,7 +580,22 @@ Make sure the JSON follows the required format: { "sections": ExtendedSection[] 
               </div>
             )}
 
-            {/* Upload Success Display */}
+            {dirty && isValidHref && (
+              <div className="bg-orange-50 border border-orange-200 rounded-lg p-3 dark:bg-orange-950 dark:border-orange-800">
+                <div className="flex items-start gap-2">
+                  <AlertCircle className="h-4 w-4 text-orange-600 dark:text-orange-400 mt-0.5 flex-shrink-0" />
+                  <div>
+                    <h5 className="font-medium text-orange-900 dark:text-orange-100 text-sm">
+                      Unsaved Changes:
+                    </h5>
+                    <p className="text-orange-800 dark:text-orange-200 text-xs mt-1">
+                      You have unsaved changes to categories. Please save them first before uploading new JSON data.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
+
             {uploadSuccess && (
               <div className="bg-green-50 border border-green-200 rounded-lg p-3 dark:bg-green-950 dark:border-green-800">
                 <div className="flex items-start gap-2">
@@ -662,7 +612,6 @@ Make sure the JSON follows the required format: { "sections": ExtendedSection[] 
               </div>
             )}
 
-            {/* Upload Error Display */}
             {uploadError && (
               <div className="bg-red-50 border border-red-200 rounded-lg p-3 dark:bg-red-950 dark:border-red-800">
                 <div className="flex items-start gap-2">
@@ -679,30 +628,57 @@ Make sure the JSON follows the required format: { "sections": ExtendedSection[] 
               </div>
             )}
 
-            {/* Upload Button */}
             <div className="flex items-center gap-3">
-              <Button
-                onClick={handleJsonUpload}
-                disabled={isUploading || !jsonContent.trim() || !isValidHref}
-                className="flex items-center gap-2"
-              >
-                {isUploading ? (
-                  <>
-                    <LoadingSpinner className="h-4 w-4" />
-                    Uploading...
-                  </>
-                ) : (
-                  <>
-                    <Upload className="h-4 w-4" />
-                    Upload JSON Data
-                  </>
-                )}
-              </Button>
+              {!dirty ? (
+                <>
+                  <Button
+                    onClick={handleJsonUpload}
+                    disabled={isUploading || !jsonContent.trim() || !isValidHref}
+                    className="flex items-center gap-2"
+                  >
+                    {isUploading ? (
+                      <>
+                        <LoadingSpinner className="h-4 w-4" />
+                        Uploading...
+                      </>
+                    ) : (
+                      <>
+                        <Upload className="h-4 w-4" />
+                        Upload JSON Data
+                      </>
+                    )}
+                  </Button>
 
-              {jsonContent.trim() && (
-                <span className="text-xs text-muted-foreground">
-                  {jsonContent.length} characters ready for upload
-                </span>
+                  {jsonContent.trim() && (
+                    <span className="text-xs text-muted-foreground">
+                      {jsonContent.length} characters ready for upload
+                    </span>
+                  )}
+                </>
+              ) : (
+                <>
+                  <Button
+                    onClick={handleSaveCategories}
+                    disabled={savingCategories}
+                    className="flex items-center gap-2 bg-orange-600 hover:bg-orange-700 text-white"
+                  >
+                    {savingCategories ? (
+                      <>
+                        <LoadingSpinner className="h-4 w-4" />
+                        Saving...
+                      </>
+                    ) : (
+                      <>
+                        <Save className="h-4 w-4" />
+                        Save Categories
+                      </>
+                    )}
+                  </Button>
+
+                  <span className="text-xs text-orange-600">
+                    You have unsaved changes to the page metadata
+                  </span>
+                </>
               )}
             </div>
           </div>
