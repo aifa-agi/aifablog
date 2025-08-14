@@ -15,7 +15,7 @@
   </a>
 </p>
 
->Transform your content strategy with Nextjs starter featuring Vercel Blob storage, ChatGPT AI integration, and vector store knowledge base. Build SEO-optimized blogs with intelligent chatbots that learn from your content. Includes role-based access control, premium content management, and lightning-fast deployment. Perfect for businesses wanting AI-powered blogs with custom knowledge base chatbots.Revolutionary Next.js blog starter featuring Vercel Blob content management, role-based access control, and instant deployment. Create premium blogs effortlessly!!!
+>Transform your content strategy with Nextjs starter featuring Vercel Blob storage, ChatGPT AI integration, and vector store knowledge base. Build SEO-optimized blogs with intelligent chatbots that learn from your content. Includes role-based access control, premium content management, and lightning-fast deployment. Perfect for businesses wanting AI-powered blogs with custom knowledge base chatbots.Revolutionary Next.js blog starter featuring Vercel Blob content management, role-based access control, and instant deployment. Create premium blogs effortlessly!
 
 <p align="center">
   <a href="https://github.com/aifa-agi/aifa-navigation-menu/stargazers" target="_blank">
