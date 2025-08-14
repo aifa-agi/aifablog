@@ -45,6 +45,11 @@ export const contentData = {
       }
     ],
     "order": 2
+  },
+  {
+    "title": "new-category",
+    "pages": [],
+    "order": 3
   }
 ]
 } as { categories: MenuCategory[] };
