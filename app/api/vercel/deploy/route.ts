@@ -2,7 +2,6 @@
 
 import { NextRequest, NextResponse } from "next/server";
 import { Vercel } from "@vercel/sdk";
-import { execSync } from 'child_process';
 
 interface VercelDeploymentResponse {
   deploymentId: string;
@@ -18,48 +17,6 @@ interface DeploymentStatusResponse {
   isComplete: boolean;
 }
 
-// Helper function to create manual deploy commit
-async function createManualDeployCommit(): Promise<boolean> {
-  try {
-    const timestamp = new Date().toISOString();
-    const commitMessage = `Manual deployment triggered - ${timestamp} [manual-deploy]`;
-    
-    console.log('Creating manual deploy commit...');
-    
-    // Create empty commit with manual deploy tag
-    execSync(`git commit --allow-empty -m "${commitMessage}"`, { 
-      stdio: 'inherit',
-      timeout: 30000 
-    });
-    
-    // Push to GitHub
-    execSync('git push origin main', { 
-      stdio: 'inherit',
-      timeout: 60000 
-    });
-    
-    console.log('✅ Manual deploy commit created and pushed successfully');
-    return true;
-    
-  } catch (error: any) {
-    console.log('ℹ️ Git operations handled, continuing with direct API deploy...', error.message);
-    return false;
-  }
-}
-
-// Helper function to safely get deployment status
-function getDeploymentStatus(deployment: any): string {
-  return deployment.readyState ?? 
-         deployment.state ?? 
-         deployment.status ?? 
-         'UNKNOWN';
-}
-
-// Helper function to check if deployment is complete
-function isDeploymentComplete(status: string): boolean {
-  return ['READY', 'ERROR', 'CANCELED', 'FAILED'].includes(status.toUpperCase());
-}
-
 export async function POST(): Promise<
   NextResponse<VercelDeploymentResponse | { error: string; details?: any }>
 > {
@@ -69,15 +26,15 @@ export async function POST(): Promise<
       bearerToken: process.env.VERCEL_TOKEN?.trim(),
     });
 
+    const projectName = process.env.PROJECT_NAME?.trim();
     const projectId = process.env.VERCEL_PROJECT_ID?.trim();
     const githubRepo = process.env.GITHUB_REPO?.trim();
-    const githubRepoId = process.env.GITHUB_REPO_ID?.trim();
 
     if (
       !process.env.VERCEL_TOKEN ||
       !projectId ||
-      !githubRepo ||
-      !githubRepoId
+      !projectName ||
+      !githubRepo
     ) {
       return NextResponse.json(
         {
@@ -86,8 +43,6 @@ export async function POST(): Promise<
             hasVercelToken: !!process.env.VERCEL_TOKEN,
             hasProjectId: !!projectId,
             hasGithubRepo: !!githubRepo,
-            hasGithubRepoId: !!githubRepoId,
-            required: ['VERCEL_TOKEN', 'VERCEL_PROJECT_ID', 'GITHUB_REPO', 'GITHUB_REPO_ID']
           },
         },
         { status: 500 }
@@ -107,60 +62,45 @@ export async function POST(): Promise<
       );
     }
 
-    console.log("🚀 Starting manual deployment process:", {
+    console.log("Creating deployment with Vercel SDK:", {
+      projectName,
       projectId,
       org,
       repo,
-      githubRepoId,
       tokenPresent: !!process.env.VERCEL_TOKEN,
     });
 
-    // Step 1: Create manual deploy commit (optional - for should-build.js script)
-    const gitSuccess = await createManualDeployCommit();
-    
-    // Step 2: Create deployment using Vercel SDK
-    const deploymentPayload = {
+    // Create deployment using Vercel SDK
+    const deployment = await vercel.deployments.createDeployment({
       requestBody: {
-        name: "aifablog",
-        project: projectId,  // Only use project ID for existing projects
-        target: "production" as const,
-        
-        // ✅ Use repoId for existing project deployment
+        name: projectName,
+        project: projectId,
+        target: "production",
         gitSource: {
-          type: "github" as const,
-          repoId: githubRepoId, // Use repoId instead of org/repo for existing projects
-          ref: "main"
+          type: "github",
+          repo: repo,
+          org: org,
+          ref: "main",
         },
-        
-        // ✅ Add environment variable to help should-build.js script
-        env: {
-          VERCEL_MANUAL_DEPLOY: 'true'
-        }
+      
       },
-    };
+    });
 
-    console.log("📦 Creating deployment with payload:", JSON.stringify(deploymentPayload, null, 2));
-
-    const deployment = await vercel.deployments.createDeployment(deploymentPayload);
-
-    console.log("✅ Deployment created successfully:", {
+    console.log("Deployment created successfully:", {
       id: deployment.id,
       status: deployment.status,
       url: deployment.url,
-      createdAt: deployment.createdAt
     });
 
     return NextResponse.json({
-      deploymentId: deployment.id || '',
+      deploymentId: deployment.id,
       status: deployment.status || "BUILDING",
       url: deployment.url,
       createdAt: deployment.createdAt || Date.now(),
       success: true,
-      gitCommitCreated: gitSuccess
     });
-
   } catch (error: any) {
-    console.error("❌ Vercel SDK deployment error:", error);
+    console.error("Vercel SDK deployment error:", error);
 
     // Handle different types of SDK errors
     let errorMessage = "Failed to create deployment";
@@ -172,24 +112,11 @@ export async function POST(): Promise<
         statusCode: error.statusCode,
         message: error.message,
         body: error.body,
-        timestamp: new Date().toISOString()
       };
     } else if (error.message) {
       errorMessage = error.message;
-      errorDetails = { 
-        originalError: error.toString(),
-        timestamp: new Date().toISOString()
-      };
+      errorDetails = { originalError: error.toString() };
     }
-
-    // Log full error for debugging
-    console.error("Full error details:", {
-      name: error.name,
-      message: error.message,
-      stack: error.stack,
-      statusCode: error.statusCode,
-      body: error.body
-    });
 
     return NextResponse.json(
       {
@@ -229,7 +156,7 @@ export async function GET(
       bearerToken: process.env.VERCEL_TOKEN.trim(),
     });
 
-    console.log("🔍 Checking deployment status:", { deploymentId });
+    console.log("Checking deployment status:", { deploymentId });
 
     // Get deployment status using Vercel SDK
     const deployment = await vercel.deployments.getDeployment({
@@ -237,28 +164,23 @@ export async function GET(
       withGitRepoInfo: "true",
     });
 
-    // ✅ Use helper functions for safer status handling
-    const currentStatus = getDeploymentStatus(deployment);
-    const isComplete = isDeploymentComplete(currentStatus);
+    const isComplete = ["READY", "ERROR", "CANCELED"].includes(
+      deployment.readyState || ""
+    );
 
-    console.log("📊 Deployment status retrieved:", {
-      id: deployment.id || deploymentId,
-      status: currentStatus,
+    console.log("Deployment status retrieved:", {
+      id: deployment.id,
+      status: deployment.readyState,
       isComplete,
-      url: deployment.url,
-      createdAt: deployment.createdAt
     });
 
     return NextResponse.json({
       id: deployment.id || deploymentId,
-      status: currentStatus,
+      status: deployment.readyState || "UNKNOWN",
       isComplete,
-      url: deployment.url,
-      createdAt: deployment.createdAt
     });
-
   } catch (error: any) {
-    console.error("❌ Vercel SDK status check error:", error);
+    console.error("Vercel SDK status check error:", error);
 
     let errorMessage = "Failed to check deployment status";
     let errorDetails = {};
@@ -269,23 +191,11 @@ export async function GET(
         statusCode: error.statusCode,
         message: error.message,
         body: error.body,
-        timestamp: new Date().toISOString()
       };
     } else if (error.message) {
       errorMessage = error.message;
-      errorDetails = { 
-        originalError: error.toString(),
-        timestamp: new Date().toISOString()
-      };
+      errorDetails = { originalError: error.toString() };
     }
-
-    // Enhanced error logging
-    console.error("Status check error details:", {
-      deploymentId: new URL(request.url).searchParams.get("deploymentId"),
-      errorName: error.name,
-      errorMessage: error.message,
-      hasToken: !!process.env.VERCEL_TOKEN
-    });
 
     return NextResponse.json(
       {
