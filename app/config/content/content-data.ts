@@ -53,7 +53,7 @@ export const contentData = {
         "hasBadge": false,
         "type": "blog",
         "isPublished": false,
-        "isVectorConnected": false,
+        "isVectorConnected": true,
         "isChatSynchronized": false,
         "order": 2,
         "title": "паром из Кадис",
@@ -67,7 +67,16 @@ export const contentData = {
             "alt": "Забронируйте паром из Кадис",
             "href": "https://9d8adypzz8xutnay.public.blob.vercel-storage.com/Screenshot%202023-12-14%20193738-2b9rzOUfoSrjgb3GhqV9ZEVP8UioDw.png"
           }
-        ]
+        ],
+        "sections": [
+          {
+            "id": "section-1"
+          },
+          {
+            "id": "section-2"
+          }
+        ],
+        "updatedAt": "2025-08-14T10:45:56.924Z"
       }
     ],
     "order": 2
