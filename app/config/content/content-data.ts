@@ -76,6 +76,26 @@ export const contentData = {
     "title": "new-category",
     "pages": [],
     "order": 3
+  },
+  {
+    "title": "admin",
+    "pages": [
+      {
+        "id": "r70rhidyb8w0o8ikzuuu8nil",
+        "linkName": "vercel-deploy",
+        "href": "/admin/vercel-deploy",
+        "roles": [
+          "guest"
+        ],
+        "hasBadge": false,
+        "type": "blog",
+        "isPublished": true,
+        "isVectorConnected": true,
+        "isChatSynchronized": true,
+        "order": 1
+      }
+    ],
+    "order": 4
   }
 ]
 } as { categories: MenuCategory[] };
