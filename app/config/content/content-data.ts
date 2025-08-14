@@ -42,6 +42,32 @@ export const contentData = {
             "id": "section-3"
           }
         ]
+      },
+      {
+        "id": "bft9sas1qpjtnp0dauhchecj",
+        "linkName": "paromy-to-cadiz",
+        "href": "/canary-islands/paromy-to-cadiz",
+        "roles": [
+          "guest"
+        ],
+        "hasBadge": false,
+        "type": "blog",
+        "isPublished": false,
+        "isVectorConnected": false,
+        "isChatSynchronized": false,
+        "order": 2,
+        "title": "паром из Кадис",
+        "description": "Забронируйте паром из Кадис",
+        "keyWords": [
+          "паром из Кадис"
+        ],
+        "images": [
+          {
+            "id": "r4qubk99cxtzrevmwpjjznfe",
+            "alt": "Забронируйте паром из Кадис",
+            "href": "https://9d8adypzz8xutnay.public.blob.vercel-storage.com/Screenshot%202023-12-14%20193738-2b9rzOUfoSrjgb3GhqV9ZEVP8UioDw.png"
+          }
+        ]
       }
     ],
     "order": 2
