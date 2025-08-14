@@ -9,7 +9,7 @@ import {
   MenuPersistResponse 
 } from "@/app/(_service)/types/api-response-types";
 
-const DATA_PATH = path.resolve(process.cwd(), "app/config/content/content-data.ts");
+const DATA_PATH = path.resolve(process.cwd(), "config/content/content-data.ts");
 
 function isProduction() {
   return process.env.NODE_ENV === "production";

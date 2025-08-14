@@ -236,7 +236,7 @@ async function saveToFileSystem(
     const contentDir = join(process.cwd(), 'app', 'config', 'content', 'sections');
     const firstPartDir = join(contentDir, firstPartHref);
     const filePath = join(firstPartDir, `${secondPartHref}.ts`);
-    const relativeFilePath = `app/config/content/sections/${firstPartHref}/${secondPartHref}.ts`;
+    const relativeFilePath = `config/content/sections/${firstPartHref}/${secondPartHref}.ts`;
 
     await ensureDirectoryExists(contentDir);
     await ensureDirectoryExists(firstPartDir);

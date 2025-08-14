@@ -1,7 +1,7 @@
 // @/app/api/menu/route.ts
 
 import { NextResponse } from "next/server";
-import { contentData } from "@/app/config/content/content-data";
+import { contentData } from "@/config/content/content-data";
 
 export async function GET() {
   try {

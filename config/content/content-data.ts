@@ -94,7 +94,7 @@ export const contentData = {
         "linkName": "vercel-deploy",
         "href": "/admin/vercel-deploy",
         "roles": [
-          "guest"
+          "admin"
         ],
         "hasBadge": false,
         "type": "blog",
