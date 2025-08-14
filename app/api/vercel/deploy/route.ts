@@ -1,144 +1,208 @@
-// API endpoint for triggering Vercel deployments
-import { NextRequest, NextResponse } from 'next/server'
-//import { auth } from '@/auth'
+// app/api/vercel/deploy/route.ts
+
+import { NextRequest, NextResponse } from "next/server";
+import { Vercel } from "@vercel/sdk";
 
 interface VercelDeploymentResponse {
-  id: string
-  url: string
-  status: 'BUILDING' | 'READY' | 'ERROR' | 'CANCELED'
-  createdAt: number
+  deploymentId: string;
+  status: string;
+  url?: string;
+  createdAt: number;
+  success: boolean;
 }
 
-interface VercelDeploymentStatusResponse {
-  id: string
-  status: 'BUILDING' | 'READY' | 'ERROR' | 'CANCELED'
-  readyState: 'BUILDING' | 'READY' | 'ERROR' | 'CANCELED'
+interface DeploymentStatusResponse {
+  id: string;
+  status: string;
+  isComplete: boolean;
 }
 
-export async function POST() {
+export async function POST(): Promise<
+  NextResponse<VercelDeploymentResponse | { error: string; details?: any }>
+> {
   try {
-    // Check authentication - only admin users can trigger deploys
-    // const session = await auth()
-    // if (!session?.user || session.user.role !== 'admin') {
-    //   return NextResponse.json(
-    //     { error: 'Unauthorized - Admin access required' },
-    //     { status: 401 }
-    //   )
-    // }
+    // Initialize Vercel SDK
+    const vercel = new Vercel({
+      bearerToken: process.env.VERCEL_TOKEN?.trim(),
+    });
 
-    const vercelToken = process.env.VERCEL_TOKEN
-    const projectId = process.env.VERCEL_PROJECT_ID
-    
-    if (!vercelToken || !projectId) {
+    const projectName = process.env.PROJECT_NAME?.trim();
+    const projectId = process.env.VERCEL_PROJECT_ID?.trim();
+    const githubRepo = process.env.GITHUB_REPO?.trim();
+
+    if (
+      !process.env.VERCEL_TOKEN ||
+      !projectId ||
+      !projectName ||
+      !githubRepo
+    ) {
       return NextResponse.json(
-        { error: 'Vercel configuration missing' },
+        {
+          error: "Missing required environment variables",
+          details: {
+            hasVercelToken: !!process.env.VERCEL_TOKEN,
+            hasProjectId: !!projectId,
+            hasGithubRepo: !!githubRepo,
+          },
+        },
         { status: 500 }
-      )
+      );
     }
 
-    // Trigger new deployment
-    const deployResponse = await fetch(`https://api.vercel.com/v13/deployments`, {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${vercelToken}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        name: projectId,
+    // Parse GitHub repo info
+    const [org, repo] = githubRepo.split("/");
+
+    if (!org || !repo) {
+      return NextResponse.json(
+        {
+          error: 'Invalid GITHUB_REPO format. Expected "owner/repo-name"',
+          details: { githubRepo },
+        },
+        { status: 400 }
+      );
+    }
+
+    console.log("Creating deployment with Vercel SDK:", {
+      projectName,
+      projectId,
+      org,
+      repo,
+      tokenPresent: !!process.env.VERCEL_TOKEN,
+    });
+
+    // Create deployment using Vercel SDK
+    const deployment = await vercel.deployments.createDeployment({
+      requestBody: {
+        name: projectName,
+        project: projectId,
+        target: "production",
         gitSource: {
-          type: 'github',
-          repoId: process.env.GITHUB_REPO_ID,
-          ref: 'main'
-        }
-      })
-    })
+          type: "github",
+          repo: repo,
+          org: org,
+          ref: "main",
+        },
+        // No need for name, projectSettings, or other fields for existing projects
+      },
+    });
 
-    if (!deployResponse.ok) {
-      const error = await deployResponse.text()
-      return NextResponse.json(
-        { error: `Failed to trigger deployment: ${error}` },
-        { status: 500 }
-      )
-    }
-
-    const deployment: VercelDeploymentResponse = await deployResponse.json()
+    console.log("Deployment created successfully:", {
+      id: deployment.id,
+      status: deployment.status,
+      url: deployment.url,
+    });
 
     return NextResponse.json({
       deploymentId: deployment.id,
-      status: deployment.status,
+      status: deployment.status || "BUILDING",
       url: deployment.url,
-      createdAt: deployment.createdAt
-    })
+      createdAt: deployment.createdAt || Date.now(),
+      success: true,
+    });
+  } catch (error: any) {
+    console.error("Vercel SDK deployment error:", error);
 
-  } catch (error) {
-    console.error('Deployment trigger error:', error)
+    // Handle different types of SDK errors
+    let errorMessage = "Failed to create deployment";
+    let errorDetails = {};
+
+    if (error.statusCode) {
+      errorMessage = `Vercel API error (${error.statusCode})`;
+      errorDetails = {
+        statusCode: error.statusCode,
+        message: error.message,
+        body: error.body,
+      };
+    } else if (error.message) {
+      errorMessage = error.message;
+      errorDetails = { originalError: error.toString() };
+    }
+
     return NextResponse.json(
-      { error: 'Internal server error' },
+      {
+        error: errorMessage,
+        details: errorDetails,
+      },
       { status: 500 }
-    )
+    );
   }
 }
 
-export async function GET(request: NextRequest) {
+export async function GET(
+  request: NextRequest
+): Promise<
+  NextResponse<DeploymentStatusResponse | { error: string; details?: any }>
+> {
   try {
-    // Check authentication
-    // const session = await auth()
-    // if (!session?.user || session.user.role !== 'admin') {
-    //   return NextResponse.json(
-    //     { error: 'Unauthorized' },
-    //     { status: 401 }
-    //   )
-    // }
-
-    const { searchParams } = new URL(request.url)
-    const deploymentId = searchParams.get('deploymentId')
+    const { searchParams } = new URL(request.url);
+    const deploymentId = searchParams.get("deploymentId");
 
     if (!deploymentId) {
       return NextResponse.json(
-        { error: 'Deployment ID required' },
+        { error: "deploymentId parameter is required" },
         { status: 400 }
-      )
+      );
     }
 
-    const vercelToken = process.env.VERCEL_TOKEN
-    
-    if (!vercelToken) {
+    if (!process.env.VERCEL_TOKEN) {
       return NextResponse.json(
-        { error: 'Vercel token missing' },
+        { error: "VERCEL_TOKEN environment variable is missing" },
         { status: 500 }
-      )
+      );
     }
 
-    // Check deployment status
-    const statusResponse = await fetch(
-      `https://api.vercel.com/v13/deployments/${deploymentId}`,
-      {
-        headers: {
-          'Authorization': `Bearer ${vercelToken}`,
-        }
-      }
-    )
+    // Initialize Vercel SDK
+    const vercel = new Vercel({
+      bearerToken: process.env.VERCEL_TOKEN.trim(),
+    });
 
-    if (!statusResponse.ok) {
-      return NextResponse.json(
-        { error: 'Failed to check deployment status' },
-        { status: 500 }
-      )
-    }
+    console.log("Checking deployment status:", { deploymentId });
 
-    const status: VercelDeploymentStatusResponse = await statusResponse.json()
+    // Get deployment status using Vercel SDK
+    const deployment = await vercel.deployments.getDeployment({
+      idOrUrl: deploymentId,
+      withGitRepoInfo: "true",
+    });
+
+    const isComplete = ["READY", "ERROR", "CANCELED"].includes(
+      deployment.readyState || ""
+    );
+
+    console.log("Deployment status retrieved:", {
+      id: deployment.id,
+      status: deployment.readyState,
+      isComplete,
+    });
 
     return NextResponse.json({
-      id: status.id,
-      status: status.readyState,
-      isComplete: ['READY', 'ERROR', 'CANCELED'].includes(status.readyState)
-    })
+      id: deployment.id || deploymentId,
+      status: deployment.readyState || "UNKNOWN",
+      isComplete,
+    });
+  } catch (error: any) {
+    console.error("Vercel SDK status check error:", error);
 
-  } catch (error) {
-    console.error('Status check error:', error)
+    let errorMessage = "Failed to check deployment status";
+    let errorDetails = {};
+
+    if (error.statusCode) {
+      errorMessage = `Vercel API error (${error.statusCode})`;
+      errorDetails = {
+        statusCode: error.statusCode,
+        message: error.message,
+        body: error.body,
+      };
+    } else if (error.message) {
+      errorMessage = error.message;
+      errorDetails = { originalError: error.toString() };
+    }
+
     return NextResponse.json(
-      { error: 'Internal server error' },
+      {
+        error: errorMessage,
+        details: errorDetails,
+      },
       { status: 500 }
-    )
+    );
   }
 }
