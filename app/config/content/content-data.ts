@@ -3,7 +3,7 @@ import { MenuCategory } from "@/app/(_service)/types/menu-types";
 export const contentData = {
   categories: [
   {
-    "title": "new-category",
+    "title": "new-category123",
     "pages": [],
     "order": 3
   },
