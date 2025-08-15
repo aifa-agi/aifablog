@@ -4,7 +4,7 @@
 
 import { ExtendedSection } from "@/app/types/section-types";
 
-const paromynatenerifeSections: ExtendedSection[] = [
+export const sections: ExtendedSection[] = [
   {
     "id": "main-title-section",
     "order": "1",
@@ -266,4 +266,4 @@ const paromynatenerifeSections: ExtendedSection[] = [
   }
 ];
 
-export default paromynatenerifeSections;
+
