@@ -13,7 +13,7 @@ interface ReadSectionsResponse {
 }
 
 // GitHub API configuration from environment variables
-const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
+const GITHUB_TOKEN = process.env.GITHUB_TOKEN; 
 const GITHUB_REPO = process.env.GITHUB_REPO;
 const GITHUB_SECTIONS_BASE_PATH = process.env.GITHUB_SECTIONS_BASE_PATH || "config/content/sections";
 

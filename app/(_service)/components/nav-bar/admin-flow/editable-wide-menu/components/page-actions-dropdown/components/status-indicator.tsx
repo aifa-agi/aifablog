@@ -25,7 +25,7 @@ export function StatusIndicator({
       className={cn(
         "inline-block mr-3 align-middle rounded-full border",
         size === "sm" ? "border-black/20" : "border-black/30",
-        isActive ? "bg-green-500" : "bg-gray-400",
+        isActive ? "bg-green-500" : "bg-orange-500",
         size === "md" && !isActive && "bg-muted-foreground",
         className
       )}

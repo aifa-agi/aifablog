@@ -40,11 +40,11 @@ import {
   Home,
 } from "lucide-react";
 import { toast } from "sonner";
-//import promptPageConfig from "@/app/config/prompt-page-congig";
+import { AdminPageInfoProps } from "./types/admin-page-sections.types";
+import { findPageBySlug } from "./utils/page-helpers";
+import { AccessDenied } from "./components/access-control/access-denied";
 
-interface AdminPagePromptProps {
-  slug: string;
-}
+
 
 // Writing Style Options for Content Generation
 const WRITING_STYLES = [
@@ -172,7 +172,7 @@ const CUSTOM_REQUIREMENTS_EXAMPLES = [
  * Component for generating AI system instructions for page content creation
  * Combines base prompt configuration with page-specific data and personalization options
  */
-export function AdminPagePrompt({ slug }: AdminPagePromptProps) {
+export function AdminPagePrompt({ slug }: AdminPageInfoProps ) {
   const { categories, loading, initialized } = useNavigationMenu();
   const { role } = useRole();
   const router = useRouter();
@@ -185,50 +185,8 @@ export function AdminPagePrompt({ slug }: AdminPagePromptProps) {
   const [contentFormat, setContentFormat] = useState<string>("professional");
   const [customRequirements, setCustomRequirements] = useState<string>("");
 
-  if (role !== "admin") {
-    return (
-      <div className="flex bg-background items-center justify-center py-12">
-        <div className="text-center">
-          <Shield className="mx-auto h-12 w-12 text-destructive mb-4" />
-          <h3 className="text-lg font-semibold text-foreground mb-2">
-            Access Denied
-          </h3>
-          <p className="text-muted-foreground mb-4">
-            You don't have permission to access this admin page
-          </p>
-          <p className="text-sm text-muted-foreground mb-2">
-            Required role:{" "}
-            <span className="font-mono bg-muted px-2 py-1 rounded">Admin</span>
-          </p>
-          <p className="text-sm text-muted-foreground mb-6">
-            Your role:{" "}
-            <span className="font-mono bg-muted px-2 py-1 rounded">{role}</span>
-          </p>
-
-          {/* Кнопка для перехода на главную страницу */}
-          <Button
-            onClick={() => router.push("/")}
-            variant="outline"
-            className="gap-2"
-          >
-            <Home className="h-4 w-4" />
-            Go to Home Page
-          </Button>
-        </div>
-      </div>
-    );
-  }
-
-  // Find page by slug across all categories
-  const findPageBySlug = (categories: MenuCategory[], targetSlug: string) => {
-    for (const category of categories) {
-      const page = category.pages.find((page) => page.linkName === targetSlug);
-      if (page) {
-        return { page, category };
-      }
-    }
-    return null;
-  };
+   
+ 
 
   const result = findPageBySlug(categories, slug);
 
@@ -703,7 +661,16 @@ export interface PageSections {
     );
   }, [result, slug, writingStyle, contentFormat, customRequirements]);
 
-  // Update system instruction when page data or personalization changes
+  useEffect(() => {
+  if (role !== "admin") {
+    const timer = setTimeout(() => {
+      router.push("/");
+    }, 3000);
+    
+    return () => clearTimeout(timer);
+  }
+}, [role, router]);
+  
   useEffect(() => {
     setSystemInstruction(generateSystemInstruction);
   }, [generateSystemInstruction]);
@@ -725,30 +692,9 @@ export interface PageSections {
     }
   };
 
-  // Show access denied state if user is not admin
-  if (role !== "admin") {
-    return (
-      <div className="flex bg-background items-center justify-center py-12">
-        <div className="text-center">
-          <Shield className="mx-auto h-12 w-12 text-destructive mb-4" />
-          <h3 className="text-lg font-semibold text-foreground mb-2">
-            Access Denied
-          </h3>
-          <p className="text-muted-foreground mb-4">
-            You don't have permission to access this admin page
-          </p>
-          <p className="text-sm text-muted-foreground">
-            Required role:{" "}
-            <span className="font-mono bg-muted px-2 py-1 rounded">Admin</span>
-          </p>
-          <p className="text-sm text-muted-foreground">
-            Your role:{" "}
-            <span className="font-mono bg-muted px-2 py-1 rounded">{role}</span>
-          </p>
-        </div>
-      </div>
-    );
-  }
+   if (role !== "admin") {
+      return <AccessDenied currentRole={role} />;
+    }
 
   // Show loading state
   if (loading || !initialized) {

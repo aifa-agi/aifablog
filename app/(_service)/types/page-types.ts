@@ -1,4 +1,5 @@
-import { ImageProps } from "next/image";
+// @/app/app/(_service)/types/page-types.ts
+
 import { Metadata } from "next";
 import { UserRole } from "@/app/config/user-roles";
 import { BadgeName } from "@/app/config/badge-config";

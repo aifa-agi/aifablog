@@ -3,7 +3,7 @@ import { MenuCategory } from "@/app/(_service)/types/menu-types";
 export const contentData = {
   categories: [
   {
-    "title": "new-category123",
+    "title": "new-category",
     "pages": [],
     "order": 3
   },
@@ -231,5 +231,5 @@ export const contentData = {
 
 export type contentData = typeof contentData;
 
-export const lastUpdated = "2025-08-15T14:16:58.198Z";
+export const lastUpdated = "2025-08-15T17:56:41.514Z";
 export const generatedBy = "menu-persist-api";

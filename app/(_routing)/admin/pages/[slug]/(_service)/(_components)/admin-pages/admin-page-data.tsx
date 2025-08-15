@@ -37,10 +37,11 @@ import {
 import { toast } from "sonner";
 import { SectionInfo } from "@/app/(_service)/types/page-types";
 import { usePageSections, useSections } from "../../(_context)/section-provider";
+import { AdminPageInfoProps } from "./types/admin-page-sections.types";
+import { findPageBySlug } from "./utils/page-helpers";
+import { AccessDenied } from "./components/access-control/access-denied";
 
-interface AdminPageInfoProps {
-  slug: string;
-}
+
 
 interface SectionsUploadData {
   sections: ExtendedSection[];
@@ -52,16 +53,7 @@ interface FileSystemResponse {
   filePath?: string;
 }
 
-// Helper function moved outside component to avoid redeclaration
-const findPageBySlug = (categories: MenuCategory[], targetSlug: string) => {
-  for (const category of categories) {
-    const page = category.pages.find((page) => page.linkName === targetSlug);
-    if (page) {
-      return { page, category };
-    }
-  }
-  return null;
-};
+
 
 export function AdminPageData({ slug }: AdminPageInfoProps) {
   // Existing hooks
@@ -106,11 +98,14 @@ export function AdminPageData({ slug }: AdminPageInfoProps) {
 Make sure the JSON follows the required format: { "sections": ExtendedSection[] }`;
 
   useEffect(() => {
-    if (role !== "admin") {
+  if (role !== "admin") {
+    const timer = setTimeout(() => {
       router.push("/");
-      return;
-    }
-  }, [role, router]);
+    }, 3000);
+    
+    return () => clearTimeout(timer);
+  }
+}, [role, router]);
 
   const getTargetFilePath = (href: string): string => {
     try {
@@ -439,37 +434,8 @@ Make sure the JSON follows the required format: { "sections": ExtendedSection[] 
   };
 
   if (role !== "admin") {
-    return (
-      <div className="flex bg-background items-center justify-center py-12">
-        <div className="text-center">
-          <Shield className="mx-auto h-12 w-12 text-destructive mb-4" />
-          <h3 className="text-lg font-semibold text-foreground mb-2">
-            Access Denied
-          </h3>
-          <p className="text-muted-foreground mb-4">
-            You don't have permission to access this admin page
-          </p>
-          <p className="text-sm text-muted-foreground mb-2">
-            Required role:{" "}
-            <span className="font-mono bg-muted px-2 py-1 rounded">Admin</span>
-          </p>
-          <p className="text-sm text-muted-foreground mb-6">
-            Your role:{" "}
-            <span className="font-mono bg-muted px-2 py-1 rounded">{role}</span>
-          </p>
-
-          <Button
-            onClick={() => router.push("/")}
-            variant="outline"
-            className="gap-2"
-          >
-            <Home className="h-4 w-4" />
-            Go to Home Page
-          </Button>
-        </div>
-      </div>
-    );
-  }
+     return <AccessDenied currentRole={role} />;
+   }
 
   if (loading || !initialized) {
     return (
