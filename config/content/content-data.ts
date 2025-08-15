@@ -35,7 +35,7 @@ export const contentData = {
             "href": "https://9d8adypzz8xutnay.public.blob.vercel-storage.com/Screenshot%202023-12-14%20193752-iLFevnFZR8YF77PoIZRUXcusgSutpX.png"
           }
         ],
-        "updatedAt": "2025-08-15T10:09:12.400Z",
+        "updatedAt": "2025-08-15T10:20:47.348Z",
         "sections": [
           {
             "id": "main-title-section"
@@ -177,5 +177,5 @@ export const contentData = {
 
 export type contentData = typeof contentData;
 
-export const lastUpdated = "2025-08-15T10:09:18.075Z";
+export const lastUpdated = "2025-08-15T10:20:50.601Z";
 export const generatedBy = "menu-persist-api";
