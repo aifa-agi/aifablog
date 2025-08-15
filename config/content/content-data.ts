@@ -35,13 +35,82 @@ export const contentData = {
             "href": "https://9d8adypzz8xutnay.public.blob.vercel-storage.com/Screenshot%202023-12-14%20193752-iLFevnFZR8YF77PoIZRUXcusgSutpX.png"
           }
         ],
-        "updatedAt": "2025-08-15T11:49:28.814Z",
+        "updatedAt": "2025-08-15T12:03:34.264Z",
         "sections": [
           {
             "id": "main-title-section"
           },
           {
             "id": "introduction-paragraph"
+          },
+          {
+            "id": "introduction-paragraph-2"
+          },
+          {
+            "id": "main-image-section"
+          },
+          {
+            "id": "ferry-operators-section"
+          },
+          {
+            "id": "ferry-operators-intro"
+          },
+          {
+            "id": "ferry-operators-infrastructure"
+          },
+          {
+            "id": "armas-operator-subsection"
+          },
+          {
+            "id": "armas-details"
+          },
+          {
+            "id": "fred-olsen-subsection"
+          },
+          {
+            "id": "fred-olsen-details"
+          },
+          {
+            "id": "routes-schedule-section"
+          },
+          {
+            "id": "routes-schedule-intro"
+          },
+          {
+            "id": "routes-schedule-planning"
+          },
+          {
+            "id": "main-routes-subsection"
+          },
+          {
+            "id": "main-routes-details"
+          },
+          {
+            "id": "seasonal-schedule-subsection"
+          },
+          {
+            "id": "seasonal-details"
+          },
+          {
+            "id": "practical-tips-section"
+          },
+          {
+            "id": "practical-tips-intro"
+          },
+          {
+            "id": "practical-tips-preparation"
+          },
+          {
+            "id": "booking-tips-subsection"
+          },
+          {
+            "id": "booking-details"
+          },
+          {
+            "id": "onboard-comfort-subsection"
+          },
+          {
+            "id": "onboard-details"
           }
         ]
       },
@@ -108,5 +177,5 @@ export const contentData = {
 
 export type contentData = typeof contentData;
 
-export const lastUpdated = "2025-08-15T11:49:40.449Z";
+export const lastUpdated = "2025-08-15T12:03:52.237Z";
 export const generatedBy = "menu-persist-api";
