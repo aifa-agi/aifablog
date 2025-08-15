@@ -168,6 +168,20 @@ export const contentData = {
         "isVectorConnected": false,
         "isChatSynchronized": false,
         "order": 1
+      },
+      {
+        "id": "xyv6gexz8wkjdi1klh0hd87i",
+        "linkName": "all-users",
+        "href": "/admin/all-users",
+        "roles": [
+          "guest"
+        ],
+        "hasBadge": false,
+        "type": "blog",
+        "isPublished": false,
+        "isVectorConnected": false,
+        "isChatSynchronized": false,
+        "order": 2
       }
     ],
     "order": 4
@@ -177,5 +191,5 @@ export const contentData = {
 
 export type contentData = typeof contentData;
 
-export const lastUpdated = "2025-08-15T12:03:52.237Z";
+export const lastUpdated = "2025-08-15T12:21:55.059Z";
 export const generatedBy = "menu-persist-api";
