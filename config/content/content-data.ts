@@ -20,7 +20,7 @@ export const contentData = {
         "hasBadge": false,
         "type": "blog",
         "isPublished": false,
-        "isVectorConnected": true,
+        "isVectorConnected": false,
         "isChatSynchronized": false,
         "order": 1,
         "title": "Паромы на Тенерифе",
@@ -35,8 +35,7 @@ export const contentData = {
             "href": "https://9d8adypzz8xutnay.public.blob.vercel-storage.com/Screenshot%202023-12-14%20193752-iLFevnFZR8YF77PoIZRUXcusgSutpX.png"
           }
         ],
-        "updatedAt": "2025-08-15T11:39:58.894Z",
-        
+        "updatedAt": "2025-08-15T11:39:58.894Z"
       },
       {
         "id": "bft9sas1qpjtnp0dauhchecj",
@@ -101,5 +100,5 @@ export const contentData = {
 
 export type contentData = typeof contentData;
 
-export const lastUpdated = "2025-08-15T11:40:05.976Z";
+export const lastUpdated = "2025-08-15T11:48:27.583Z";
 export const generatedBy = "menu-persist-api";
