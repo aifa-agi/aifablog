@@ -5,7 +5,7 @@ import fs from "fs/promises";
 import path from "path";
 
 interface ReadSectionsRequest {
-  filePath: string; // e.g., "web-development/react-basics"
+  filePath: string; 
 }
 
 interface ReadSectionsResponse {
