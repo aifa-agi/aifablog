@@ -9,7 +9,25 @@ const GITHUB_FILE_PATH = process.env.GITHUB_FILE_PATH || "config/content/content
 const MENU_CACHE_TTL = parseInt(process.env.MENU_CACHE_TTL || "300000"); // 5 minutes default
 
 // Simple in-memory cache for menu data
-let menuCache: {
+let menuCache: {// @/app/api/menu/route.ts
+
+import { NextResponse } from "next/server";
+import { contentData } from "@/config/content/content-data";
+
+export async function GET() {
+  try {
+    return NextResponse.json({
+      status: "ok",
+      categories: contentData.categories
+    });
+  } catch (e: any) {
+    console.error("Error fetching menu categories:", e);
+    return NextResponse.json(
+      { error: "Failed to fetch menu categories" }, 
+      { status: 500 }
+    );
+  }
+}
   data: any | null;
   timestamp: number;
 } = {
