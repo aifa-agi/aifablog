@@ -2,6 +2,7 @@
 // Generated on: 2025-08-15T10:09:12.230Z
 // Source href: paromy-na-tenerife
 
+// @ts-ignore
 import { ExtendedSection } from "@/app/types/section-types";
 
 export const sections: ExtendedSection[] = [
