@@ -1,11 +1,10 @@
 // Auto-generated file - do not edit manually
-// Generated on: 2025-08-15T10:09:12.230Z
+// Generated on: 2025-08-15T10:20:47.265Z
 // Source href: paromy-na-tenerife
 
-// @ts-ignore
 import { ExtendedSection } from "@/app/types/section-types";
 
-export const sections: ExtendedSection[] = [
+const paromynatenerifeSections: ExtendedSection[] = [
   {
     "id": "main-title-section",
     "order": "1",
@@ -267,4 +266,4 @@ export const sections: ExtendedSection[] = [
   }
 ];
 
-
+export default paromynatenerifeSections;
