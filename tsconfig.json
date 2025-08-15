@@ -36,7 +36,7 @@
     "app/(_service)/types/PageScheme.js",
     "app/(_service)/components/json-to-html-transformer",
     "app/config"
-, "config/content/sections/canary-islands"  ],
+, "config/content/sections/canary-islands", "components/ui/sections"  ],
   "exclude": [
     "node_modules"
   ]
