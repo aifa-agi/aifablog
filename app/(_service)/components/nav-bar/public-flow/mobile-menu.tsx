@@ -7,18 +7,19 @@ import { useRole } from '@/app/(_service)/contexts/role-provider';
 import { useNavigationMenu } from '@/app/(_service)/contexts/nav-bar-provider';
 import { humanize } from "@/app/api/menu/persist/humanize";
 import { PageData } from '@/app/(_service)/types/page-types';
+import { MenuCategory } from '@/app/(_service)/types/menu-types';
 
 interface MobileMenuProps {
   isOpen: boolean;
   setIsOpen: (open: boolean) => void;
   topOffset: string;
+  categories: MenuCategory[];
 }
 
 const greenDotClass = 'bg-emerald-500';
 
-export default function MobileMenu({ isOpen, topOffset }: MobileMenuProps) {
+export default function MobileMenu({ isOpen, topOffset, categories }: MobileMenuProps) {
   const { role } = useRole();
-  const { categories } = useNavigationMenu();
 
   const getFilteredLinks = (pages: PageData[]) =>
     pages.filter((singlePage) => singlePage.roles.includes(role) && singlePage.isPublished);

@@ -30,6 +30,11 @@ export function AddPageButton({
   variant = "outline",
   title = "Add page"
 }: AddPageButtonProps) {
+  // Hide button if category is "home"
+  if (category.title.toLowerCase() === "home") {
+    return null;
+  }
+
   // Handle button click and pass the category to the callback
   const handleClick = () => {
     onAddPage(category);

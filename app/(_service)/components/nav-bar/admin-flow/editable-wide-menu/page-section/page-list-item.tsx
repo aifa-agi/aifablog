@@ -2,7 +2,7 @@
 
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Badge } from "@/app/(_service)/components/ui/badge";
 import { GripVertical } from "lucide-react";
 import { cn } from "@/app/(_service)/lib/utils";
@@ -14,7 +14,8 @@ import { useRouter } from "next/navigation";
 import { MenuCategory } from "@/app/(_service)/types/menu-types";
 import { PageActionsDropdown } from "../components/page-actions-dropdown";
 import { PublishActionsDropdown } from "../components/publish-actions-dropdown/components/publish-actions-dropdown";
-import { VectorStoreActionsDropdown } from "../components/vecror-store-actions-dropdown";
+// ИСПРАВЛЕНО: vecror -> vector
+import { VectorStoreActionsDropdown } from "../components/vector-store-actions-dropdown";
 import { ChatSynchroniseActionDropdown } from "../components/chat-synchronise-action-dropdown";
 import { LinksActionsDropdown } from "../components/links-action-dropdown";
 import { BadgesActionsDropdown } from "../components/badges-actions-dropdown";
@@ -47,7 +48,8 @@ export function PageListItem({
     isDragging,
   } = useSortable({ id: page.id });
 
-  // Функция для навигации к странице админки
+  const [isAdminCategory, setAdminCategory] = useState(false);
+
   const handlePageClick = () => {
     if (categoryTitle.toLowerCase() === "admin") {
       router.push(`/admin/${page.linkName}`);
@@ -55,8 +57,14 @@ export function PageListItem({
     }
   };
 
-  // Определяем, является ли категория админской
-  const isAdminCategory = categoryTitle.toLowerCase() === "admin";
+  useEffect(() => {
+    if (categoryTitle.toLowerCase() === "admin") {
+      setAdminCategory(true);
+    }
+    if (categoryTitle.toLowerCase() !== "admin") {
+      setAdminCategory(false);
+    }
+  }, [categoryTitle]);
 
   return (
     <li
@@ -94,8 +102,7 @@ export function PageListItem({
         )}
       </div>
 
-      {/* Показываем действия только если категория не "admin" */}
-      {!isAdminCategory && (
+      {!isAdminCategory ? (
         <div className="flex items-center gap-1">
           <BadgesActionsDropdown
             singlePage={page}
@@ -124,6 +131,14 @@ export function PageListItem({
             setCategories={setCategories}
           />
           <LinksActionsDropdown
+            singlePage={page}
+            categoryTitle={categoryTitle}
+            setCategories={setCategories}
+          />
+        </div>
+      ) : (
+        <div className="flex items-center gap-1">
+          <BadgesActionsDropdown
             singlePage={page}
             categoryTitle={categoryTitle}
             setCategories={setCategories}

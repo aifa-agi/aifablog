@@ -22,12 +22,22 @@ interface CategoryActionsDropdownProps {
   setCategories: React.Dispatch<React.SetStateAction<MenuCategory[]>>;
 }
 
+// Список защищенных категорий, для которых нельзя показывать действия
+const PROTECTED_CATEGORIES = ['root', 'admin', 'home'];
 
 export function CategoryActionsDropdown({
   categoryTitle,
   setCategories,
 }: CategoryActionsDropdownProps) {
   const dialogs = useDialogs();
+
+  // Проверяем, является ли категория защищенной
+  const isProtectedCategory = PROTECTED_CATEGORIES.includes(categoryTitle.toLowerCase());
+
+  // Если категория защищенная, не показываем дропдаун
+  if (isProtectedCategory) {
+    return null;
+  }
 
   // Обработчик переименования категории
   const handleRename = () => {
@@ -74,7 +84,6 @@ export function CategoryActionsDropdown({
       }
     });
   };
-
 
   const handleDelete = () => {
     dialogs.show({

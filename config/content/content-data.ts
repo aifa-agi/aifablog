@@ -19,7 +19,7 @@ export const contentData = {
         ],
         "hasBadge": false,
         "type": "blog",
-        "isPublished": false,
+        "isPublished": true,
         "isVectorConnected": true,
         "isChatSynchronized": false,
         "order": 1,
@@ -153,6 +153,46 @@ export const contentData = {
     "order": 2
   },
   {
+    "title": "home",
+    "pages": [
+      {
+        "id": "ks7eqcf6z1fhes1lwiwz75zn",
+        "linkName": "home-page",
+        "href": "/home/home-page",
+        "roles": [
+          "guest"
+        ],
+        "hasBadge": false,
+        "type": "blog",
+        "isPublished": false,
+        "isVectorConnected": false,
+        "isChatSynchronized": false,
+        "order": 1
+      }
+    ],
+    "order": 5
+  },
+  {
+    "title": "root",
+    "pages": [
+      {
+        "id": "om8aaom6s12e89f3e22yp6k9",
+        "linkName": "term",
+        "href": "/root/term",
+        "roles": [
+          "guest"
+        ],
+        "hasBadge": false,
+        "type": "blog",
+        "isPublished": false,
+        "isVectorConnected": false,
+        "isChatSynchronized": false,
+        "order": 1
+      }
+    ],
+    "order": 6
+  },
+  {
     "title": "admin",
     "pages": [
       {
@@ -191,5 +231,5 @@ export const contentData = {
 
 export type contentData = typeof contentData;
 
-export const lastUpdated = "2025-08-15T12:21:55.059Z";
+export const lastUpdated = "2025-08-15T14:16:58.198Z";
 export const generatedBy = "menu-persist-api";

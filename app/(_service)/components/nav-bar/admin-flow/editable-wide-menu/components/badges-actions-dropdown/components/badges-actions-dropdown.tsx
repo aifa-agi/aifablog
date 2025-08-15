@@ -11,12 +11,17 @@ import { BadgesDropdownContent } from "./badges-dropdown-content";
 /**
  * Main badges actions dropdown component for managing page badges and roles
  * Always interactive as this is an administrative function
+ * Hidden for "home" category as it's a protected category
  */
 export function BadgesActionsDropdown({
   singlePage,
   categoryTitle,
   setCategories,
 }: BadgesActionsDropdownProps) {
+  // Hide dropdown if category is "home"
+  if (categoryTitle.toLowerCase() === "home") {
+    return null;
+  }
 
   return (
     <DropdownMenu>

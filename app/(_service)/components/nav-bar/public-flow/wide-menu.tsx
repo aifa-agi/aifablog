@@ -9,10 +9,12 @@ import { useRole } from '@/app/(_service)/contexts/role-provider';
 import { useNavigationMenu } from '@/app/(_service)/contexts/nav-bar-provider';
 import { humanize } from "@/app/api/menu/persist/humanize";
 import { PageData } from '@/app/(_service)/types/page-types';
+import { MenuCategory } from '@/app/(_service)/types/menu-types';
 
 interface WideMenuProps {
   isOpen: boolean;
   setIsOpen: (open: boolean) => void;
+  categories: MenuCategory[];
 }
 
 const MAX_LINKS_PER_COLUMN_DEFAULT = 10;
@@ -21,9 +23,8 @@ const MAX_LINKS_PER_COLUMN_ACTIVE = 11;
 const isSmallCategory = (category: any) => category.pages.length <= 5;
 const greenDotClass = 'bg-emerald-500';
 
-export default function WideMenu({ isOpen, setIsOpen }: WideMenuProps) {
+export default function WideMenu({ isOpen, setIsOpen, categories  }: WideMenuProps) {
   const { role } = useRole();
-  const { categories } = useNavigationMenu();
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);
   const [activeCategoryTitle, setActiveCategoryTitle] = useState<string | null>(null);
 
