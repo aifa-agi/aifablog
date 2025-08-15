@@ -2,9 +2,10 @@
 
 import { Suspense } from "react";
 import { LoadingSpinner } from "@/app/(_service)/components/ui/loading-spinner";
-import { AdminPagesNavBarProvider } from "./(_service)/(_components)/(_context)/admin-pages-nav-context";
+import { AdminPagesNavBarProvider } from "./(_service)/(_context)/admin-pages-nav-context";
 import { AdminPageContent } from "./(_service)/(_components)/admin-page-content";
 import AdminPagesNavBar from "./(_service)/(_components)/admin-page-nav-bar";
+import { SectionProvider } from "./(_service)/(_context)/section-provider";
 
 interface AdminPageDetailsProps {
   params: Promise<{
@@ -24,6 +25,7 @@ export default async function AdminPageDetails({
 
   return (
     <AdminPagesNavBarProvider slug={slug}>
+      <SectionProvider>
       <div className="container mx-auto p-6 max-w-4xl">
         <div className="bg-secondary rounded-lg shadow-sm border p-6">
           <div className="flex flex-row justify-between items-start gap-3">
@@ -42,6 +44,7 @@ export default async function AdminPageDetails({
           </Suspense>
         </div>
       </div>
+      </SectionProvider>
     </AdminPagesNavBarProvider>
   );
 }

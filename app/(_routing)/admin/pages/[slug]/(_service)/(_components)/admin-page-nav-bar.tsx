@@ -6,7 +6,7 @@ import { Button } from "@/app/(_service)/components/ui/button";
 import {
   AdminPageTab,
   useAdminPagesNav,
-} from "./(_context)/admin-pages-nav-context";
+} from "../(_context)/admin-pages-nav-context";
 
 /**
  * Navigation component for admin page tabs with horizontal scroll

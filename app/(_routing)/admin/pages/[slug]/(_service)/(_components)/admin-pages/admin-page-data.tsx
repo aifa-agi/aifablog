@@ -31,9 +31,12 @@ import {
   Info,
   RefreshCw,
   Save,
+  FileText,
+  HardDrive,
 } from "lucide-react";
 import { toast } from "sonner";
 import { SectionInfo } from "@/app/(_service)/types/page-types";
+import { usePageSections, useSections } from "../../(_context)/section-provider";
 
 interface AdminPageInfoProps {
   slug: string;
@@ -49,17 +52,45 @@ interface FileSystemResponse {
   filePath?: string;
 }
 
+// Helper function moved outside component to avoid redeclaration
+const findPageBySlug = (categories: MenuCategory[], targetSlug: string) => {
+  for (const category of categories) {
+    const page = category.pages.find((page) => page.linkName === targetSlug);
+    if (page) {
+      return { page, category };
+    }
+  }
+  return null;
+};
+
 export function AdminPageData({ slug }: AdminPageInfoProps) {
-  const { categories, setCategories, loading, initialized, dirty } =
-    useNavigationMenu();
+  // Existing hooks
+  const { categories, setCategories, loading, initialized, dirty } = useNavigationMenu();
   const { handleUpdate, loading: savingCategories } = useMenuOperations();
   const { role } = useRole();
   const router = useRouter();
 
+  // Section context hooks
+  const sectionsContext = useSections();
+  
+  // Local state
   const [jsonContent, setJsonContent] = useState<string>("");
   const [isUploading, setIsUploading] = useState<boolean>(false);
   const [uploadError, setUploadError] = useState<string>("");
   const [uploadSuccess, setUploadSuccess] = useState<string>("");
+
+  // Find current page data using helper function
+  const pageData = findPageBySlug(categories, slug);
+  const pageHref = pageData?.page?.href;
+
+  // Auto-load sections for current page
+  const {
+    sections: loadedSections,
+    loading: sectionsLoading,
+    error: sectionsError,
+    reload: reloadSections,
+    update: updateLoadedSections
+  } = usePageSections(pageHref);
 
   const uploadInstructions = `Follow these steps to upload your generated JSON file:
 
@@ -67,9 +98,10 @@ export function AdminPageData({ slug }: AdminPageInfoProps) {
 2. Paste the JSON content into the text area below
 3. Click the "Upload JSON Data" button to process the file
 4. The system will validate the JSON structure and save it to the file system
-5. File will be saved based on the page href to: app/config/content/sections/[firstPart]/[secondPart].ts
+5. File will be saved based on the page href to: config/content/sections/[firstPart]/[secondPart].ts
 6. Page metadata will be automatically updated with section IDs
-7. Click "Save Categories" to persist changes to the server
+7. Sections will be loaded into memory via Section Context
+8. Click "Save Categories" to persist changes to the server
 
 Make sure the JSON follows the required format: { "sections": ExtendedSection[] }`;
 
@@ -79,16 +111,6 @@ Make sure the JSON follows the required format: { "sections": ExtendedSection[] 
       return;
     }
   }, [role, router]);
-
-  const findPageBySlug = (categories: MenuCategory[], targetSlug: string) => {
-    for (const category of categories) {
-      const page = category.pages.find((page) => page.linkName === targetSlug);
-      if (page) {
-        return { page, category };
-      }
-    }
-    return null;
-  };
 
   const getTargetFilePath = (href: string): string => {
     try {
@@ -100,7 +122,7 @@ Make sure the JSON follows the required format: { "sections": ExtendedSection[] 
       }
       
       const [firstPart, secondPart] = parts;
-      return `app/config/content/sections/${firstPart}/${secondPart}.ts`;
+      return `config/content/sections/${firstPart}/${secondPart}.ts`;
     } catch (error) {
       return `Unable to parse href: ${href}`;
     }
@@ -252,13 +274,20 @@ Make sure the JSON follows the required format: { "sections": ExtendedSection[] 
       }
 
       try {
+        // Update sections in context
+        if (page.href) {
+          updateLoadedSections(parsedJson.sections);
+          sectionsContext.invalidateCache(page.href); // Invalidate cache to force reload if needed
+        }
+
+        // Update page metadata
         const sectionInfos = extractSectionIds(parsedJson.sections);
         updatePageSections(category.title, page.linkName, sectionInfos);
       } catch (metadataError) {
         toast.error(`Upload successful, but failed to update page metadata: ${metadataError instanceof Error ? metadataError.message : 'Unknown error'}`);
       }
 
-      const successMessage = `JSON data uploaded successfully! File saved to: ${apiResult.filePath}. Page metadata updated with ${parsedJson.sections.length} section(s).`;
+      const successMessage = `JSON data uploaded successfully! File saved to: ${apiResult.filePath}. Page metadata updated with ${parsedJson.sections.length} section(s). Sections loaded into memory.`;
       setUploadSuccess(successMessage);
       toast.success("Upload completed successfully!");
 
@@ -287,6 +316,17 @@ Make sure the JSON follows the required format: { "sections": ExtendedSection[] 
     }
   };
 
+  const handleReloadSections = async () => {
+    if (!pageHref) return;
+    
+    try {
+      await reloadSections();
+      toast.success("Sections reloaded from file system");
+    } catch (error) {
+      toast.error("Failed to reload sections");
+    }
+  };
+
   const getRefreshIconColor = (page: any): string => {
     if (!page.sections || page.sections.length === 0) {
       return "text-gray-400";
@@ -297,6 +337,105 @@ Make sure the JSON follows the required format: { "sections": ExtendedSection[] 
     }
     
     return "text-green-600";
+  };
+
+  const renderSectionStatus = () => {
+    if (!pageHref) return null;
+    
+    if (sectionsLoading) {
+      return (
+        <div className="flex items-center gap-2">
+          <LoadingSpinner className="h-3 w-3" />
+          <span className="text-xs text-muted-foreground">Loading sections from file...</span>
+        </div>
+      );
+    }
+    
+    if (sectionsError) {
+      return (
+        <div className="flex items-center gap-2">
+          <Badge variant="destructive" className="text-xs">
+            Error loading sections
+          </Badge>
+          <Button
+            size="sm"
+            variant="ghost"
+            onClick={handleReloadSections}
+            className="h-auto p-1"
+          >
+            <RefreshCw className="h-3 w-3" />
+          </Button>
+        </div>
+      );
+    }
+    
+    if (loadedSections) {
+      const sectionsCount = loadedSections.length;
+      return (
+        <div className="flex items-center gap-2">
+          <Badge variant="default" className="text-xs bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">
+            <HardDrive className="h-3 w-3 mr-1" />
+            {sectionsCount} sections loaded from file
+          </Badge>
+          <Button
+            size="sm"
+            variant="ghost"
+            onClick={handleReloadSections}
+            className="h-auto p-1"
+            title="Reload sections from file system"
+          >
+            <RefreshCw className="h-3 w-3" />
+          </Button>
+        </div>
+      );
+    }
+    
+    return (
+      <div className="flex items-center gap-2">
+        <Badge variant="secondary" className="text-xs">
+          <FileText className="h-3 w-3 mr-1" />
+          No sections file found
+        </Badge>
+        <Button
+          size="sm"
+          variant="ghost"
+          onClick={handleReloadSections}
+          className="h-auto p-1"
+          title="Check for sections file"
+        >
+          <RefreshCw className="h-3 w-3" />
+        </Button>
+      </div>
+    );
+  };
+
+  const getSectionsComparison = () => {
+    if (!pageData?.page || !loadedSections) return null;
+
+    const metadataSections = pageData.page.sections || [];
+    const loadedSectionsCount = loadedSections.length;
+    const metadataSectionsCount = metadataSections.length;
+
+    if (loadedSectionsCount !== metadataSectionsCount) {
+      return (
+        <div className="bg-amber-50 border border-amber-200 rounded-lg p-3 dark:bg-amber-950 dark:border-amber-800">
+          <div className="flex items-start gap-2">
+            <Info className="h-4 w-4 text-amber-600 dark:text-amber-400 mt-0.5 flex-shrink-0" />
+            <div className="flex-1">
+              <h5 className="font-medium text-amber-900 dark:text-amber-100 text-sm">
+                Section Count Mismatch
+              </h5>
+              <p className="text-amber-800 dark:text-amber-200 text-xs mt-1">
+                File contains {loadedSectionsCount} sections, but metadata shows {metadataSectionsCount} sections. 
+                Consider uploading new sections or saving categories to sync.
+              </p>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    return null;
   };
 
   if (role !== "admin") {
@@ -340,8 +479,6 @@ Make sure the JSON follows the required format: { "sections": ExtendedSection[] 
       </div>
     );
   }
-
-  const pageData = findPageBySlug(categories, slug);
 
   if (!pageData) {
     return (
@@ -389,7 +526,7 @@ Make sure the JSON follows the required format: { "sections": ExtendedSection[] 
             Page Information
             {page.sections && page.sections.length > 0 && (
               <Badge variant="secondary" className="text-xs">
-                {page.sections.length} sections
+                {page.sections.length} sections (metadata)
               </Badge>
             )}
             {dirty && (
@@ -399,7 +536,7 @@ Make sure the JSON follows the required format: { "sections": ExtendedSection[] 
             )}
           </CardTitle>
         </CardHeader>
-        <CardContent className="space-y-2 text-sm">
+        <CardContent className="space-y-3 text-sm">
           <div className="flex items-center gap-2">
             <span className="text-muted-foreground">Category:</span>
             <Badge variant="outline">{category.title}</Badge>
@@ -430,13 +567,13 @@ Make sure the JSON follows the required format: { "sections": ExtendedSection[] 
           </div>
 
           <div className="flex items-start gap-2">
-            <span className="text-muted-foreground">Current sections:</span>
+            <span className="text-muted-foreground">Metadata sections:</span>
             <div className="flex-1">
               {page.sections && page.sections.length > 0 ? (
                 <div className="space-y-1">
                   <div className="flex items-center gap-2">
                     <Badge variant="outline" className="text-xs">
-                      {page.sections.length} sections loaded
+                      {page.sections.length} sections in metadata
                     </Badge>
                     <RefreshCw className={`h-3 w-3 ${getRefreshIconColor(page)}`} />
                   </div>
@@ -449,13 +586,22 @@ Make sure the JSON follows the required format: { "sections": ExtendedSection[] 
               ) : (
                 <div className="flex items-center gap-2">
                   <Badge variant="secondary" className="text-xs">
-                    No sections loaded
+                    No sections in metadata
                   </Badge>
                   <RefreshCw className={`h-3 w-3 ${getRefreshIconColor(page)}`} />
                 </div>
               )}
             </div>
           </div>
+
+          <div className="flex items-start gap-2">
+            <span className="text-muted-foreground">File sections:</span>
+            <div className="flex-1">
+              {renderSectionStatus()}
+            </div>
+          </div>
+
+          {getSectionsComparison()}
           
           {page.href && !isValidHref && (
             <div className="bg-amber-50 border border-amber-200 rounded-lg p-3 dark:bg-amber-950 dark:border-amber-800">
@@ -491,8 +637,8 @@ Make sure the JSON follows the required format: { "sections": ExtendedSection[] 
           <div className="space-y-3 text-sm text-muted-foreground">
             <p className="leading-relaxed">
               Upload your AI-generated JSON file to update the page content and
-              configuration. The JSON will be validated and saved to the file system,
-              and the page metadata will be automatically updated with section IDs.
+              configuration. The JSON will be validated, saved to the file system,
+              loaded into Section Context, and the page metadata will be automatically updated.
             </p>
           </div>
         </CardHeader>
@@ -519,12 +665,12 @@ Make sure the JSON follows the required format: { "sections": ExtendedSection[] 
               <Info className="h-4 w-4 text-gray-600 dark:text-gray-400 mt-0.5 flex-shrink-0" />
               <div className="flex-1 text-xs">
                 <h5 className="font-medium text-gray-900 dark:text-gray-100 mb-1">
-                  API Information:
+                  API & Context Information:
                 </h5>
                 <div className="text-gray-700 dark:text-gray-300 space-y-1">
-                  <p>Endpoint: <code className="bg-gray-200 dark:bg-gray-800 px-1 rounded">/api/admin/sections/upload</code></p>
-                  <p>Method: POST</p>
-                  <p>Payload: <code className="bg-gray-200 dark:bg-gray-800 px-1 rounded">{"{ href: string, sections: ExtendedSection[] }"}</code></p>
+                  <p>Upload Endpoint: <code className="bg-gray-200 dark:bg-gray-800 px-1 rounded">/api/sections/upload</code></p>
+                  <p>Read Endpoint: <code className="bg-gray-200 dark:bg-gray-800 px-1 rounded">/api/sections/read</code></p>
+                  <p>Context: <code className="bg-gray-200 dark:bg-gray-800 px-1 rounded">Section Context (in memory cache)</code></p>
                   <p>Target: <code className="bg-gray-200 dark:bg-gray-800 px-1 rounded">{targetPath}</code></p>
                   <p>Metadata Update: <code className="bg-gray-200 dark:bg-gray-800 px-1 rounded">page.sections</code> will be updated with section IDs</p>
                 </div>
@@ -684,6 +830,28 @@ Make sure the JSON follows the required format: { "sections": ExtendedSection[] 
           </div>
         </CardContent>
       </Card>
+
+      {/* Debug panel for development - can be removed in production */}
+      {process.env.NODE_ENV === 'development' && loadedSections && (
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-sm flex items-center gap-2">
+              <Database className="h-4 w-4" />
+              Debug: Loaded Sections ({loadedSections.length})
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-2">
+              
+              {loadedSections.length > 5 && (
+                <div className="text-xs text-muted-foreground">
+                  ... and {loadedSections.length - 5} more sections
+                </div>
+              )}
+            </div>
+          </CardContent>
+        </Card>
+      )}
     </div>
   );
 }

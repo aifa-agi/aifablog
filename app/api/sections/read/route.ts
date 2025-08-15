@@ -1,4 +1,4 @@
-// app/api/admin/sections/upload/route.ts
+// @/app/api/admin/sections/upload/route.ts
 
 import { NextRequest, NextResponse } from 'next/server';
 import { writeFile, mkdir } from 'fs/promises';
@@ -103,10 +103,8 @@ function validateSafeName(name: string, fieldName: string): void {
 }
 
 function generateTypeScriptFile(filename: string, sections: ExtendedSection[]): string {
-  const importStatement = `import { ExtendedSection } from "@/app/types/section-types";`;
-  const variableName = filename.replace(/-/g, '');
-  const dataVariable = `const ${variableName}Sections: ExtendedSection[] = ${JSON.stringify(sections, null, 2)};`;
-  const exportStatement = `export default ${variableName}Sections;`;
+  const importStatement = `// @ts-ignore\nimport { ExtendedSection } from "@/app/types/section-types";`;
+  const exportStatement = `export const sections: ExtendedSection[] = ${JSON.stringify(sections, null, 2)};`;
   
   const fileContent = [
     '// Auto-generated file - do not edit manually',
@@ -114,8 +112,6 @@ function generateTypeScriptFile(filename: string, sections: ExtendedSection[]): 
     `// Source href: ${filename}`,
     '',
     importStatement,
-    '',
-    dataVariable,
     '',
     exportStatement,
     ''
@@ -233,7 +229,7 @@ async function saveToFileSystem(
   sections: ExtendedSection[]
 ): Promise<SectionUploadResponse> {
   try {
-    const contentDir = join(process.cwd(), 'app', 'config', 'content', 'sections');
+    const contentDir = join(process.cwd(), 'config', 'content', 'sections');
     const firstPartDir = join(contentDir, firstPartHref);
     const filePath = join(firstPartDir, `${secondPartHref}.ts`);
     const relativeFilePath = `config/content/sections/${firstPartHref}/${secondPartHref}.ts`;
@@ -404,7 +400,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
         environment: 'production'
       });
     } else {
-      const categoryDir = join(process.cwd(), 'app', 'config', 'content', 'sections', firstPartHref);
+      const categoryDir = join(process.cwd(), 'config', 'content', 'sections', firstPartHref);
       
       return NextResponse.json({
         success: true,
