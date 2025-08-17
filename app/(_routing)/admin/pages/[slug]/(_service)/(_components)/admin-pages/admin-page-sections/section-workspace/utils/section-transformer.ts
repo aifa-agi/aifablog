@@ -1,5 +1,4 @@
-// @/app/(_routing)/admin/pages/[slug]/(_service)/(_components)/admin-pages/admin-page-sections/section-workspace/utils/section-transformer.ts
-
+// @/app\(_routing)\admin\pages\[slug]\(_service)\(_components)\admin-pages\admin-page-sections\section-workspace\utils\section-transformer.ts
 import { ExtendedSection } from "@/app/(_service)/types/section-types";
 import { WorkflowSection, ExtendedSectionType } from "../types/workspace.types";
 

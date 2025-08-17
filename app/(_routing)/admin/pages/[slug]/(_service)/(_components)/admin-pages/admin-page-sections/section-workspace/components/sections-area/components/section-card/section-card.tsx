@@ -1,3 +1,6 @@
+
+// @/app/(_routing)/admin/pages/[slug]/(_service)/(_components)/admin-pages/admin-page-sections/section-workspace/components/sections-area/components/section-card/section-card.tsx
+
 "use client";
 
 import React, { memo } from "react";

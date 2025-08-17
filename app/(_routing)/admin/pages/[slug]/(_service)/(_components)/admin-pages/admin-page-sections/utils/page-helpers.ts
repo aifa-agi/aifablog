@@ -1,5 +1,5 @@
 
-// @/app/(_routing)/admin/pages/[slug]/(_service)/(_components)/admin-pages/utils/page-helpers.ts
+// @/app/(_routing)/admin/pages/[slug]/(_service)/(_components)/admin-pages/admin-page-sections/utils/page-helpers.ts
 
 import { MenuCategory } from "@/app/(_service)/types/menu-types";
 

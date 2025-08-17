@@ -1,3 +1,6 @@
+
+// @/app/(_routing)/admin/pages/[slug]/(_service)/(_components)/admin-pages/admin-page-sections/section-workspace/components/sections-area/components/section-card/utils/get-content.ts
+
 import { ExtendedSection } from "@/app/(_service)/types/section-types";
 
 export const getContentPreview = (section: ExtendedSection): string => {

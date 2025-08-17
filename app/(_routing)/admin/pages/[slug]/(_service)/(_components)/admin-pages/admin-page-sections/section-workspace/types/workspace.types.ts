@@ -1,3 +1,4 @@
+
 // @/app/(_routing)/admin/pages/[slug]/(_service)/(_components)/admin-pages/admin-page-sections/section-workspace/types/workspace.types.ts
 
 import { ExtendedSection } from "@/app/(_service)/types/section-types";

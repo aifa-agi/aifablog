@@ -1,6 +1,5 @@
 
 // @/app/(_routing)/admin/pages/[slug]/(_service)/(_components)/admin-pages/admin-page-sections/section-workspace/components/design-gallery-panel/design-gallery-panel.tsx
-
 "use client";
 
 import React from "react";

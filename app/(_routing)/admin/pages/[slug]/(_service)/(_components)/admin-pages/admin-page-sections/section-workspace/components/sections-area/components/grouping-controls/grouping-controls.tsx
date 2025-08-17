@@ -1,4 +1,5 @@
-// @/app/(_routing)/admin/pages/[slug]/(_service)/(_components)/admin-pages/admin-page-sections/section-workspace/components/sections-area/components/sections-list/components/grouping-controls/grouping-controls.tsx
+
+// @/app/(_routing)/admin/pages/[slug]/(_service)/(_components)/admin-pages/admin-page-sections/section-workspace/components/sections-area/components/grouping-controls/grouping-controls.tsx
 
 "use client";
 

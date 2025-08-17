@@ -1,7 +1,6 @@
 
 
-// @/app/(_routing)/admin/pages/[slug]/(_service)/(_components)/admin-pages/admin-page-sections/section-workspace/utils/page-type-helpers.ts
-
+// @app/(_routing)/admin/pages/[slug]/(_service)/(_components)/admin-pages/admin-page-sections/section-workspace/utils/page-type-helpers.ts
 import { PageType } from "@/app/(_service)/types/page-types";
 
 export const getPageTypeName = (pageType: PageType): string => {
