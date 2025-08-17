@@ -4,35 +4,49 @@
 
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Button } from "@/app/(_service)/components/ui/button";
-import { X } from "lucide-react";
 
 interface DesignGalleryPanelProps {
   isOpen: boolean;
-  onClose: () => void;
+  onClose: () => void; // Keep for compatibility but not used in UI
+  containerHeight?: number;
 }
 
 interface TemplateCardProps {
   number: number;
+  onClick?: () => void;
 }
 
-const TemplateCard: React.FC<TemplateCardProps> = ({ number }) => (
-  <div className="bg-card border border-border rounded-lg p-4 hover:shadow-md transition-shadow cursor-pointer">
-    <div 
-      className="w-full bg-muted rounded-md flex items-center justify-center text-muted-foreground font-semibold text-lg"
-      style={{ aspectRatio: '4/3' }}
-    >
-      <div className="w-12 h-12 rounded-full border-2 border-primary flex items-center justify-center text-primary font-bold">
+const TemplateCard: React.FC<TemplateCardProps> = ({ number, onClick }) => (
+  <div
+    className="bg-card border border-border rounded-lg p-3 hover:shadow-md hover:border-primary/20 transition-all duration-200 cursor-pointer flex flex-col items-center justify-center"
+    onClick={onClick}
+    style={{ 
+      minWidth: '110px',
+      aspectRatio: '4/3'
+    }}
+  >
+    <div className="flex-1 flex items-center justify-center">
+      <div className="w-12 h-12 rounded-full border-2 border-primary flex items-center justify-center text-primary font-bold text-sm">
         {number}
       </div>
+    </div>
+    <div className="mt-2 text-xs text-center text-muted-foreground whitespace-nowrap">
+      Template {number}
     </div>
   </div>
 );
 
 export const DesignGalleryPanel: React.FC<DesignGalleryPanelProps> = ({
   isOpen,
-  onClose
+  containerHeight = 500
 }) => {
+  const minHeight = Math.max(containerHeight, 400);
+
+  const handleTemplateSelect = (templateNumber: number) => {
+    console.log(`Template ${templateNumber} selected`);
+    // TODO: Implement template selection logic
+  };
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -45,35 +59,33 @@ export const DesignGalleryPanel: React.FC<DesignGalleryPanelProps> = ({
             stiffness: 300,
             damping: 30
           }}
-          className="bg-background border-l border-border overflow-hidden"
+          className="bg-background border-l border-border overflow-hidden flex flex-col"
+          style={{ minHeight: `${minHeight}px` }}
         >
-          <div className="h-full flex flex-col">
-            {/* Header */}
-            <div className="flex items-center justify-between p-4 border-b border-border">
-              <div>
-                <h4 className="font-semibold text-foreground">Design Gallery</h4>
-                <p className="text-xs text-muted-foreground">Choose a template design</p>
-              </div>
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={onClose}
-                className="h-8 w-8 p-0"
-              >
-                <X className="h-4 w-4" />
-              </Button>
+          {/* Header - removed close button */}
+          <div className="p-4 pr-0 border-b border-border bg-background/95 backdrop-blur-sm sticky top-0 z-10">
+            <div>
+              <h4 className="font-semibold text-foreground">Design Gallery</h4>
+              <p className="text-xs text-muted-foreground">Choose a template design for selected sections</p>
             </div>
+          </div>
 
-            {/* Template Grid */}
-            <div className="flex-1 p-4">
-              <div 
-                className="grid grid-cols-2 gap-3 overflow-y-auto custom-scrollbar"
-                style={{ maxHeight: 'calc(100vh - 300px)' }}
-              >
-                {Array.from({ length: 10 }, (_, i) => (
-                  <TemplateCard key={i + 1} number={i + 1} />
-                ))}
-              </div>
+          {/* Adaptive Template Grid */}
+          <div className="flex-1 p-4 pr-0 overflow-y-auto">
+            <div
+              className="grid gap-3 auto-fill"
+              style={{
+                gridTemplateColumns: 'repeat(auto-fit, minmax(110px, 1fr))',
+                minHeight: `${minHeight - 80}px` // Subtract header height
+              }}
+            >
+              {Array.from({ length: 12 }, (_, i) => (
+                <TemplateCard
+                  key={i + 1}
+                  number={i + 1}
+                  onClick={() => handleTemplateSelect(i + 1)}
+                />
+              ))}
             </div>
           </div>
         </motion.div>
