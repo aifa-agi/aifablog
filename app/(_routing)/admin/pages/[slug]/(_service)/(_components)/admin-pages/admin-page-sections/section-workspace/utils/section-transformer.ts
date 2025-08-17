@@ -108,9 +108,9 @@ export const generateDesignId = (
   
   // Handle muted text type
   if (typographyType === "TypographyMuted") {
-    return "Any";
+    return "Muted";
   }
-  return "Muted Text"
+  return "Any"
     case "Step Section":
       return `ST${index.toString().padStart(2, "0")}`;
     default:

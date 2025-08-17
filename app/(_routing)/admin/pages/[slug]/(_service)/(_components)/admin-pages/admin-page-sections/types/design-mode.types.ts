@@ -1,5 +1,6 @@
 
-// @/app/(_routing)/admin/pages/[slug]/(_service)/(_components)/admin-pages/admin-page-sections/utils/page-helpers.ts
+// @/app/(_routing)/admin/pages/[slug]/(_service)/(_components)/admin-pages/admin-page-sections/types/design-mode.types.ts
+
 export interface DesignModeState {
   isActive: boolean;
   selectedSections: string[];

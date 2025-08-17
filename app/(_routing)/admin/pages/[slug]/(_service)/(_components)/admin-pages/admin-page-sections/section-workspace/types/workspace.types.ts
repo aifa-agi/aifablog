@@ -56,12 +56,7 @@ export interface WorkspaceProps {
   onSectionReorder?: (sections: ExtendedSection[]) => void;
 }
 
-export interface WorkspaceHeaderProps {
-  pageType: PageType;
-  sectionsCount: number;
-  isGalleryOpen: boolean;
-  onGalleryToggle: () => void;
-}
+
 
 export interface WorkspaceLayoutProps {
   isGalleryOpen: boolean;
@@ -73,7 +68,7 @@ export interface WorkspaceLayoutProps {
 export interface SelectedSectionsInfo {
   sectionIds: string[];
   designIds: string[];
-  sectionTypes: ExtendedSectionType[];
+  sectionTypes: ExtendedSectionType;
   count: number;
   isValid: boolean; // Contiguous selection
 }
