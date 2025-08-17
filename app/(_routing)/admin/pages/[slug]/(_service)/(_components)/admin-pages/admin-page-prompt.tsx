@@ -40,9 +40,10 @@ import {
   Home,
 } from "lucide-react";
 import { toast } from "sonner";
-import { AdminPageInfoProps } from "./types/admin-page-sections.types";
-import { findPageBySlug } from "./utils/page-helpers";
-import { AccessDenied } from "./components/access-control/access-denied";
+import { AdminPageInfoProps } from "./admin-page-sections/types/admin-page-sections.types";
+import { findPageBySlug } from "./admin-page-sections/utils/page-helpers";
+import { AccessDenied } from "./admin-page-sections/components/access-control/access-denied";
+import { PageNotFound } from "./admin-page-sections/components/page-not-found";
 
 
 
@@ -188,13 +189,13 @@ export function AdminPagePrompt({ slug }: AdminPageInfoProps ) {
    
  
 
-  const result = findPageBySlug(categories, slug);
+  const pageData = findPageBySlug(categories, slug);
 
   // Generate system instruction combining base config with page data and personalization
   const generateSystemInstruction = useMemo(() => {
-    if (!result) return "";
+    if (!pageData) return "";
 
-    const { page } = result;
+    const { page } = pageData;
 
     // Extract page-specific data
     const pageTitle = page.title || page.linkName || "Untitled Page";
@@ -500,7 +501,7 @@ interface PageSpecificDataInfo {
   keywords: ${JSON.stringify(pageKeywords, null, 2)};
   isPublished: ${page.isPublished};
   pageType: "${page.type}";
-  category: "${result.category.title}";
+  category: "${pageData.category.title}";
 }
 
 /**
@@ -554,6 +555,7 @@ ${
 
 // CRITICAL: These types must remain unchanged as they form working project schema
 
+
 interface SimpleSectionFullScreenSizeImageProps
   extends Omit<ImageProps, "src" | "width" | "height" | "alt"> {
   src: string;
@@ -599,6 +601,7 @@ export interface SimpleSection {
   id: string;
   order?: string;
   bodyContent: {
+    sectionType: "Simple";
     type: SimpleSectionTypeName;
     props: SimpleSectionTypes[SimpleSectionTypeName];
   };
@@ -607,7 +610,9 @@ export interface SimpleSection {
 export interface TypographySection {
   id: string;
   order?: string;
+  linkConfiguration?: LinkConfiguration;
   bodyContent: {
+    sectionType: "Typography";
     type: TypographySectionTypeName;
     props: TypographySectionTypes[TypographySectionTypeName];
   };
@@ -616,14 +621,15 @@ export interface TypographySection {
 export interface StepSection {
   id: string;
   order?: string;
+  linkConfiguration?: LinkConfiguration;
   bodyContent: (
     | {
-        sectionType: "Simple";
+        sectionType: "Simple Steps";
         type: SimpleSectionTypeName;
         props: SimpleSectionTypes[SimpleSectionTypeName];
       }
     | {
-        sectionType: "Typography";
+        sectionType: "Typography Steps";
         type: TypographySectionTypeName;
         props: TypographySectionTypes[TypographySectionTypeName];
       }
@@ -634,6 +640,7 @@ export type ExtendedSection =
   | SimpleSection
   | StepSection
   | TypographySection;
+
 
 export interface PageSections {
   sections: ExtendedSection[];
@@ -659,7 +666,7 @@ export interface PageSections {
       customRequirementsSection +
       pageSpecificConfig
     );
-  }, [result, slug, writingStyle, contentFormat, customRequirements]);
+  }, [pageData, slug, writingStyle, contentFormat, customRequirements]);
 
   useEffect(() => {
   if (role !== "admin") {
@@ -708,31 +715,11 @@ export interface PageSections {
     );
   }
 
-  // Show error state if page not found
-  if (!result) {
-    return (
-      <div className="flex bg-background items-center justify-center py-12">
-        <div className="text-center">
-          <AlertCircle className="mx-auto h-12 w-12 text-destructive mb-4" />
-          <h3 className="text-lg font-semibold text-foreground mb-2">
-            Page Not Found
-          </h3>
-          <p className="text-muted-foreground mb-4">
-            The page with slug{" "}
-            <code className="bg-muted px-2 py-1 rounded text-foreground">
-              {slug}
-            </code>{" "}
-            does not exist
-          </p>
-          <p className="text-sm text-muted-foreground">
-            Please check the URL or select an existing page from the menu
-          </p>
-        </div>
-      </div>
-    );
-  }
+ if (!pageData) {
+     return <PageNotFound slug={slug} />;
+   }
 
-  const { page } = result;
+  const { page } = pageData;
 
   return (
     <div className="space-y-6">

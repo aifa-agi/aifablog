@@ -8,7 +8,7 @@ import { AdminPagePrompt } from "./admin-pages/admin-page-prompt";
 import { AdminPageData } from "./admin-pages/admin-page-data";
 import { AdminPageN8N } from "./admin-pages/admin-page-n8n";
 import { AdminPagePreview } from "./admin-pages/admin-page-preview";
-import { AdminPageSections } from "./admin-pages/admin-page-sections";
+import { AdminPageSections } from "./admin-pages/admin-page-sections/admin-page-sections";
 
 
 export function AdminPageContent() {

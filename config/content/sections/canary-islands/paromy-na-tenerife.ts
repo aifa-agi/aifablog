@@ -1,5 +1,5 @@
 // Auto-generated file - do not edit manually
-// Generated on: 2025-08-15T12:03:33.849Z
+// Generated on: 2025-08-17T11:59:10.192Z
 // Source href: paromy-na-tenerife
 
 // @ts-ignore
@@ -7,261 +7,810 @@ import { ExtendedSection } from "@/app/types/section-types";
 
 export const sections: ExtendedSection[] = [
   {
-    "id": "main-title-section",
+    "id": "hero-title",
     "order": "1",
     "bodyContent": {
+      "sectionType": "Typography",
       "type": "TypographyH1",
       "props": {
-        "children": "# Паромы на Тенерифе: Полный гид по морским перевозкам 2025"
+        "children": "# Ferries in Tenerife: Your Complete 2025 Guide to Island Hopping"
       }
     }
   },
   {
-    "id": "introduction-paragraph",
+    "id": "hero-intro",
     "order": "2",
     "bodyContent": {
+      "sectionType": "Typography",
       "type": "TypographyP",
       "props": {
-        "children": "Планируете путешествие по Канарским островам? **Паромы на Тенерифе** открывают удивительные возможности для исследования архипелага[4][6]. Этот солнечный остров служит важным транспортным узлом, соединяющим все Канарские острова современными и комфортабельными паромами. В 2025 году паромное сообщение стало еще более удобным благодаря регулярным рейсам двух ведущих компаний - Naviera Armas и Fred Olsen Express[4][6]. Каждый день отправляется около 27 рейсов в различных направлениях[6], что делает межостровные перемещения максимально гибкими для туристов и местных жителей."
+        "children": "Planning your Canary Islands adventure? Let me tell you, ferries in Tenerife are your gateway to exploring this incredible archipelago like a local. Whether you're dreaming of day trips to neighboring islands or planning an epic island-hopping journey, understanding Tenerife's ferry system is absolutely essential for any savvy traveler.\n\nHere's what makes ferry travel from Tenerife so special: you're not just getting from point A to point B – you're experiencing the Atlantic Ocean in all its glory, with breathtaking views that no flight can match. Plus, with multiple operators serving different routes, you've got flexibility that fits any budget or schedule."
       }
     }
   },
   {
-    "id": "introduction-paragraph-2",
+    "id": "hero-image",
     "order": "3",
     "bodyContent": {
-      "type": "TypographyP",
-      "props": {
-        "children": "Тенерифе располагает двумя стратегически важными портами: **Лос-Кристианос** на юге и **Санта-Крус-де-Тенерифе** на севере острова[4][6]. Из порта Лос-Кристианос отправляются паромы на соседние острова Ла Гомера, Ла Пальма и Эль Йерро, в то время как из Санта-Круса можно добраться до Гран-Канарии[4]. Время в пути варьируется от 50 минут до нескольких часов в зависимости от маршрута[6][12]. Стоимость билетов колеблется от 40 до 75 евро[12], что делает паромные перевозки доступным способом познакомиться с уникальной природой и культурой каждого острова архипелага."
-      }
-    }
-  },
-  {
-    "id": "main-image-section",
-    "order": "4",
-    "bodyContent": {
+      "sectionType": "Simple",
       "type": "SimpleSectionFullScreenSizeImage",
       "props": {
         "src": "https://9d8adypzz8xutnay.public.blob.vercel-storage.com/Screenshot%202023-12-14%20193752-iLFevnFZR8YF77PoIZRUXcusgSutpX.png",
         "alt": "Паромы на Тенерифе",
         "aspectRatio": "video",
-        "objectFit": "cover"
+        "objectFit": "cover",
+        "hasRounded": true,
+        "borderRadius": "8px"
       }
     }
   },
   {
-    "id": "ferry-operators-section",
-    "order": "5",
+    "id": "ferry-operators-title",
+    "order": "4",
     "bodyContent": {
+      "sectionType": "Typography",
       "type": "TypographyH2",
       "props": {
-        "children": "## Основные паромные операторы и инфраструктура Тенерифе"
+        "children": "## Major Ferry Operators Serving Tenerife"
       }
     }
   },
   {
     "id": "ferry-operators-intro",
+    "order": "5",
+    "bodyContent": {
+      "sectionType": "Typography",
+      "type": "TypographyP",
+      "props": {
+        "children": "Understanding your ferry options is crucial for planning the perfect inter-island adventure. Tenerife is served by several reputable ferry companies, each offering unique advantages and route combinations. The competition between operators actually works in your favor – you'll find competitive pricing, modern vessels, and excellent service standards across the board.\n\nWhat's particularly impressive about Tenerife's ferry network is its reliability and frequency. Unlike many island destinations where ferry service can be sporadic, Tenerife enjoys multiple daily connections to its neighboring islands, making spontaneous island hopping totally feasible. The operators have invested heavily in modern fleets, ensuring comfortable journeys with amenities that make the voyage part of your vacation experience."
+      }
+    }
+  },
+  {
+    "id": "naviera-armas-title",
     "order": "6",
     "bodyContent": {
-      "type": "TypographyP",
+      "sectionType": "Typography",
+      "type": "TypographyH3",
       "props": {
-        "children": "Паромная индустрия Тенерифе представлена двумя крупнейшими операторами, которые обеспечивают надежное и регулярное сообщение между Канарскими островами. **Naviera Armas** и **Fred Olsen Express** конкурируют между собой, предлагая пассажирам различные тарифы и уровни комфорта[4][6]. Компания Armas традиционно предлагает более доступные цены, в то время как Fred Olsen делает акцент на скорости и премиальном сервисе[4]. Оба оператора предоставляют современные суда с развитой инфраструктурой, включающей рестораны, магазины, зоны отдыха и Wi-Fi на борту."
+        "children": "### Naviera Armas: The Island Hopping Champion"
       }
     }
   },
   {
-    "id": "ferry-operators-infrastructure",
+    "id": "naviera-armas-intro",
     "order": "7",
     "bodyContent": {
+      "sectionType": "Typography",
       "type": "TypographyP",
       "props": {
-        "children": "Портовая инфраструктура Тенерифе постоянно модернизируется для обеспечения максимального комфорта пассажиров. Порт **Санта-Крус-де-Тенерифе** является крупнейшим на острове и обслуживает до 98 еженедельных рейсов[6]. Здесь расположены современные терминалы с удобными залами ожидания, информационными табло и службами поддержки пассажиров. Порт Лос-Кристианос, хотя и меньше по размеру, специализируется на межостровных маршрутах и отличается быстрой обработкой пассажиров. Оба порта имеют удобные парковки, службы такси и автобусные остановки для легкого доступа."
+        "children": "When locals talk about reliable ferry service, Naviera Armas consistently tops the list. This operator has built its reputation on punctuality and comprehensive route coverage, making it the go-to choice for both residents and tourists. Their modern fleet includes high-speed vessels that significantly reduce travel times between islands."
       }
     }
   },
   {
-    "id": "armas-operator-subsection",
+    "id": "naviera-armas-services",
     "order": "8",
     "bodyContent": {
-      "type": "TypographyH3",
+      "sectionType": "Typography",
+      "type": "TypographyH4",
       "props": {
-        "children": "### Naviera Armas: доступность и надежность"
+        "children": "#### Routes and Service Quality"
       }
     }
   },
   {
-    "id": "armas-details",
+    "id": "naviera-armas-details",
     "order": "9",
     "bodyContent": {
+      "sectionType": "Typography",
       "type": "TypographyP",
       "props": {
-        "children": "Компания **Naviera Armas** заслужила репутацию надежного перевозчика благодаря обширной сети маршрутов и конкурентным ценам[4][6]. Флот компании включает современные суда различных классов - от скоростных катамаранов для коротких маршрутов до больших паромов для дальних переходов. Armas особенно популярна среди местных жителей благодаря программе скидок для резидентов Канарских островов, которая предоставляет до 70% скидки[4]. Для туристов компания предлагает гибкую систему тарифов, позволяющую выбрать оптимальное соотношение цены и комфорта. На борту судов Armas работают рестораны с традиционной канарской кухней, магазины duty-free и комфортабельные салоны для отдыха."
+        "children": "Naviera Armas operates from both Santa Cruz de Tenerife and Los Cristianos, offering direct connections to Gran Canaria, La Palma, La Gomera, and El Hierro. Their vessels feature comfortable seating areas, cafeterias, duty-free shops, and even children's play areas on longer routes. The company's commitment to punctuality means you can confidently plan tight itineraries without worrying about delays."
       }
     }
   },
   {
-    "id": "fred-olsen-subsection",
+    "id": "naviera-armas-pricing",
     "order": "10",
     "bodyContent": {
-      "type": "TypographyH3",
+      "sectionType": "Typography",
+      "type": "TypographyH4",
       "props": {
-        "children": "### Fred Olsen Express: скорость и премиальный сервис"
+        "children": "#### Pricing and Booking Strategy"
       }
     }
   },
   {
-    "id": "fred-olsen-details",
+    "id": "naviera-armas-pricing-details",
     "order": "11",
     "bodyContent": {
+      "sectionType": "Typography",
       "type": "TypographyP",
       "props": {
-        "children": "**Fred Olsen Express** позиционируется как премиальный паромный оператор, делающий акцент на скорости и высоком качестве обслуживания[4][12]. Суда компании отличаются футуристичным дизайном и современным техническим оснащением[12]. Fred Olsen часто предлагает дополнительные услуги, такие как бесплатные автобусные трансферы от порта Агаете до Лас-Пальмаса на Гран-Канарии[12]. Компания также известна своей пунктуальностью и комфортабельными салонами различных классов. Пассажиры могут выбрать от эконом-класса до VIP-залов с персональным обслуживанием. Электронная система бронирования Fred Olsen считается одной из самых удобных - достаточно предъявить паспорт при посадке, билеты сохраняются в цифровом формате[12]."
+        "children": "Pricing with Naviera Armas follows a dynamic model similar to airlines – book early for the best deals. Foot passenger tickets typically range from €25-45 depending on destination and season, while vehicle transport starts around €65. Their online booking system offers discounts for return trips and multi-island packages."
       }
     }
   },
   {
-    "id": "routes-schedule-section",
+    "id": "fred-olsen-title",
     "order": "12",
     "bodyContent": {
-      "type": "TypographyH2",
+      "sectionType": "Typography",
+      "type": "TypographyH3",
       "props": {
-        "children": "## Популярные маршруты и актуальное расписание на 2025 год"
+        "children": "### Fred. Olsen Express: Speed Meets Comfort"
       }
     }
   },
   {
-    "id": "routes-schedule-intro",
+    "id": "fred-olsen-intro",
     "order": "13",
     "bodyContent": {
+      "sectionType": "Typography",
       "type": "TypographyP",
       "props": {
-        "children": "Паромная сеть Тенерифе в 2025 году предлагает широкий выбор маршрутов для путешествий между Канарскими островами. **Расписание паромов** варьируется в зависимости от сезона, с заметным увеличением количества рейсов в период с мая по октябрь[6]. Наиболее популярным направлением остается маршрут **Тенерифе - Гран-Канария**, обслуживаемый ежедневными рейсами обеих компаний[9][12]. Время в пути составляет от 1 часа 40 минут до 2 часов 30 минут в зависимости от типа судна и погодных условий. Короткие маршруты до соседних островов, такие как переправа до Ла Гомеры, занимают всего 50 минут[6], что делает их идеальными для однодневных экскурсий."
+        "children": "If time is your most precious commodity, Fred. Olsen Express delivers the fastest inter-island connections in the Canaries. Their high-speed catamarans slash journey times in half compared to conventional ferries, though this premium service comes at a slightly higher price point."
       }
     }
   },
   {
-    "id": "routes-schedule-planning",
+    "id": "fred-olsen-speed",
     "order": "14",
     "bodyContent": {
-      "type": "TypographyP",
+      "sectionType": "Typography",
+      "type": "TypographyH4",
       "props": {
-        "children": "При планировании межостровных путешествий важно учитывать особенности каждого маршрута и сезонные изменения в расписании. В высокий туристический сезон количество рейсов может увеличиваться до 158 еженедельных отправлений[6], что предоставляет путешественникам максимальную гибкость в выборе времени поездки. Стоимость билетов также варьируется в зависимости от сезона - раннее бронирование позволяет сэкономить до 30% от стандартной цены[12]. Особое внимание стоит уделить маршрутам выходного дня, когда местные жители активно перемещаются между островами для отдыха, что может повлиять на наличие свободных мест."
+        "children": "#### Express Routes and Journey Times"
       }
     }
   },
   {
-    "id": "main-routes-subsection",
+    "id": "fred-olsen-speed-details",
     "order": "15",
     "bodyContent": {
-      "type": "TypographyH3",
-      "props": {
-        "children": "### Ключевые межостровные маршруты"
-      }
-    }
-  },
-  {
-    "id": "main-routes-details",
-    "order": "16",
-    "bodyContent": {
-      "type": "TypographyList",
-      "props": {
-        "items": [
-          "**Санта-Крус-де-Тенерифе → Лас-Пальмас-де-Гран-Канария**: 1 час 40 минут, до 35 рейсов в неделю, стоимость от 40€[9][12]",
-          "**Лос-Кристианос → Сан-Себастиан-де-ла-Гомера**: 50 минут, до 49 рейсов в неделю, популярен для однодневных экскурсий[6]",
-          "**Лос-Кристианос → Ла Пальма**: 2,5-8,5 часов в зависимости от типа судна, несколько рейсов в день[17]",
-          "**Лос-Кристианос → Эль Йерро**: самый удаленный остров, время в пути до 11-13 часов[2]",
-          "**Санта-Крус-де-Тенерифе → Агаете (Гран-Канария)**: эксклюзивный маршрут Fred Olsen с бесплатным автобусом до Лас-Пальмаса[12]"
-        ]
-      }
-    }
-  },
-  {
-    "id": "seasonal-schedule-subsection",
-    "order": "17",
-    "bodyContent": {
-      "type": "TypographyH3",
-      "props": {
-        "children": "### Сезонные особенности расписания и ценообразования"
-      }
-    }
-  },
-  {
-    "id": "seasonal-details",
-    "order": "18",
-    "bodyContent": {
+      "sectionType": "Typography",
       "type": "TypographyP",
       "props": {
-        "children": "Сезонность существенно влияет на **расписание паромов на Тенерифе** и стоимость перевозок. В период с декабря по март количество рейсов несколько сокращается, но остается достаточным для комфортного путешествия[6]. Летние месяцы характеризуются пиковым спросом, особенно на маршрутах к пляжным островам. В это время рекомендуется бронировать билеты за 2-3 недели до поездки. Зимний период предлагает более спокойную атмосферу на борту и зачастую более доступные цены. Особые предложения и скидки часто действуют в межсезонье - в ноябре и феврале, когда операторы стимулируют спрос специальными тарифами для туристов."
+        "children": "Fred. Olsen's express catamarans can reach Gran Canaria from Tenerife in just 80 minutes, compared to 2.5 hours on conventional ferries. Their routes primarily focus on the central triangle of Tenerife, Gran Canaria, and Fuerteventura, with some seasonal extensions to Lanzarote. The vessels feature airline-style seating and large panoramic windows."
       }
     }
   },
   {
-    "id": "practical-tips-section",
-    "order": "19",
+    "id": "fred-olsen-experience",
+    "order": "16",
     "bodyContent": {
+      "sectionType": "Typography",
+      "type": "TypographyH4",
+      "props": {
+        "children": "#### Premium Travel Experience"
+      }
+    }
+  },
+  {
+    "id": "fred-olsen-experience-details",
+    "order": "17",
+    "bodyContent": {
+      "sectionType": "Typography",
+      "type": "TypographyP",
+      "props": {
+        "children": "The premium positioning shows in every detail: from the modern terminals to the smooth boarding process and onboard service. While you'll pay 20-30% more than conventional ferries, the time savings and comfort level make it worthwhile for business travelers or those with packed itineraries."
+      }
+    }
+  },
+  {
+    "id": "ferry-routes-title",
+    "order": "18",
+    "bodyContent": {
+      "sectionType": "Typography",
       "type": "TypographyH2",
       "props": {
-        "children": "## Практические советы и рекомендации для путешественников"
+        "children": "## Essential Ferry Routes from Tenerife"
+      }
+    }
+  },
+  {
+    "id": "ferry-routes-intro",
+    "order": "19",
+    "bodyContent": {
+      "sectionType": "Typography",
+      "type": "TypographyP",
+      "props": {
+        "children": "Tenerife's strategic location in the center of the Canary Islands makes it the perfect hub for exploring the entire archipelago. The island operates two main ferry ports, each serving different destinations and offering distinct advantages depending on your travel plans. Understanding which routes operate from which ports – and when – is essential for maximizing your island-hopping experience.\n\nWhat makes Tenerife's ferry network particularly traveler-friendly is the variety of routing options. Whether you're planning day trips, extended stays, or a complete island circuit, you'll find connections that work with your schedule. The frequency of service means you're not locked into rigid departure times, giving you the flexibility to adapt your plans based on weather, local discoveries, or simply how much you're enjoying each destination."
+      }
+    }
+  },
+  {
+    "id": "routes-from-santa-cruz-title",
+    "order": "20",
+    "bodyContent": {
+      "sectionType": "Typography",
+      "type": "TypographyH3",
+      "props": {
+        "children": "### Routes from Santa Cruz de Tenerife"
+      }
+    }
+  },
+  {
+    "id": "routes-from-santa-cruz-intro",
+    "order": "21",
+    "bodyContent": {
+      "sectionType": "Typography",
+      "type": "TypographyP",
+      "props": {
+        "children": "Santa Cruz serves as Tenerife's primary ferry port, handling the majority of inter-island traffic with excellent facilities and frequent departures. The port's location makes it particularly convenient if you're staying in the capital or northern regions of the island."
+      }
+    }
+  },
+  {
+    "id": "gran-canaria-route",
+    "order": "22",
+    "bodyContent": {
+      "sectionType": "Typography",
+      "type": "TypographyH4",
+      "props": {
+        "children": "#### Tenerife to Gran Canaria Connection"
+      }
+    }
+  },
+  {
+    "id": "gran-canaria-route-details",
+    "order": "23",
+    "bodyContent": {
+      "sectionType": "Typography",
+      "type": "TypographyP",
+      "props": {
+        "children": "The Tenerife-Gran Canaria route is the busiest in the Canaries, with up to 6 daily departures during peak season. Journey time varies from 80 minutes (fast ferry) to 2.5 hours (conventional ferry). Both Naviera Armas and Fred. Olsen operate this route, giving you pricing and schedule flexibility. Tickets start around €30 for foot passengers."
+      }
+    }
+  },
+  {
+    "id": "la-palma-route",
+    "order": "24",
+    "bodyContent": {
+      "sectionType": "Typography",
+      "type": "TypographyH4",
+      "props": {
+        "children": "#### Gateway to La Palma's Natural Wonders"
+      }
+    }
+  },
+  {
+    "id": "la-palma-route-details",
+    "order": "25",
+    "bodyContent": {
+      "sectionType": "Typography",
+      "type": "TypographyP",
+      "props": {
+        "children": "The journey to La Palma takes approximately 2.5-3 hours, with 2-3 daily departures depending on season. This route is served exclusively by Naviera Armas, operating modern ferries with excellent onboard amenities. La Palma's dramatic landscapes and hiking opportunities make it a favorite among nature enthusiasts visiting the Canaries."
+      }
+    }
+  },
+  {
+    "id": "routes-from-los-cristianos-title",
+    "order": "26",
+    "bodyContent": {
+      "sectionType": "Typography",
+      "type": "TypographyH3",
+      "props": {
+        "children": "### Departures from Los Cristianos"
+      }
+    }
+  },
+  {
+    "id": "routes-from-los-cristianos-intro",
+    "order": "27",
+    "bodyContent": {
+      "sectionType": "Typography",
+      "type": "TypographyP",
+      "props": {
+        "children": "Los Cristianos, located in southern Tenerife, specializes in routes to the western islands and offers a more relaxed departure experience. If you're staying in the resort areas of Playa de las Américas or Costa Adeje, this port is incredibly convenient and eliminates the need to travel across the island."
+      }
+    }
+  },
+  {
+    "id": "la-gomera-route",
+    "order": "28",
+    "bodyContent": {
+      "sectionType": "Typography",
+      "type": "TypographyH4",
+      "props": {
+        "children": "#### Quick Escape to La Gomera"
+      }
+    }
+  },
+  {
+    "id": "la-gomera-route-details",
+    "order": "29",
+    "bodyContent": {
+      "sectionType": "Typography",
+      "type": "TypographyP",
+      "props": {
+        "children": "The shortest inter-island journey from Tenerife, reaching La Gomera in just 50 minutes. Naviera Armas operates up to 5 daily departures, making day trips entirely feasible. This UNESCO World Heritage island offers pristine laurel forests and traditional Canarian culture just a short hop away. Round-trip tickets start around €45."
+      }
+    }
+  },
+  {
+    "id": "el-hierro-route",
+    "order": "30",
+    "bodyContent": {
+      "sectionType": "Typography",
+      "type": "TypographyH4",
+      "props": {
+        "children": "#### El Hierro: The Hidden Gem"
+      }
+    }
+  },
+  {
+    "id": "el-hierro-route-details",
+    "order": "31",
+    "bodyContent": {
+      "sectionType": "Typography",
+      "type": "TypographyP",
+      "props": {
+        "children": "El Hierro, the smallest and most remote Canary Island, is reached via a 2.5-hour journey with daily departures. This UNESCO Biosphere Reserve offers unparalleled tranquility and some of the best diving in the Atlantic. Limited to one daily departure, advance booking is essential, especially during peak season."
+      }
+    }
+  },
+  {
+    "id": "practical-tips-title",
+    "order": "32",
+    "bodyContent": {
+      "sectionType": "Typography",
+      "type": "TypographyH2",
+      "props": {
+        "children": "## Practical Tips for Ferry Travel Success"
       }
     }
   },
   {
     "id": "practical-tips-intro",
-    "order": "20",
+    "order": "33",
     "bodyContent": {
+      "sectionType": "Typography",
       "type": "TypographyP",
       "props": {
-        "children": "Путешествие на **паромах по Канарским островам** требует определенной подготовки для максимального комфорта и избежания непредвиденных ситуаций. Опытные путешественники рекомендуют изучить особенности каждого оператора, правила перевозки багажа и документооборота[6][12]. Важно помнить, что погодные условия в Атлантическом океане могут влиять на расписание, особенно в зимние месяцы. Планирование поездки с учетом возможных задержек поможет избежать стресса и пропущенных соединений. Современные паромы оборудованы всеми необходимыми удобствами, но знание нюансов сделает ваше путешествие еще более приятным и беззаботным."
+        "children": "Successfully navigating Tenerife's ferry system goes beyond just booking tickets – it's about understanding the nuances that can make or break your island-hopping experience. From seasonal schedule changes to onboard amenities, these insider tips will help you travel like a seasoned local rather than a confused tourist.\n\nThe key to ferry travel success lies in preparation and flexibility. While the operators are generally reliable, Atlantic weather conditions can occasionally impact schedules, especially during winter months. Smart travelers build buffer time into their itineraries and have backup plans. Additionally, understanding the cultural aspects of ferry travel in the Canaries – from boarding procedures to onboard etiquette – will enhance your overall experience and help you connect with fellow travelers."
       }
     }
   },
   {
-    "id": "practical-tips-preparation",
-    "order": "21",
+    "id": "booking-strategies-title",
+    "order": "34",
     "bodyContent": {
-      "type": "TypographyP",
-      "props": {
-        "children": "Подготовка к паромному путешествию начинается с выбора оптимального времени отправления и изучения услуг на борту. **Электронные билеты** стали стандартом для обеих компаний - достаточно сохранить подтверждение на смартфоне и иметь при себе паспорт[12]. Если планируете взять с собой арендованный автомобиль, обязательно уточните условия у компании проката - не все операторы разрешают межостровные перевозки[4]. Cicar, Goldcar и Localrent предоставляют такую возможность за дополнительную плату, в то время как Autorisen и Pluscar категорически запрещают подобные поездки[4]."
-      }
-    }
-  },
-  {
-    "id": "booking-tips-subsection",
-    "order": "22",
-    "bodyContent": {
+      "sectionType": "Typography",
       "type": "TypographyH3",
       "props": {
-        "children": "### Бронирование билетов и документооборот"
+        "children": "### Smart Booking Strategies"
       }
     }
   },
   {
-    "id": "booking-details",
-    "order": "23",
+    "id": "booking-strategies-intro",
+    "order": "35",
     "bodyContent": {
+      "sectionType": "Typography",
       "type": "TypographyP",
       "props": {
-        "children": "**Онлайн-бронирование** стало наиболее удобным способом покупки билетов на паромы Тенерифе. Официальные сайты Naviera Armas и Fred Olsen предлагают интуитивно понятный интерфейс на нескольких языках, включая английский[12]. При бронировании важно указать точное количество пассажиров и наличие транспортных средств. Система автоматически предложит доступные тарифы с возможностью сравнения цен и времени отправления. Оплата производится банковскими картами всех основных платежных систем. Рекомендуется бронировать билеты за 1-2 недели в высокий сезон и за несколько дней в межсезонье для получения лучших цен."
+        "children": "Timing your bookings correctly can save you significant money and ensure seat availability during your preferred travel times. The ferry operators use dynamic pricing similar to airlines, with costs fluctuating based on demand, season, and advance booking period."
       }
     }
   },
   {
-    "id": "onboard-comfort-subsection",
-    "order": "24",
+    "id": "advance-booking-tips",
+    "order": "36",
     "bodyContent": {
+      "sectionType": "Typography",
+      "type": "TypographyH4",
+      "props": {
+        "children": "#### Advance Booking Advantages"
+      }
+    }
+  },
+  {
+    "id": "advance-booking-details",
+    "order": "37",
+    "bodyContent": {
+      "sectionType": "Typography",
+      "type": "TypographyP",
+      "props": {
+        "children": "Book 2-4 weeks in advance for the best prices, with potential savings of 20-40% compared to walk-up rates. Peak season (July-August, Christmas-New Year) requires earlier booking – up to 6 weeks ahead for popular routes. Online booking platforms offer multi-trip discounts and package deals that aren't available at the port."
+      }
+    }
+  },
+  {
+    "id": "flexible-booking-options",
+    "order": "38",
+    "bodyContent": {
+      "sectionType": "Typography",
+      "type": "TypographyH4",
+      "props": {
+        "children": "#### Flexible Ticket Options"
+      }
+    }
+  },
+  {
+    "id": "flexible-booking-details",
+    "order": "39",
+    "bodyContent": {
+      "sectionType": "Typography",
+      "type": "TypographyP",
+      "props": {
+        "children": "Both major operators offer flexible tickets that allow date changes for a small fee (typically €5-10). This flexibility is invaluable when weather conditions or your travel plans change. Open-jaw tickets (departing from one port, returning to another) are available and can save time if you're staying in different areas of Tenerife."
+      }
+    }
+  },
+  {
+    "id": "comfort-amenities-title",
+    "order": "40",
+    "bodyContent": {
+      "sectionType": "Typography",
       "type": "TypographyH3",
       "props": {
-        "children": "### Комфорт на борту и дополнительные услуги"
+        "children": "### Onboard Comfort and Amenities"
       }
     }
   },
   {
-    "id": "onboard-details",
-    "order": "25",
+    "id": "comfort-amenities-intro",
+    "order": "41",
     "bodyContent": {
+      "sectionType": "Typography",
       "type": "TypographyP",
       "props": {
-        "children": "Современные паромы предлагают широкий спектр услуг для комфортного путешествия. На борту работают **рестораны с канарской кухней**, магазины с сувенирами и товарами первой необходимости, а также duty-free зоны[6]. Wi-Fi доступен в общественных зонах, хотя в каютах сигнал может быть слабее[6]. Для длительных переходов рекомендуется бронировать каюты различных категорий - от эконом-класса до люксов с отдельными удобствами. Багажные отделения позволяют безопасно хранить крупные чемоданы во время плавания[12]. Пассажиры с особыми потребностями могут рассчитывать на специальные места и помощь персонала."
+        "children": "Modern Canary Islands ferries offer amenities that transform your journey into part of the vacation experience. Understanding what's available onboard helps you pack appropriately and set realistic expectations for your crossing."
+      }
+    }
+  },
+  {
+    "id": "onboard-facilities",
+    "order": "42",
+    "bodyContent": {
+      "sectionType": "Typography",
+      "type": "TypographyH4",
+      "props": {
+        "children": "#### Standard Onboard Facilities"
+      }
+    }
+  },
+  {
+    "id": "onboard-facilities-details",
+    "order": "43",
+    "bodyContent": {
+      "sectionType": "Typography",
+      "type": "TypographyP",
+      "props": {
+        "children": "All ferries feature air-conditioned seating areas, clean restrooms, cafeterias serving hot meals and snacks, and duty-free shops. Larger vessels include outdoor deck areas perfect for sightseeing and photography. WiFi is available on most routes, though speeds can be limited during peak usage. Power outlets are available in premium seating areas."
+      }
+    }
+  },
+  {
+    "id": "comfort-recommendations",
+    "order": "44",
+    "bodyContent": {
+      "sectionType": "Typography",
+      "type": "TypographyH4",
+      "props": {
+        "children": "#### Maximizing Comfort During Your Journey"
+      }
+    }
+  },
+  {
+    "id": "comfort-recommendations-details",
+    "order": "45",
+    "bodyContent": {
+      "sectionType": "Typography",
+      "type": "TypographyP",
+      "props": {
+        "children": "Arrive 30 minutes early to secure preferred seating, especially window seats for scenic routes. Pack light snacks and water, as onboard prices are premium. Bring seasickness medication if you're sensitive to motion – Atlantic swells can be noticeable even on larger ferries. Dress in layers as indoor temperatures can vary significantly from outdoor deck temperatures."
+      }
+    }
+  },
+  {
+    "id": "seasonal-considerations-title",
+    "order": "46",
+    "bodyContent": {
+      "sectionType": "Typography",
+      "type": "TypographyH2",
+      "props": {
+        "children": "## Seasonal Considerations and Weather Impact"
+      }
+    }
+  },
+  {
+    "id": "seasonal-considerations-intro",
+    "order": "47",
+    "bodyContent": {
+      "sectionType": "Typography",
+      "type": "TypographyP",
+      "props": {
+        "children": "Understanding how seasons affect ferry operations in the Canary Islands is crucial for planning a successful island-hopping adventure. While the archipelago enjoys year-round mild weather, Atlantic conditions can vary significantly between seasons, impacting both schedules and onboard comfort levels.\n\nThe beauty of Tenerife's ferry system lies in its year-round operation, but savvy travelers know that certain seasons offer distinct advantages. From reduced crowds and lower prices in shoulder seasons to enhanced schedules and perfect weather in peak periods, timing your ferry travel can dramatically impact your overall experience. Weather patterns, while generally mild, do follow seasonal trends that affect sea conditions and departure reliability."
+      }
+    }
+  },
+  {
+    "id": "peak-season-travel-title",
+    "order": "48",
+    "bodyContent": {
+      "sectionType": "Typography",
+      "type": "TypographyH3",
+      "props": {
+        "children": "### Peak Season Travel (July-August, December-January)"
+      }
+    }
+  },
+  {
+    "id": "peak-season-travel-intro",
+    "order": "49",
+    "bodyContent": {
+      "sectionType": "Typography",
+      "type": "TypographyP",
+      "props": {
+        "children": "Peak season brings maximum ferry frequencies, perfect weather conditions, and vibrant island atmospheres – but also crowds and higher prices. Understanding how to navigate these busy periods ensures you still enjoy smooth inter-island travel despite the increased demand."
+      }
+    }
+  },
+  {
+    "id": "peak-season-advantages",
+    "order": "50",
+    "bodyContent": {
+      "sectionType": "Typography",
+      "type": "TypographyH4",
+      "props": {
+        "children": "#### Peak Season Advantages"
+      }
+    }
+  },
+  {
+    "id": "peak-season-advantages-details",
+    "order": "51",
+    "bodyContent": {
+      "sectionType": "Typography",
+      "type": "TypographyP",
+      "props": {
+        "children": "Summer and winter holidays bring enhanced ferry schedules with additional departures and extended hours. Weather conditions are typically excellent with calm seas and clear visibility, making for pleasant crossings and spectacular views. All island attractions and restaurants operate at full capacity, providing the complete Canary Islands experience."
+      }
+    }
+  },
+  {
+    "id": "peak-season-challenges",
+    "order": "52",
+    "bodyContent": {
+      "sectionType": "Typography",
+      "type": "TypographyH4",
+      "props": {
+        "children": "#### Managing Peak Season Challenges"
+      }
+    }
+  },
+  {
+    "id": "peak-season-challenges-details",
+    "order": "53",
+    "bodyContent": {
+      "sectionType": "Typography",
+      "type": "TypographyP",
+      "props": {
+        "children": "Advance booking becomes essential, with popular routes selling out weeks ahead. Expect premium pricing with tickets costing 30-50% more than shoulder season rates. Ports become crowded, requiring earlier arrival times and patience during boarding. Counter these challenges by booking early, considering less popular departure times, and building flexibility into your itinerary."
+      }
+    }
+  },
+  {
+    "id": "shoulder-season-travel-title",
+    "order": "54",
+    "bodyContent": {
+      "sectionType": "Typography",
+      "type": "TypographyH3",
+      "props": {
+        "children": "### Shoulder Season Sweet Spots (April-June, September-November)"
+      }
+    }
+  },
+  {
+    "id": "shoulder-season-travel-intro",
+    "order": "55",
+    "bodyContent": {
+      "sectionType": "Typography",
+      "type": "TypographyP",
+      "props": {
+        "children": "Many experienced travelers consider shoulder seasons the optimal time for ferry travel in the Canaries. You'll enjoy the perfect balance of good weather, reasonable prices, manageable crowds, and reliable schedules – essentially all the benefits of peak season without the drawbacks."
+      }
+    }
+  },
+  {
+    "id": "shoulder-season-benefits",
+    "order": "56",
+    "bodyContent": {
+      "sectionType": "Typography",
+      "type": "TypographyH4",
+      "props": {
+        "children": "#### Shoulder Season Benefits"
+      }
+    }
+  },
+  {
+    "id": "shoulder-season-benefits-details",
+    "order": "57",
+    "bodyContent": {
+      "sectionType": "Typography",
+      "type": "TypographyP",
+      "props": {
+        "children": "Ticket prices drop 20-30% compared to peak season while maintaining frequent departure schedules. Weather remains excellent for ferry travel with minimal risk of cancellations. Ports are less crowded, making the boarding process smoother and more relaxed. Island accommodations and attractions offer better availability and pricing, enhancing your overall trip value."
+      }
+    }
+  },
+  {
+    "id": "shoulder-season-considerations",
+    "order": "58",
+    "bodyContent": {
+      "sectionType": "Typography",
+      "type": "TypographyH4",
+      "props": {
+        "children": "#### Seasonal Considerations"
+      }
+    }
+  },
+  {
+    "id": "shoulder-season-considerations-details",
+    "order": "59",
+    "bodyContent": {
+      "sectionType": "Typography",
+      "type": "TypographyP",
+      "props": {
+        "children": "Some seasonal restaurant and attraction closures may occur, particularly on smaller islands like El Hierro. Ferry schedules may be slightly reduced compared to peak season, but still offer excellent connectivity. Spring shoulder season (April-June) tends to be drier than autumn (September-November), which can experience occasional brief rain showers."
+      }
+    }
+  },
+  {
+    "id": "island-hopping-strategies-title",
+    "order": "60",
+    "bodyContent": {
+      "sectionType": "Typography",
+      "type": "TypographyH2",
+      "props": {
+        "children": "## Strategic Island Hopping Itineraries"
+      }
+    }
+  },
+  {
+    "id": "island-hopping-strategies-intro",
+    "order": "61",
+    "bodyContent": {
+      "sectionType": "Typography",
+      "type": "TypographyP",
+      "props": {
+        "children": "Creating the perfect island-hopping itinerary from Tenerife requires balancing your interests, available time, and ferry schedules to maximize your Canary Islands experience. With seven unique islands offering everything from volcanic landscapes to pristine beaches, strategic planning ensures you see the best of what each destination offers without feeling rushed.\n\nThe key to successful island hopping lies in understanding each island's unique character and matching it to your travel style. Some islands are perfect for day trips, while others deserve extended stays. Ferry schedules and connections between islands also play a crucial role in determining the most efficient routing. Smart travelers consider factors like accommodation costs, activity availability, and weather patterns when crafting their inter-island adventure."
+      }
+    }
+  },
+  {
+    "id": "day-trip-strategies-title",
+    "order": "62",
+    "bodyContent": {
+      "sectionType": "Typography",
+      "type": "TypographyH3",
+      "props": {
+        "children": "### Perfect Day Trip Destinations"
+      }
+    }
+  },
+  {
+    "id": "day-trip-strategies-intro",
+    "order": "63",
+    "bodyContent": {
+      "sectionType": "Typography",
+      "type": "TypographyP",
+      "props": {
+        "children": "Not every island requires an overnight stay to appreciate its highlights. Some destinations are perfectly suited for day trips, offering concentrated experiences that fit within ferry schedules and provide excellent value for time-conscious travelers."
+      }
+    }
+  },
+  {
+    "id": "la-gomera-day-trip",
+    "order": "64",
+    "bodyContent": {
+      "sectionType": "Typography",
+      "type": "TypographyH4",
+      "props": {
+        "children": "#### La Gomera: The Ultimate Day Trip"
+      }
+    }
+  },
+  {
+    "id": "la-gomera-day-trip-details",
+    "order": "65",
+    "bodyContent": {
+      "sectionType": "Typography",
+      "type": "TypographyP",
+      "props": {
+        "children": "La Gomera's proximity to Tenerife (50-minute crossing) and compact size make it ideal for day trips. Take the 8:30 AM departure from Los Cristianos, explore Garajonay National Park, experience the famous whistling language demonstration, and return on the 6:30 PM ferry. This schedule allows 8-9 hours on the island – perfect for hiking, cultural experiences, and lunch with ocean views."
+      }
+    }
+  },
+  {
+    "id": "gran-canaria-day-trip",
+    "order": "66",
+    "bodyContent": {
+      "sectionType": "Typography",
+      "type": "TypographyH4",
+      "props": {
+        "children": "#### Gran Canaria: City and Nature Combined"
+      }
+    }
+  },
+  {
+    "id": "gran-canaria-day-trip-details",
+    "order": "67",
+    "bodyContent": {
+      "sectionType": "Typography",
+      "type": "TypographyP",
+      "props": {
+        "children": "Gran Canaria works well as a day trip focusing on Las Palmas' historic Vegueta quarter and the famous Playa de las Canteras. Take the early fast ferry (80 minutes), spend the morning exploring the colonial architecture and Columbus House museum, lunch at the beach, and return on an evening departure. The urban focus makes public transport feasible without rental cars."
+      }
+    }
+  },
+  {
+    "id": "multi-island-itineraries-title",
+    "order": "68",
+    "bodyContent": {
+      "sectionType": "Typography",
+      "type": "TypographyH3",
+      "props": {
+        "children": "### Extended Multi-Island Itineraries"
+      }
+    }
+  },
+  {
+    "id": "multi-island-itineraries-intro",
+    "order": "69",
+    "bodyContent": {
+      "sectionType": "Typography",
+      "type": "TypographyP",
+      "props": {
+        "children": "For travelers with a week or more, multi-island itineraries offer the chance to experience the incredible diversity of the Canary Islands. These longer journeys require more planning but reward you with deeper cultural immersion and access to experiences impossible during day trips."
+      }
+    }
+  },
+  {
+    "id": "seven-day-itinerary",
+    "order": "70",
+    "bodyContent": {
+      "sectionType": "Typography",
+      "type": "TypographyH4",
+      "props": {
+        "children": "#### The Classic 7-Day Island Circuit"
+      }
+    }
+  },
+  {
+    "id": "seven-day-itinerary-details",
+    "order": "71",
+    "bodyContent": {
+      "sectionType": "Typography",
+      "type": "TypographyP",
+      "props": {
+        "children": "Start with 2 days in Tenerife (arrival and acclimatization), then ferry to Gran Canaria for 2 days (urban culture and beaches), continue to Fuerteventura for 2 days (pristine beaches and wind sports), and return to Tenerife for departure. This itinerary covers the three largest islands, provides variety in landscapes and activities, and maintains manageable travel distances between destinations."
+      }
+    }
+  },
+  {
+    "id": "nature-focused-itinerary",
+    "order": "72",
+    "bodyContent": {
+      "sectionType": "Typography",
+      "type": "TypographyH4",
+      "props": {
+        "children": "#### The Nature Explorer Route"
+      }
+    }
+  },
+  {
+    "id": "nature-focused-itinerary-details",
+    "order": "73",
+    "bodyContent": {
+      "sectionType": "Typography",
+      "type": "TypographyP",
+      "props": {
+        "children": "Perfect for hikers and nature lovers: Tenerife (2 days - Teide National Park), La Palma (3 days - Caldera de Taburiente and volcanic landscapes), La Gomera (2 days - Garajonay National Park), and El Hierro (2 days - biosphere reserve experiences). This itinerary prioritizes natural beauty and hiking opportunities while minimizing urban experiences. Book accommodations near national parks for easy trail access."
       }
     }
   }

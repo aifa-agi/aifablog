@@ -37,9 +37,10 @@ import {
 import { toast } from "sonner";
 import { SectionInfo } from "@/app/(_service)/types/page-types";
 import { usePageSections, useSections } from "../../(_context)/section-provider";
-import { AdminPageInfoProps } from "./types/admin-page-sections.types";
-import { findPageBySlug } from "./utils/page-helpers";
-import { AccessDenied } from "./components/access-control/access-denied";
+import { AdminPageInfoProps } from "./admin-page-sections/types/admin-page-sections.types";
+import { findPageBySlug } from "./admin-page-sections/utils/page-helpers";
+import { AccessDenied } from "./admin-page-sections/components/access-control/access-denied";
+import { PageInformationCard } from "./admin-page-sections/components/page-information-card";
 
 
 
@@ -486,106 +487,18 @@ Make sure the JSON follows the required format: { "sections": ExtendedSection[] 
         </div>
       </div>
 
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-lg flex items-center gap-2">
-            Page Information
-            {page.sections && page.sections.length > 0 && (
-              <Badge variant="secondary" className="text-xs">
-                {page.sections.length} sections (metadata)
-              </Badge>
-            )}
-            {dirty && (
-              <Badge variant="outline" className="text-xs text-orange-600 border-orange-300">
-                Unsaved changes
-              </Badge>
-            )}
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-3 text-sm">
-          <div className="flex items-center gap-2">
-            <span className="text-muted-foreground">Category:</span>
-            <Badge variant="outline">{category.title}</Badge>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="text-muted-foreground">Page:</span>
-            <Badge variant="outline">{page.title}</Badge>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="text-muted-foreground">Href:</span>
-            <code className="bg-muted px-2 py-1 rounded text-xs">
-              {page.href || "Not defined"}
-            </code>
-            {page.href && !isValidHref && (
-              <Badge variant="destructive" className="text-xs">
-                Invalid format
-              </Badge>
-            )}
-            {isValidHref && (
-              <Badge variant="default" className="text-xs bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
-                Valid
-              </Badge>
-            )}
-          </div>
-          <div className="flex items-start gap-2">
-            <span className="text-muted-foreground">Target file:</span>
-            <code className="bg-muted px-2 py-1 rounded text-xs flex-1">{targetPath}</code>
-          </div>
-
-          <div className="flex items-start gap-2">
-            <span className="text-muted-foreground">Metadata sections:</span>
-            <div className="flex-1">
-              {page.sections && page.sections.length > 0 ? (
-                <div className="space-y-1">
-                  <div className="flex items-center gap-2">
-                    <Badge variant="outline" className="text-xs">
-                      {page.sections.length} sections in metadata
-                    </Badge>
-                    <RefreshCw className={`h-3 w-3 ${getRefreshIconColor(page)}`} />
-                  </div>
-                  <div className="text-xs text-muted-foreground">
-                    Status: {!dirty ? 'Saved' : 'Pending save'} | 
-                    IDs: {page.sections.slice(0, 3).map(s => s.id).join(", ")}
-                    {page.sections.length > 3 && ` ... +${page.sections.length - 3} more`}
-                  </div>
-                </div>
-              ) : (
-                <div className="flex items-center gap-2">
-                  <Badge variant="secondary" className="text-xs">
-                    No sections in metadata
-                  </Badge>
-                  <RefreshCw className={`h-3 w-3 ${getRefreshIconColor(page)}`} />
-                </div>
-              )}
-            </div>
-          </div>
-
-          <div className="flex items-start gap-2">
-            <span className="text-muted-foreground">File sections:</span>
-            <div className="flex-1">
-              {renderSectionStatus()}
-            </div>
-          </div>
-
-          {getSectionsComparison()}
-          
-          {page.href && !isValidHref && (
-            <div className="bg-amber-50 border border-amber-200 rounded-lg p-3 dark:bg-amber-950 dark:border-amber-800">
-              <div className="flex items-start gap-2">
-                <AlertCircle className="h-4 w-4 text-amber-600 dark:text-amber-400 mt-0.5 flex-shrink-0" />
-                <div className="flex-1">
-                  <h5 className="font-medium text-amber-900 dark:text-amber-100 text-sm">
-                    Invalid Href Format
-                  </h5>
-                  <p className="text-amber-800 dark:text-amber-200 text-xs mt-1">
-                    Href must be in format "/category/subcategory" with only letters, numbers, hyphens, and underscores.
-                  </p>
-                </div>
-              </div>
-            </div>
-          )}
-        </CardContent>
-      </Card>
+      <PageInformationCard
+              page={page}
+              category={category}
+              dirty={dirty}
+              isValidHref={isValidHref}
+              pageHref={pageHref}
+              sectionsLoading={sectionsLoading}
+              sectionsError={sectionsError}
+              loadedSections={loadedSections}
+              onReloadSections={handleReloadSections}
+              getRefreshIconColor={getRefreshIconColor}
+            />
 
       <Card>
         <CardHeader>
@@ -797,27 +710,7 @@ Make sure the JSON follows the required format: { "sections": ExtendedSection[] 
         </CardContent>
       </Card>
 
-      {/* Debug panel for development - can be removed in production */}
-      {process.env.NODE_ENV === 'development' && loadedSections && (
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-sm flex items-center gap-2">
-              <Database className="h-4 w-4" />
-              Debug: Loaded Sections ({loadedSections.length})
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-2">
-              
-              {loadedSections.length > 5 && (
-                <div className="text-xs text-muted-foreground">
-                  ... and {loadedSections.length - 5} more sections
-                </div>
-              )}
-            </div>
-          </CardContent>
-        </Card>
-      )}
+    
     </div>
   );
 }

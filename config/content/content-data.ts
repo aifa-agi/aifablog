@@ -35,82 +35,226 @@ export const contentData = {
             "href": "https://9d8adypzz8xutnay.public.blob.vercel-storage.com/Screenshot%202023-12-14%20193752-iLFevnFZR8YF77PoIZRUXcusgSutpX.png"
           }
         ],
-        "updatedAt": "2025-08-15T12:03:34.264Z",
+        "updatedAt": "2025-08-17T11:59:10.210Z",
         "sections": [
           {
-            "id": "main-title-section"
+            "id": "hero-title"
           },
           {
-            "id": "introduction-paragraph"
+            "id": "hero-intro"
           },
           {
-            "id": "introduction-paragraph-2"
+            "id": "hero-image"
           },
           {
-            "id": "main-image-section"
-          },
-          {
-            "id": "ferry-operators-section"
+            "id": "ferry-operators-title"
           },
           {
             "id": "ferry-operators-intro"
           },
           {
-            "id": "ferry-operators-infrastructure"
+            "id": "naviera-armas-title"
           },
           {
-            "id": "armas-operator-subsection"
+            "id": "naviera-armas-intro"
           },
           {
-            "id": "armas-details"
+            "id": "naviera-armas-services"
           },
           {
-            "id": "fred-olsen-subsection"
+            "id": "naviera-armas-details"
           },
           {
-            "id": "fred-olsen-details"
+            "id": "naviera-armas-pricing"
           },
           {
-            "id": "routes-schedule-section"
+            "id": "naviera-armas-pricing-details"
           },
           {
-            "id": "routes-schedule-intro"
+            "id": "fred-olsen-title"
           },
           {
-            "id": "routes-schedule-planning"
+            "id": "fred-olsen-intro"
           },
           {
-            "id": "main-routes-subsection"
+            "id": "fred-olsen-speed"
           },
           {
-            "id": "main-routes-details"
+            "id": "fred-olsen-speed-details"
           },
           {
-            "id": "seasonal-schedule-subsection"
+            "id": "fred-olsen-experience"
           },
           {
-            "id": "seasonal-details"
+            "id": "fred-olsen-experience-details"
           },
           {
-            "id": "practical-tips-section"
+            "id": "ferry-routes-title"
+          },
+          {
+            "id": "ferry-routes-intro"
+          },
+          {
+            "id": "routes-from-santa-cruz-title"
+          },
+          {
+            "id": "routes-from-santa-cruz-intro"
+          },
+          {
+            "id": "gran-canaria-route"
+          },
+          {
+            "id": "gran-canaria-route-details"
+          },
+          {
+            "id": "la-palma-route"
+          },
+          {
+            "id": "la-palma-route-details"
+          },
+          {
+            "id": "routes-from-los-cristianos-title"
+          },
+          {
+            "id": "routes-from-los-cristianos-intro"
+          },
+          {
+            "id": "la-gomera-route"
+          },
+          {
+            "id": "la-gomera-route-details"
+          },
+          {
+            "id": "el-hierro-route"
+          },
+          {
+            "id": "el-hierro-route-details"
+          },
+          {
+            "id": "practical-tips-title"
           },
           {
             "id": "practical-tips-intro"
           },
           {
-            "id": "practical-tips-preparation"
+            "id": "booking-strategies-title"
           },
           {
-            "id": "booking-tips-subsection"
+            "id": "booking-strategies-intro"
           },
           {
-            "id": "booking-details"
+            "id": "advance-booking-tips"
           },
           {
-            "id": "onboard-comfort-subsection"
+            "id": "advance-booking-details"
           },
           {
-            "id": "onboard-details"
+            "id": "flexible-booking-options"
+          },
+          {
+            "id": "flexible-booking-details"
+          },
+          {
+            "id": "comfort-amenities-title"
+          },
+          {
+            "id": "comfort-amenities-intro"
+          },
+          {
+            "id": "onboard-facilities"
+          },
+          {
+            "id": "onboard-facilities-details"
+          },
+          {
+            "id": "comfort-recommendations"
+          },
+          {
+            "id": "comfort-recommendations-details"
+          },
+          {
+            "id": "seasonal-considerations-title"
+          },
+          {
+            "id": "seasonal-considerations-intro"
+          },
+          {
+            "id": "peak-season-travel-title"
+          },
+          {
+            "id": "peak-season-travel-intro"
+          },
+          {
+            "id": "peak-season-advantages"
+          },
+          {
+            "id": "peak-season-advantages-details"
+          },
+          {
+            "id": "peak-season-challenges"
+          },
+          {
+            "id": "peak-season-challenges-details"
+          },
+          {
+            "id": "shoulder-season-travel-title"
+          },
+          {
+            "id": "shoulder-season-travel-intro"
+          },
+          {
+            "id": "shoulder-season-benefits"
+          },
+          {
+            "id": "shoulder-season-benefits-details"
+          },
+          {
+            "id": "shoulder-season-considerations"
+          },
+          {
+            "id": "shoulder-season-considerations-details"
+          },
+          {
+            "id": "island-hopping-strategies-title"
+          },
+          {
+            "id": "island-hopping-strategies-intro"
+          },
+          {
+            "id": "day-trip-strategies-title"
+          },
+          {
+            "id": "day-trip-strategies-intro"
+          },
+          {
+            "id": "la-gomera-day-trip"
+          },
+          {
+            "id": "la-gomera-day-trip-details"
+          },
+          {
+            "id": "gran-canaria-day-trip"
+          },
+          {
+            "id": "gran-canaria-day-trip-details"
+          },
+          {
+            "id": "multi-island-itineraries-title"
+          },
+          {
+            "id": "multi-island-itineraries-intro"
+          },
+          {
+            "id": "seven-day-itinerary"
+          },
+          {
+            "id": "seven-day-itinerary-details"
+          },
+          {
+            "id": "nature-focused-itinerary"
+          },
+          {
+            "id": "nature-focused-itinerary-details"
           }
         ]
       },
@@ -231,5 +375,5 @@ export const contentData = {
 
 export type contentData = typeof contentData;
 
-export const lastUpdated = "2025-08-15T17:56:41.514Z";
+export const lastUpdated = "2025-08-17T11:59:13.006Z";
 export const generatedBy = "menu-persist-api";

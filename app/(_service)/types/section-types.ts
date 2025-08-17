@@ -36,8 +36,12 @@ export interface FooterSection {
 
 export interface Section {
   id: string;
-  headerContent: HeaderSection;
-  bodyContent?: React.ReactNode;
+  headerContent?: HeaderSection;
+  bodyContent: {
+    sectionType: "Section";
+    type: TypographySectionTypeName;
+    props: React.ReactNode;
+  };
   footerContent?: FooterSection;
   linkConfiguration?: LinkConfiguration;
   videoUrl?: string;
@@ -92,6 +96,7 @@ export interface SimpleSection {
   id: string;
   order?: string;
   bodyContent: {
+    sectionType: "Simple";
     type: SimpleSectionTypeName;
     props: SimpleSectionTypes[SimpleSectionTypeName];
   };
@@ -102,6 +107,7 @@ export interface TypographySection {
   order?: string;
   linkConfiguration?: LinkConfiguration;
   bodyContent: {
+    sectionType: "Typography";
     type: TypographySectionTypeName;
     props: TypographySectionTypes[TypographySectionTypeName];
   };
@@ -113,12 +119,12 @@ export interface StepSection {
   linkConfiguration?: LinkConfiguration;
   bodyContent: (
     | {
-        sectionType: "Simple";
+        sectionType: "Simple Steps";
         type: SimpleSectionTypeName;
         props: SimpleSectionTypes[SimpleSectionTypeName];
       }
     | {
-        sectionType: "Typography";
+        sectionType: "Typography Steps";
         type: TypographySectionTypeName;
         props: TypographySectionTypes[TypographySectionTypeName];
       }
