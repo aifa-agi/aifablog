@@ -3,7 +3,7 @@
 
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { WorkspaceProps } from "./types";
 import { useWorkspaceState } from "./hooks";
 import { useSectionManagement } from "./hooks/use-section-management";
@@ -13,6 +13,7 @@ import {
   DesignGalleryPanel,
   SectionsArea
 } from "./components";
+import { AddNewSection } from "./components/sections-area/components/add-new-section";
 
 export const SectionWorkspace: React.FC<WorkspaceProps> = ({
   sections,
@@ -28,36 +29,70 @@ export const SectionWorkspace: React.FC<WorkspaceProps> = ({
 
   const sectionManagement = useSectionManagement(sections);
   const {
-    selectedCount
+    hasSelectedSections,
+    selectedCount,
+    clearSelection,
+    selection
   } = sectionManagement;
 
-  // State to track manual override of gallery control
-  const [manualOverride, setManualOverride] = useState(false);
+  // Состояние для выбранного шаблона из галереи
+  const [selectedTemplateId, setSelectedTemplateId] = useState<number | null>(null);
 
-  // Auto open/close logic - only operates when no manual override
+  // Логика показа AddNewSection
+  const shouldShowAddNewSection = 
+    !hasSelectedSections && 
+    selectedTemplateId !== null && 
+    selectedTemplateId > 0;
+
+  // Автоматическое управление галереей на основе выбора секций
   useEffect(() => {
-    if (!manualOverride) {
-      if (selectedCount > 0 && !isGalleryOpen) {
-        openGallery();
-      } else if (selectedCount === 0 && isGalleryOpen) {
-        closeGallery();
-      }
+    if (selectedCount > 0 && !isGalleryOpen) {
+      openGallery();
+    } else if (selectedCount === 0 && isGalleryOpen && !selectedTemplateId) {
+      closeGallery();
     }
-  }, [selectedCount, isGalleryOpen, manualOverride, openGallery, closeGallery]);
+  }, [selectedCount, isGalleryOpen, selectedTemplateId, openGallery, closeGallery]);
 
-  // Manual toggle handler with override flag
-  const handleToggleGallery = () => {
-    toggleGallery();
-    setManualOverride(true);
+  // Обработчик выбора шаблона
+  const handleTemplateSelect = useCallback((templateId: number) => {
+    if (templateId === 0) {
+      // Сброс выбора
+      setSelectedTemplateId(null);
+    } else {
+      setSelectedTemplateId(templateId);
+    }
+  }, []);
+
+  // При закрытии галереи сбрасываем выбранный шаблон
+  const handleGalleryClose = useCallback(() => {
+  setSelectedTemplateId(null);
+}, []);
+
+  // Эффект для отслеживания изменений в выборе секций
+  useEffect(() => {
+    if (shouldShowAddNewSection && hasSelectedSections) {
+      // Если открыто окно AddNewSection и пользователь выбрал секции,
+      // то закрываем AddNewSection и сбрасываем выбранный шаблон
+      setSelectedTemplateId(null);
+    }
+  }, [hasSelectedSections, shouldShowAddNewSection]);
+
+  const handleAddNewSection = () => {
+    console.log(`Creating new section with template ${selectedTemplateId}`);
+    // Здесь будет логика создания новой секции
+    // После создания сбрасываем состояние
+    setSelectedTemplateId(null);
   };
 
-  // Close handler with reset of manual override
-  const handleCloseGallery = () => {
-    closeGallery();
-    setManualOverride(false);
+  const handleCloseAddNewSection = () => {
+    setSelectedTemplateId(null);
   };
 
-  
+  const handleSectionReorder = (reorderedSections: any[]) => {
+    if (onSectionReorder) {
+      onSectionReorder(reorderedSections);
+    }
+  };
 
   return (
     <div className="space-y-4">
@@ -65,9 +100,9 @@ export const SectionWorkspace: React.FC<WorkspaceProps> = ({
         pageType={pageType}
         sectionsCount={sections.length}
         isGalleryOpen={isGalleryOpen}
-        onGalleryToggle={handleToggleGallery}
+        onGalleryToggle={toggleGallery}
         selectedCount={selectedCount}
-        hasSelectedSections={selectedCount > 0}
+        hasSelectedSections={hasSelectedSections}
       />
 
       <WorkspaceLayout
@@ -75,18 +110,29 @@ export const SectionWorkspace: React.FC<WorkspaceProps> = ({
         galleryContent={
           <DesignGalleryPanel
             isOpen={isGalleryOpen}
-            onClose={handleCloseGallery}
-            containerHeight={600} 
+            selectedTemplateId={selectedTemplateId}
+            onSelectTemplate={handleTemplateSelect}
+            onClose={handleGalleryClose}
           />
         }
       >
-        <SectionsArea
-          sections={sections}
-          onSectionReorder={onSectionReorder}
-          sectionManagement={sectionManagement}
-        />
+        <div className="space-y-4">
+          {/* AddNewSection отображается только при выполнении условий */}
+          {shouldShowAddNewSection && (
+            <AddNewSection
+              selectedTemplateId={selectedTemplateId!}
+              onAdd={handleAddNewSection}
+              onClose={handleCloseAddNewSection}
+            />
+          )}
+
+          <SectionsArea
+            sections={sections}
+            onSectionReorder={handleSectionReorder}
+            sectionManagement={sectionManagement}
+          />
+        </div>
       </WorkspaceLayout>
     </div>
   );
 };
-
