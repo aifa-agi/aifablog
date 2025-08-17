@@ -61,11 +61,57 @@ export const generateDesignId = (
     case "Simple":
       return `I${index.toString().padStart(3, "0")}`;
     case "Typography":
-      const typographyType = (section as any).bodyContent?.type;
-      if (typographyType?.startsWith("TypographyH")) {
-        return `H${typographyType.slice(-1)}`;
-      }
-      return `T${index.toString().padStart(3, "0")}`;
+  const typographyType = (section as any).bodyContent?.type;
+  
+  // Handle heading types
+  if (typographyType?.startsWith("TypographyH")) {
+    return `H${typographyType.slice(-1)}`;
+  }
+  
+  // Handle paragraph type
+  if (typographyType?.startsWith("TypographyP")) {
+    return "Paragraph";
+  }
+  
+  // Handle blockquote type
+  if (typographyType === "TypographyBlockquote") {
+    return "Blockquote";
+  }
+  
+  // Handle table type
+  if (typographyType === "TypographyTable") {
+    return "Table";
+  }
+  
+  // Handle list types
+  if (typographyType === "TypographyList") {
+    return "List";
+  }
+  
+  if (typographyType === "TypographyOrderedList") {
+    return "Ordered List";
+  }
+  
+  // Handle lead paragraph type
+  if (typographyType === "TypographyLead") {
+    return "Lead";
+  }
+  
+  // Handle large text type
+  if (typographyType === "TypographyLarge") {
+    return "Large Text";
+  }
+  
+  // Handle small text type
+  if (typographyType === "TypographySmall") {
+    return "Small Text";
+  }
+  
+  // Handle muted text type
+  if (typographyType === "TypographyMuted") {
+    return "Any";
+  }
+  return "Muted Text"
     case "Step Section":
       return `ST${index.toString().padStart(2, "0")}`;
     default:

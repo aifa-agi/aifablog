@@ -1,5 +1,3 @@
-// @/app/(_routing)/admin/pages/[slug]/(_service)/(_components)/admin-pages/admin-page-sections/section-workspace/components/sections-area/components/sections-list/components/section-card/section-card.tsx
-
 "use client";
 
 import React, { memo } from "react";
@@ -72,6 +70,9 @@ export const SectionCard: React.FC<SectionCardProps> = memo(
       transition,
     };
 
+    // Определяем состояние перетаскивания
+    const isCurrentlyDragging = isDragging || isSortableDragging;
+
     const handleSelectionChange = (checked: boolean) => {
       onSelectionToggle(section.id, checked);
     };
@@ -95,8 +96,6 @@ export const SectionCard: React.FC<SectionCardProps> = memo(
     };
 
     console.log('section from section-card.tsx', section)
-    // Extract content preview from section
-   
 
     const getSectionTypeColor = (type: string): string => {
       const colorMap: Record<string, string> = {
@@ -122,19 +121,30 @@ export const SectionCard: React.FC<SectionCardProps> = memo(
       <motion.div
         ref={setNodeRef}
         style={style}
-        whileHover={{ scale: 1.02 }}
-        className={`transition-all duration-200 ${isDragging || isSortableDragging ? "opacity-50" : ""}`}
+        whileHover={{ scale: isCurrentlyDragging ? 1 : 1.02 }}
+        className={`
+          transition-all duration-200 
+          ${isCurrentlyDragging 
+            ? "bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800 rounded-lg p-1 shadow-lg rotate-2 z-50 opacity-100" 
+            : ""
+          }
+        `}
       >
         <Card
           className={`
             relative overflow-hidden transition-all duration-200
             ${isSelected ? "ring-2 ring-primary" : ""}
             ${isGrouped ? "border-l-4 border-l-primary" : ""}
-            ${isProcessing ? "opacity-75" : ""}
+            ${isCurrentlyDragging 
+              ? "shadow-2xl opacity-100" 
+              : isProcessing 
+                ? "opacity-75" 
+                : ""
+            }
           `}
         >
-          {/* Processing Overlay */}
-          {isProcessing && (
+          {/* Processing Overlay - скрываем при перетаскивании */}
+          {isProcessing && !isCurrentlyDragging && (
             <div className="absolute inset-0 bg-background/80 flex items-center justify-center z-10">
               <div className="flex items-center gap-2 text-sm">
                 <Loader2 className="h-4 w-4 animate-spin" />
@@ -143,30 +153,21 @@ export const SectionCard: React.FC<SectionCardProps> = memo(
             </div>
           )}
 
-          <CardContent className="p-4">
+          <CardContent className={`p-4 ${isCurrentlyDragging ? "opacity-100" : ""}`}>
             <div className="flex items-start gap-3">
-              {/* Selection Checkbox */}
-              <div className="flex flex-col items-center gap-2 pt-1">
+              {/* First Column - Only Checkbox */}
+              <div className="flex items-center pt-6">
                 <Checkbox
                   checked={isSelected}
                   onCheckedChange={handleSelectionChange}
                   disabled={isProcessing}
                 />
-
-                {/* Drag Handle */}
-                <div
-                  {...attributes}
-                  {...listeners}
-                  className="cursor-grab active:cursor-grabbing p-1 hover:bg-muted rounded"
-                >
-                  <GripVertical className="h-4 w-4 text-muted-foreground" />
-                </div>
               </div>
 
-              {/* Section Content */}
+              {/* Second Column - Section Content */}
               <div className="flex-1 min-w-0">
                 {/* Header with badges */}
-                <div className="flex items-center gap-2 mb-2">
+                <div className="flex items-center gap-2 mb-0">
                   <Badge
                     variant="secondary"
                     className={`text-xs ${getSectionTypeColor(section.sectionType)}`}
@@ -192,10 +193,17 @@ export const SectionCard: React.FC<SectionCardProps> = memo(
                       Modified
                     </Badge>
                   )}
+
+                  {/* Показываем индикатор перетаскивания */}
+                  {isCurrentlyDragging && (
+                    <Badge variant="outline" className="text-xs text-amber-600 dark:text-amber-400 bg-amber-100 dark:bg-amber-900/50">
+                      Dragging...
+                    </Badge>
+                  )}
                 </div>
 
                 {/* Content Preview */}
-                <div className="text-sm text-muted-foreground mb-2 line-clamp-2">
+                <div className="text-sm text-muted-foreground mb-2 line-clamp-1">
                   {getContentPreview(section.extendedSection)}
                 </div>
 
@@ -206,37 +214,15 @@ export const SectionCard: React.FC<SectionCardProps> = memo(
                 </div>
               </div>
 
-              {/* Action Buttons */}
-              <div className="flex items-center gap-1">
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={handlePreview}
-                  disabled={isProcessing}
-                  className="h-8 w-8 p-0"
-                  title="Preview section"
-                >
-                  <Eye className="h-4 w-4" />
-                </Button>
-
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={handleEdit}
-                  disabled={isProcessing}
-                  className="h-8 w-8 p-0"
-                  title="Edit section"
-                >
-                  <Edit className="h-4 w-4" />
-                </Button>
-
+              {/* Third Column - Only DropDown and Drag Handle aligned with checkbox */}
+              <div className="flex items-center gap-1 pt-4">
                 {/* More Actions Dropdown */}
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <Button
                       variant="ghost"
                       size="sm"
-                      disabled={isProcessing}
+                      disabled={isProcessing || isCurrentlyDragging}
                       className="h-8 w-8 p-0"
                     >
                       <MoreVertical className="h-4 w-4" />
@@ -265,6 +251,21 @@ export const SectionCard: React.FC<SectionCardProps> = memo(
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
+
+                {/* Drag Handle */}
+                <div
+                  {...attributes}
+                  {...listeners}
+                  className={`
+                    cursor-grab active:cursor-grabbing p-1 hover:bg-muted rounded transition-all duration-200
+                    ${isCurrentlyDragging ? "bg-amber-100 dark:bg-amber-900/50" : ""}
+                  `}
+                >
+                  <GripVertical className={`
+                    h-4 w-4 transition-colors duration-200
+                    ${isCurrentlyDragging ? "text-amber-600 dark:text-amber-400" : "text-muted-foreground"}
+                  `} />
+                </div>
               </div>
             </div>
           </CardContent>
