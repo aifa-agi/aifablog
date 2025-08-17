@@ -1,5 +1,5 @@
-
 // @/app/(_routing)/admin/pages/[slug]/(_service)/(_components)/admin-pages/admin-page-sections/section-workspace/components/workspace-header/workspace-header.tsx
+
 "use client";
 
 import React from "react";
@@ -17,6 +17,11 @@ export const WorkspaceHeader: React.FC<WorkspaceHeaderProps> = ({
   selectedCount = 0,
   hasSelectedSections = false
 }) => {
+  const handleButtonClick = () => {
+    console.log('WorkspaceHeader: Gallery toggle button clicked, current state:', isGalleryOpen);
+    onGalleryToggle();
+  };
+
   return (
     <div className="flex items-center justify-between mb-4">
       <div className="flex items-center gap-3">
@@ -25,7 +30,7 @@ export const WorkspaceHeader: React.FC<WorkspaceHeaderProps> = ({
             Main Workspace
           </h3>
           <div className="flex items-center gap-2 mt-1">
-            <Badge 
+            <Badge
               className={`text-xs ${getPageTypeColor(pageType)}`}
               variant="secondary"
             >
@@ -48,7 +53,7 @@ export const WorkspaceHeader: React.FC<WorkspaceHeaderProps> = ({
       <Button
         variant="outline"
         size="sm"
-        onClick={onGalleryToggle}
+        onClick={handleButtonClick}
         className="flex items-center gap-2"
         disabled={sectionsCount === 0}
       >
@@ -68,4 +73,3 @@ export const WorkspaceHeader: React.FC<WorkspaceHeaderProps> = ({
     </div>
   );
 };
-

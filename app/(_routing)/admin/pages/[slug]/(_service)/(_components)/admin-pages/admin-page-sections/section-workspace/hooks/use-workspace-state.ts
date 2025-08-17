@@ -1,5 +1,3 @@
-
-
 // @/app/(_routing)/admin/pages/[slug]/(_service)/(_components)/admin-pages/admin-page-sections/section-workspace/hooks/use-workspace-state.ts
 
 "use client";
@@ -8,45 +6,63 @@ import { useState, useCallback } from "react";
 import { WorkspaceState, SectionSelectionState } from "../types";
 
 export const useWorkspaceState = () => {
-  // Initialize initial selection state
   const initialSelection: SectionSelectionState = {
     selectedSections: new Set<string>(),
     isContiguous: false,
     selectionRange: null
   };
 
-  const openGallery = useCallback(() => {
-    setWorkspaceState(prev => ({
-      ...prev,
-      isGalleryOpen: true,
-      layoutMode: 'split'
-    }));
-  }, []);
-
   const [workspaceState, setWorkspaceState] = useState<WorkspaceState>({
     isGalleryOpen: false,
     layoutMode: 'full',
-    selection: initialSelection,      // Added missing field
-    isDirty: false                    // Added missing field
+    selection: initialSelection,
+    isDirty: false
   });
 
   const toggleGallery = useCallback(() => {
-    setWorkspaceState(prev => ({
-      ...prev,
-      isGalleryOpen: !prev.isGalleryOpen,
-      layoutMode: !prev.isGalleryOpen ? 'split' : 'full'
-    }));
+    setWorkspaceState(prev => {
+      const newIsGalleryOpen = !prev.isGalleryOpen;
+      const newLayoutMode: 'full' | 'split' = newIsGalleryOpen ? 'split' : 'full';
+
+      console.log('toggleGallery:', prev.isGalleryOpen, '->', newIsGalleryOpen);
+      
+      return {
+        ...prev,
+        isGalleryOpen: newIsGalleryOpen,
+        layoutMode: newLayoutMode
+      };
+    });
+  }, []);
+
+  const openGallery = useCallback(() => {
+    setWorkspaceState(prev => {
+      if (!prev.isGalleryOpen) {
+        console.log('openGallery: opening gallery');
+        return {
+          ...prev,
+          isGalleryOpen: true,
+          layoutMode: 'split' as const
+        };
+      }
+      return prev;
+    });
   }, []);
 
   const closeGallery = useCallback(() => {
-    setWorkspaceState(prev => ({
-      ...prev,
-      isGalleryOpen: false,
-      layoutMode: 'full'
-    }));
+    setWorkspaceState(prev => {
+      if (prev.isGalleryOpen) {
+        console.log('closeGallery: closing gallery');
+        return {
+          ...prev,
+          isGalleryOpen: false,
+          layoutMode: 'full' as const
+        };
+      }
+      return prev;
+    });
   }, []);
 
-  // New methods for working with section selection
+  // Остальные методы остаются без изменений...
   const updateSelection = useCallback((sectionId: string, isSelected: boolean) => {
     setWorkspaceState(prev => {
       const newSelectedSections = new Set(prev.selection.selectedSections);
@@ -57,8 +73,7 @@ export const useWorkspaceState = () => {
         newSelectedSections.delete(sectionId);
       }
 
-      // Check if selection is contiguous (for future functionality)
-      const isContiguous = newSelectedSections.size <= 1; // Simplified logic for now
+      const isContiguous = newSelectedSections.size <= 1;
 
       return {
         ...prev,
@@ -96,7 +111,6 @@ export const useWorkspaceState = () => {
     }));
   }, []);
 
-  // Computed properties for convenience
   const hasSelectedSections = workspaceState.selection.selectedSections.size > 0;
   const selectedSectionsCount = workspaceState.selection.selectedSections.size;
 
@@ -108,19 +122,18 @@ export const useWorkspaceState = () => {
     isDirty: workspaceState.isDirty,
     hasSelectedSections,
     selectedSectionsCount,
-   
+    
     // Gallery management methods
     toggleGallery,
     closeGallery,
-    openGallery, // ✅ Добавляем новый метод
-   
+    openGallery,
+    
     // Selection management methods
     updateSelection,
     clearSelection,
-   
+    
     // Change state management methods
     markDirty,
     markClean,
   };
 };
-
