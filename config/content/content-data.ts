@@ -8,7 +8,7 @@ export const contentData = {
     "order": 3
   },
   {
-    "title": "canary-islands125",
+    "title": "canary-islands",
     "pages": [
       {
         "id": "gdwn8jw1g3vp8js9im14jvgj",
@@ -307,7 +307,7 @@ export const contentData = {
           "guest"
         ],
         "hasBadge": false,
-        "type": "blog",
+        "type": "homePage",
         "isPublished": false,
         "isVectorConnected": false,
         "isChatSynchronized": false,
@@ -375,5 +375,5 @@ export const contentData = {
 
 export type contentData = typeof contentData;
 
-export const lastUpdated = "2025-08-17T11:59:13.006Z";
+export const lastUpdated = "2025-08-18T07:25:24.611Z";
 export const generatedBy = "menu-persist-api";

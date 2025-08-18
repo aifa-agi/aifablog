@@ -1,4 +1,6 @@
+//
 // @/app/(_service)/components/nav-bar/admin-flow/page-actions-dropdown/index.tsx
+// Comments: No changes needed; menu items are added inside PageActionsMenu / HomeActionsMenu.
 
 "use client";
 
@@ -18,6 +20,7 @@ import { useIconStatus } from "./hooks/use-icon-status";
 import { useNavigationMenu } from "@/app/(_service)/contexts/nav-bar-provider";
 import { PageActionsMenu } from "./components/page-actions-menu";
 import { PageTypeMenu } from "./components/page-type-menu";
+import { HomeActionsMenu } from "./components/home-actions-menu";
 
 export function PageActionsDropdown({
   singlePage,
@@ -25,8 +28,7 @@ export function PageActionsDropdown({
   categories,
   setCategories,
 }: PageActionsDropdownProps) {
- 
-  // Error handling for missing required props
+
   if (!categoryTitle || !categories) {
     return (
       <div className="p-4 bg-red-100 border border-red-400 rounded">
@@ -43,10 +45,8 @@ export function PageActionsDropdown({
     );
   }
 
-  // Get navigation menu context for dirty state
   const { dirty: hasUnsavedChanges } = useNavigationMenu();
 
-  // Custom hooks for data and actions management
   const { currentPageData, dataStatus, getCurrentPageData } = usePageData({
     singlePage,
     categoryTitle,
@@ -61,13 +61,11 @@ export function PageActionsDropdown({
     getCurrentPageData,
   });
 
-  // Hook for determining icon status
   const { iconStatus } = useIconStatus({
     currentPageData,
     dataStatus,
   });
 
-  // Function to get icon CSS class based on status
   const getIconColorClass = () => {
     switch (iconStatus) {
       case "complete":
@@ -97,23 +95,32 @@ export function PageActionsDropdown({
           />
         </Button>
       </DropdownMenuTrigger>
-     
+
       <DropdownMenuContent align="end" className="min-w-[190px]">
-        <PageActionsMenu
-          {...dataStatus}
-          {...pageActions}
-          currentPageData={currentPageData}
-          hasUnsavedChanges={hasUnsavedChanges}
-        />
-       
-        <PageTypeMenu
-          onSetPageType={pageActions.handleSetPageType}
-          isPageTypeActive={pageActions.isPageTypeActive}
-        />
+        {categoryTitle !== "home" ? (
+          <PageActionsMenu
+            {...dataStatus}
+            {...pageActions}
+            currentPageData={currentPageData}
+            hasUnsavedChanges={hasUnsavedChanges}
+          />
+        ) : (
+          <HomeActionsMenu
+            {...dataStatus}
+            {...pageActions}
+            currentPageData={currentPageData}
+            hasUnsavedChanges={hasUnsavedChanges}
+          />
+        )}
+        {categoryTitle !== "home" && (
+          <PageTypeMenu
+            onSetPageType={pageActions.handleSetPageType}
+            isPageTypeActive={pageActions.isPageTypeActive}
+          />
+        )}
       </DropdownMenuContent>
     </DropdownMenu>
   );
 }
 
-// Re-export types for convenience
 export type { PageActionsDropdownProps } from "./types";
