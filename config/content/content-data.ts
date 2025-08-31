@@ -1,4 +1,4 @@
-import { MenuCategory } from "@/app/(_service)/types/menu-types";
+import { MenuCategory } from "@/app/@right/(_service)/(_types)/menu-types";
 
 export const contentData = {
   categories: [
@@ -20,12 +20,13 @@ export const contentData = {
         "hasBadge": false,
         "type": "blog",
         "isPublished": true,
+        "isAddedToPrompt": false,
         "isVectorConnected": true,
         "isChatSynchronized": false,
         "order": 1,
-        "title": "Паромы на Тенерифе",
-        "description": ": Полный гид по морским перевозкам 2025",
-        "keyWords": [
+        "title": "Паромы на Тенерифе! Тенерифе",
+        "description": "Полный гид по морским перевозкам 2025",
+        "keywords": [
           "Паромы на Тенерифе"
         ],
         "images": [
@@ -256,7 +257,11 @@ export const contentData = {
           {
             "id": "nature-focused-itinerary-details"
           }
-        ]
+        ],
+        "intent": "qwert asdfg",
+        "attention": "12fgr rrrer w  eweee",
+        "audiences": "a sdfa sdfasdf asdfasedf asdf",
+        "taxonomy": "sdfsdf asdfasdfasd fasdfasdf asdfa sdf"
       },
       {
         "id": "bft9sas1qpjtnp0dauhchecj",
@@ -268,12 +273,13 @@ export const contentData = {
         "hasBadge": false,
         "type": "blog",
         "isPublished": false,
+        "isAddedToPrompt": false,
         "isVectorConnected": true,
         "isChatSynchronized": false,
         "order": 2,
         "title": "паром из Кадис",
         "description": "Забронируйте паром из Кадис",
-        "keyWords": [
+        "keywords": [
           "паром из Кадис"
         ],
         "images": [
@@ -291,7 +297,12 @@ export const contentData = {
             "id": "section-2"
           }
         ],
-        "updatedAt": "2025-08-14T10:45:56.924Z"
+        "updatedAt": "2025-08-14T10:45:56.924Z",
+        "linkConfiguration": {
+          "outgoing": "active",
+          "incoming": "pending",
+          "external": "pending"
+        }
       }
     ],
     "order": 2
@@ -309,9 +320,22 @@ export const contentData = {
         "hasBadge": false,
         "type": "homePage",
         "isPublished": false,
+        "isAddedToPrompt": false,
         "isVectorConnected": false,
         "isChatSynchronized": false,
-        "order": 1
+        "order": 1,
+        "title": "aifa",
+        "description": "AI generator",
+        "images": [
+          {
+            "id": "o2srus4w0jgeo81r96gyb55r",
+            "alt": "Logo",
+            "href": "https://9d8adypzz8xutnay.public.blob.vercel-storage.com/logo-DdZf25dGZUGryUbrmCK29xtMK5w1cw.png"
+          }
+        ],
+        "keywords": [
+          "Ai"
+        ]
       }
     ],
     "order": 5
@@ -329,6 +353,7 @@ export const contentData = {
         "hasBadge": false,
         "type": "blog",
         "isPublished": false,
+        "isAddedToPrompt": false,
         "isVectorConnected": false,
         "isChatSynchronized": false,
         "order": 1
@@ -349,6 +374,7 @@ export const contentData = {
         "hasBadge": false,
         "type": "blog",
         "isPublished": false,
+        "isAddedToPrompt": false,
         "isVectorConnected": false,
         "isChatSynchronized": false,
         "order": 1
@@ -358,22 +384,58 @@ export const contentData = {
         "linkName": "all-users",
         "href": "/admin/all-users",
         "roles": [
-          "guest"
+          "guest",
+          "admin"
         ],
         "hasBadge": false,
         "type": "blog",
-        "isPublished": false,
+        "isPublished": true,
+        "isAddedToPrompt": false,
         "isVectorConnected": false,
         "isChatSynchronized": false,
         "order": 2
       }
     ],
     "order": 4
+  },
+  {
+    "title": "company",
+    "pages": [
+      {
+        "id": "w1dp0y04r7jcsap9ml2sm3v3",
+        "linkName": "about",
+        "href": "/company/about",
+        "roles": [
+          "guest",
+          "admin"
+        ],
+        "hasBadge": false,
+        "type": "footerPage",
+        "isPublished": true,
+        "isAddedToPrompt": false,
+        "isVectorConnected": false,
+        "isChatSynchronized": false,
+        "order": 1,
+        "title": "About",
+        "description": "About",
+        "images": [
+          {
+            "id": "ghkzv6wf0tidr3c1zbaci6wc",
+            "alt": "About",
+            "href": "https://9d8adypzz8xutnay.public.blob.vercel-storage.com/Screenshot%202023-11-12%20094730-uYZwK1JE32RlrVVJjkALvOK6OBH8uz.png"
+          }
+        ],
+        "keywords": [
+          "About"
+        ]
+      }
+    ],
+    "order": 7
   }
 ]
 } as { categories: MenuCategory[] };
 
 export type contentData = typeof contentData;
 
-export const lastUpdated = "2025-08-18T07:25:24.611Z";
+export const lastUpdated = "2025-08-31T20:40:41.699Z";
 export const generatedBy = "menu-persist-api";
