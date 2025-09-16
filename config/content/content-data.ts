@@ -594,7 +594,7 @@ export const contentData = {
             "href": "https://9d8adypzz8xutnay.public.blob.vercel-storage.com/Screenshot%202023-12-14%20193752-iLFevnFZR8YF77PoIZRUXcusgSutpX.png"
           }
         ],
-        "updatedAt": "2025-09-16T02:59:51.590Z",
+        "updatedAt": "2025-09-16T00:58:33.739Z",
         "sections": [
           {
             "id": "hero-title"
@@ -825,7 +825,7 @@ export const contentData = {
           },
           {
             "id": "h2-1",
-            "tempMDXContent": ""
+            "tempMDXContent": "<h2>Паромы на Тенерифе: удобный и живописный способ путешествовать по острову</h2>\n<p>Если вы планируете путешествие на Тенерифе или хотите исследовать окрестные острова, морские перевозки с помощью паромов — отличный выбор. Паромы Тенерифе предлагают не просто транспорт, а настоящее приключение, позволяющее насладиться живописными видами Атлантического океана и уникальной природой Канарских островов. Это удобный и надежный способ добраться до разных частей архипелага, который ценят как семейные туристы, так и искатели новых впечатлений.</p>\n<p>Морские перевозки на Тенерифе отличаются высоким уровнем комфорта и безопасности. Современные паромы оборудованы всем необходимым для приятного путешествия: просторными салонами, кафе и даже зонами отдыха на открытом воздухе. Такой способ передвижения позволяет избежать суеты аэропортов и длительных очередей, а также предлагает более расслабленную атмосферу, чтобы начать отпуск с хорошим настроением.</p>\n<p>В этой статье мы расскажем, как добраться на пароме по Тенерифе, какие маршруты доступны и какие преимущества дает этот вид транспорта. Узнаете, почему паромы — это не только альтернатива самолету или автобусу, но и самостоятельный способ открыть для себя красоты острова и его соседей. Если хотите путешествовать с комфортом, наслаждаясь морским бризом и панорамными видами, паромы на Тенерифе — ваш лучший выбор.</p>"
           },
           {
             "id": "h2-2",
@@ -849,7 +849,7 @@ export const contentData = {
           },
           {
             "id": "h2-7",
-            "tempMDXContent": "<h2>Итоги и рекомендации по выбору паромов на Тенерифе</h2>\n<p>Паромы на Тенерифе — это удобный, комфортный и живописный способ перемещения между островами Канарского архипелага. Они сочетают в себе скорость, безопасность и возможность насладиться морскими пейзажами, что делает их привлекательным выбором как для туристов, так и для местных жителей. Основные преимущества паромных перевозок включают регулярное расписание, разнообразие маршрутов, современные удобства на борту и доступные цены. Благодаря наличию различных типов кают, ресторанов и развлекательных программ, путешествие превращается в полноценный отдых даже во время перемещения.</p>\n<p>Выбирая паром для путешествия на Тенерифе, важно ориентироваться на несколько ключевых факторов. Во-первых, учитывайте расписание и частоту рейсов, чтобы максимально эффективно спланировать время. Во-вторых, обратите внимание на доступность и комфорт кают, особенно если вы путешествуете с детьми или планируете длительный маршрут. Также стоит заранее ознакомиться с условиями бронирования и возможностью перевозки автомобиля, если это актуально. Рекомендуется бронировать билеты заранее, особенно в высокий сезон, чтобы избежать неприятных сюрпризов и гарантировать себе место на выбранном рейсе.</p>\n<ul>\n  <li>Планируйте прибытие в порт с запасом времени для прохождения всех процедур посадки.</li>\n  <li>Выбирайте каюты с учетом своих потребностей — от стандартных до семейных с дополнительными удобствами.</li>\n  <li>Используйте онлайн-сервисы для бронирования билетов и заказа питания на борту.</li>\n  <li>Обращайте внимание на специальные тарифы и скидки, доступные для детей, пожилых и групп.</li>\n  <li>Не забывайте о безопасности и следуйте инструкциям экипажа во время плавания.</li>\n</ul>\n<p>«Путешествие на пароме — это не только способ добраться из пункта А в пункт Б, но и возможность открыть для себя новые горизонты с комфортом и удовольствием», — отмечают опытные путешественники.</p>\n<p>Если вы готовы к новым впечатлениям и хотите исследовать Тенерифе и соседние острова без лишних хлопот, рекомендуем не откладывать бронирование билетов. Современные паромы предлагают высокий уровень сервиса и множество удобств, которые сделают ваше путешествие незабываемым. Начните планировать поездку уже сегодня — откройте для себя красоту Канар с морской стороны!</p>"
+            "tempMDXContent": "<h2>Итоги и рекомендации по выбору паромов на Тенерифе</h2>\n\n<p>Паромы на Тенерифе — это удобный, безопасный и живописный способ путешествовать по острову и соседним Канарским островам. Они объединяют в себе комфорт современных судов, возможность насладиться морским воздухом и великолепными панорамными видами, а также экономическую выгоду по сравнению с авиаперелетами. Благодаря регулярным рейсам, разнообразию маршрутов и широкому спектру услуг на борту, паром становится отличным выбором как для семейных туристов, так и для искателей приключений. Кроме того, паромы позволяют перевозить больше багажа и даже автомобили, что особенно ценно для тех, кто планирует длительное путешествие и хочет исследовать остров на собственном транспорте.</p>\n\n<p>При выборе парома важно учитывать несколько факторов: время в пути, расписание рейсов, уровень комфорта на борту и особенности маршрута. Если для вас важна скорость, возможно, стоит рассмотреть самолет, но если хочется получить удовольствие от самого путешествия и избежать суеты аэропортов, паром — оптимальный вариант. Современные паромы Тенерифе предлагают удобные каюты, разнообразные рестораны и развлекательные программы, включая детские зоны, что делает поездку приятной и незабываемой.</p>\n\n<ul>\n  <li>Заблаговременно планируйте время прибытия в порт и бронируйте билеты онлайн для гарантии места и экономии.</li>\n  <li>Выбирайте каюту или место в салоне в зависимости от ваших предпочтений и бюджета.</li>\n  <li>Обратите внимание на дополнительные услуги на борту, такие как питание и развлечения, особенно если путешествуете с детьми.</li>\n  <li>Учитывайте погодные условия и возможные задержки, чтобы избежать неприятных сюрпризов.</li>\n  <li>Подготовьте необходимые документы и оптимальный багаж для комфортного путешествия.</li>\n</ul>\n\n<p>Выбирая паром для путешествия на Тенерифе, вы выбираете не просто транспорт, а часть отдыха и приятное приключение. Позвольте себе насладиться морским бризом, живописными видами и атмосферой свободы, которую дарит путешествие по воде.</p>\n\n<p>Не откладывайте планирование — бронируйте билеты заранее, следите за акциями перевозчиков и готовьтесь к незабываемому морскому путешествию по Канарским островам!</p>\n\n<blockquote>«Путешествие на пароме — это не просто дорога, это возможность открыть для себя мир с новой стороны, наслаждаясь каждым мгновением пути.»</blockquote>"
           }
         ],
         "intent": "как добраться на Тенерифе на пароме",
@@ -2680,6 +2680,257 @@ export const contentData = {
             "status": "checked"
           },
           {
+            "id": "h2-4",
+            "tag": "h2",
+            "classification": "Comparison",
+            "keywords": [
+              "паром vs самолет",
+              "преимущества парома",
+              "сравнение транспорта"
+            ],
+            "taxonomy": "Сравнение",
+            "attention": "Помогает выбрать оптимальный способ добраться на Тенерифе, учитывая все плюсы и минусы.",
+            "intent": "Сравнить паром и самолет как способы добраться до Тенерифе, выделить преимущества парома.",
+            "audiences": "Путешественники, выбирающие транспорт",
+            "selfPrompt": "Напишите сравнительный анализ парома и самолета для путешествия на Тенерифе, выделите преимущества парома. Объем 450-650 слов. Форматирование: Markdown, заголовки уровней 2 и 3, параграфы, списки, таблицы, без избыточных изображений. • также следует учитывать пользовательские настройки, сделанные ко всей странице: writing-style:{title:Conversational, description:Friendly, informal, like talking to a friend}, content-format:{title:Professional, description:Business-appropriate, formal tone}, custom requirements and specifications:{—} •",
+            "designDescription": "Сравнение двух популярных способов добраться на Тенерифе.",
+            "connectedDesignSectionId": "",
+            "additionalData": {
+              "minWords": 450,
+              "maxWords": 650,
+              "actualContent": "need generate helpful content"
+            },
+            "realContentStructure": [
+              {
+                "id": "p-4-1",
+                "tag": "p",
+                "keywords": [
+                  "сравнение транспорта",
+                  "выбор способа",
+                  "путешествие"
+                ],
+                "taxonomy": "Параграф",
+                "attention": "Вводит читателя в тему сравнения транспорта.",
+                "intent": "Объяснить важность выбора подходящего транспорта для путешествия.",
+                "audiences": "Путешественники, сомневающиеся в выборе транспорта",
+                "selfPrompt": "Напишите вводный параграф о сравнении парома и самолета для поездки на Тенерифе. Объем 100-200 слов. Форматирование: Markdown, обычный текст.",
+                "additionalData": {
+                  "minWords": 100,
+                  "maxWords": 200,
+                  "actualContent": "need generate helpful content"
+                },
+                "status": "checked"
+              },
+              {
+                "id": "h3-4-2",
+                "tag": "h3",
+                "classification": "Comparison",
+                "keywords": [
+                  "преимущества парома",
+                  "комфорт",
+                  "безопасность"
+                ],
+                "taxonomy": "Преимущества",
+                "attention": "Подчеркивает сильные стороны паромного сообщения.",
+                "intent": "Дать подробный обзор преимуществ парома по сравнению с самолетом.",
+                "audiences": "Путешественники, выбирающие комфорт и безопасность",
+                "selfPrompt": "Опишите преимущества паромов по сравнению с самолетами: комфорт, безопасность, стоимость. Объем 200-300 слов. Форматирование: Markdown, заголовок 3 уровня, параграфы, маркированные списки, без изображений.",
+                "additionalData": {
+                  "minWords": 200,
+                  "maxWords": 300,
+                  "actualContent": "need generate helpful content"
+                },
+                "realContentStructure": [
+                  {
+                    "id": "img-4-2-1",
+                    "tag": "img",
+                    "keywords": [
+                      "комфорт парома",
+                      "удобства",
+                      "путешествие"
+                    ],
+                    "taxonomy": "Иллюстрация",
+                    "attention": "Визуально подкрепляет преимущества комфорта на пароме.",
+                    "intent": "Вставить изображение, иллюстрирующее комфорт на пароме.",
+                    "audiences": "Все читатели",
+                    "selfPrompt": "Вставьте изображение, показывающее комфорт на пароме с ALT текстом 5-15 слов. Форматирование: alt-текст без тегов.",
+                    "additionalData": {
+                      "minWords": 5,
+                      "maxWords": 15,
+                      "actualContent": "need generate helpful content"
+                    },
+                    "status": "checked"
+                  },
+                  {
+                    "id": "p-4-2-2",
+                    "tag": "p",
+                    "keywords": [
+                      "безопасность",
+                      "плавание",
+                      "надежность"
+                    ],
+                    "taxonomy": "Параграф",
+                    "attention": "Раскрывает аспекты безопасности путешествия на пароме.",
+                    "intent": "Объяснить особенности безопасности и надежности паромов.",
+                    "audiences": "Путешественники, беспокоящиеся о безопасности",
+                    "selfPrompt": "Напишите параграф о безопасности и надежности паромных перевозок. Объем 90-180 слов. Форматирование: Markdown, обычный текст.",
+                    "additionalData": {
+                      "minWords": 90,
+                      "maxWords": 180,
+                      "actualContent": "need generate helpful content"
+                    },
+                    "status": "checked"
+                  },
+                  {
+                    "id": "p-4-2-3",
+                    "tag": "p",
+                    "keywords": [
+                      "стоимость",
+                      "экономия",
+                      "выгодные предложения"
+                    ],
+                    "taxonomy": "Параграф",
+                    "attention": "Демонстрирует экономическую выгоду паромных поездок.",
+                    "intent": "Описать ценовые преимущества и акции при покупке билетов на паром.",
+                    "audiences": "Экономные путешественники",
+                    "selfPrompt": "Создайте параграф о выгодах стоимости паромных билетов и акциях. Объем 85-170 слов. Форматирование: Markdown, обычный текст.",
+                    "additionalData": {
+                      "minWords": 85,
+                      "maxWords": 170,
+                      "actualContent": "need generate helpful content"
+                    },
+                    "status": "checked"
+                  },
+                  {
+                    "id": "ul-4-2-4",
+                    "tag": "ul",
+                    "keywords": [
+                      "преимущества",
+                      "паром",
+                      "список"
+                    ],
+                    "taxonomy": "Список",
+                    "attention": "Упрощает восприятие основных плюсов парома.",
+                    "intent": "Перечислить ключевые преимущества паромных перевозок в виде списка.",
+                    "audiences": "Все читатели, рассматривающие варианты транспорта",
+                    "selfPrompt": "Создайте маркированный список из 5-7 преимуществ паромов над самолетами. Объем 45-90 слов. Форматирование: Markdown список.",
+                    "additionalData": {
+                      "minWords": 45,
+                      "maxWords": 90,
+                      "actualContent": "need generate helpful content"
+                    },
+                    "status": "checked"
+                  }
+                ],
+                "status": "checked"
+              },
+              {
+                "id": "h3-4-3",
+                "tag": "h3",
+                "classification": "Comparison",
+                "keywords": [
+                  "недостатки парома",
+                  "ограничения",
+                  "сравнение"
+                ],
+                "taxonomy": "Недостатки",
+                "attention": "Помогает объективно оценить все аспекты выбора транспорта.",
+                "intent": "Обозначить возможные недостатки паромных перевозок и сравнить их с самолетом.",
+                "audiences": "Путешественники, желающие взвесить все за и против",
+                "selfPrompt": "Опишите недостатки паромов по сравнению с самолетами, включая ограничения и возможные неудобства. Объем 250-350 слов. Форматирование: Markdown, заголовок 3 уровня, параграфы, нумерованные списки, цитаты, без изображений.",
+                "additionalData": {
+                  "minWords": 250,
+                  "maxWords": 350,
+                  "actualContent": "need generate helpful content"
+                },
+                "realContentStructure": [
+                  {
+                    "id": "p-4-3-1",
+                    "tag": "p",
+                    "keywords": [
+                      "время в пути",
+                      "ограничения",
+                      "погодные условия"
+                    ],
+                    "taxonomy": "Параграф",
+                    "attention": "Объясняет причины возможных неудобств при поездке на пароме.",
+                    "intent": "Раскрыть основные ограничения и сложности при использовании паромов.",
+                    "audiences": "Путешественники, учитывающие факторы времени и погоды",
+                    "selfPrompt": "Напишите параграф о времени в пути и влиянии погодных условий на паромные перевозки. Объем 110-220 слов. Форматирование: Markdown, обычный текст.",
+                    "additionalData": {
+                      "minWords": 110,
+                      "maxWords": 220,
+                      "actualContent": "need generate helpful content"
+                    },
+                    "status": "checked"
+                  },
+                  {
+                    "id": "p-4-3-2",
+                    "tag": "p",
+                    "keywords": [
+                      "ограничения багажа",
+                      "комфорт",
+                      "доступность"
+                    ],
+                    "taxonomy": "Параграф",
+                    "attention": "Раскрывает особенности правил и ограничений на борту парома.",
+                    "intent": "Объяснить правила по багажу и комфорт на пароме.",
+                    "audiences": "Путешественники, планирующие поездку с багажом",
+                    "selfPrompt": "Создайте параграф о правилах багажа и уровне комфорта на паромах. Объем 80-160 слов. Форматирование: Markdown, обычный текст.",
+                    "additionalData": {
+                      "minWords": 80,
+                      "maxWords": 160,
+                      "actualContent": "need generate helpful content"
+                    },
+                    "status": "checked"
+                  },
+                  {
+                    "id": "ol-4-3-3",
+                    "tag": "ol",
+                    "keywords": [
+                      "недостатки",
+                      "паромы",
+                      "список"
+                    ],
+                    "taxonomy": "Список",
+                    "attention": "Облегчает понимание основных минусов паромных перевозок.",
+                    "intent": "Перечислить в нумерованном списке недостатки паромов.",
+                    "audiences": "Путешественники, взвешивающие все варианты",
+                    "selfPrompt": "Создайте нумерованный список из 5-7 основных недостатков паромных перевозок на Тенерифе. Объем 55-110 слов. Форматирование: Markdown нумерованный список.",
+                    "additionalData": {
+                      "minWords": 55,
+                      "maxWords": 110,
+                      "actualContent": "need generate helpful content"
+                    },
+                    "status": "checked"
+                  },
+                  {
+                    "id": "blockquote-4-3-4",
+                    "tag": "blockquote",
+                    "keywords": [
+                      "мнение эксперта",
+                      "недостатки парома",
+                      "объективность"
+                    ],
+                    "taxonomy": "Цитата",
+                    "attention": "Добавляет объективность и экспертную оценку.",
+                    "intent": "Включить цитату эксперта о недостатках паромных перевозок.",
+                    "audiences": "Путешественники, ищущие сбалансированную информацию",
+                    "selfPrompt": "Создайте цитату эксперта, раскрывающую объективные недостатки паромов. Объем 18-40 слов. Форматирование: Markdown цитата.",
+                    "additionalData": {
+                      "minWords": 18,
+                      "maxWords": 40,
+                      "actualContent": "need generate helpful content"
+                    },
+                    "status": "checked"
+                  }
+                ],
+                "status": "checked"
+              }
+            ],
+            "status": "checked"
+          },
+          {
             "id": "h2-5",
             "tag": "h2",
             "classification": "HowTo",
@@ -3719,6 +3970,706 @@ export const contentData = {
         "isVectorConnected": false,
         "isChatSynchronized": false,
         "order": 2
+      },
+      {
+        "id": "u2b53o33n68gl3k9k37ubgr4",
+        "linkName": "zdfgsdfg-sdfg-sdf",
+        "href": "/canary-islands/zdfgsdfg-sdfg-sdf",
+        "roles": [
+          "guest"
+        ],
+        "hasBadge": true,
+        "type": "blog",
+        "aiRecommendContentStructure": [
+          {
+            "id": "h2-1",
+            "tag": "h2",
+            "classification": "semantic",
+            "keywords": [],
+            "taxonomy": "",
+            "attention": "",
+            "intent": "",
+            "audiences": "",
+            "selfPrompt": "",
+            "designDescription": "",
+            "connectedDesignSectionId": "",
+            "additionalData": {
+              "minWords": 200,
+              "maxWords": 350,
+              "actualContent": ""
+            },
+            "realContentStructure": [
+              {
+                "id": "p-1-1",
+                "tag": "p",
+                "additionalData": {
+                  "minWords": 120,
+                  "maxWords": 250,
+                  "actualContent": ""
+                }
+              },
+              {
+                "id": "p-1-2",
+                "tag": "p",
+                "additionalData": {
+                  "minWords": 80,
+                  "maxWords": 180,
+                  "actualContent": ""
+                }
+              },
+              {
+                "id": "img-1-3",
+                "tag": "img",
+                "additionalData": {
+                  "minWords": 5,
+                  "maxWords": 15,
+                  "actualContent": ""
+                }
+              },
+              {
+                "id": "blockquote-1-4",
+                "tag": "blockquote",
+                "additionalData": {
+                  "minWords": 25,
+                  "maxWords": 50,
+                  "actualContent": ""
+                }
+              }
+            ]
+          },
+          {
+            "id": "h2-2",
+            "tag": "h2",
+            "classification": "semantic",
+            "keywords": [],
+            "taxonomy": "",
+            "attention": "",
+            "intent": "",
+            "audiences": "",
+            "selfPrompt": "",
+            "designDescription": "",
+            "connectedDesignSectionId": "",
+            "additionalData": {
+              "minWords": 400,
+              "maxWords": 600,
+              "actualContent": ""
+            },
+            "realContentStructure": [
+              {
+                "id": "p-2-1",
+                "tag": "p",
+                "additionalData": {
+                  "minWords": 100,
+                  "maxWords": 200,
+                  "actualContent": ""
+                }
+              },
+              {
+                "id": "h3-2-2",
+                "tag": "h3",
+                "additionalData": {
+                  "minWords": 200,
+                  "maxWords": 300,
+                  "actualContent": ""
+                },
+                "realContentStructure": [
+                  {
+                    "id": "p-2-2-1",
+                    "tag": "p",
+                    "additionalData": {
+                      "minWords": 70,
+                      "maxWords": 140,
+                      "actualContent": ""
+                    }
+                  },
+                  {
+                    "id": "p-2-2-2",
+                    "tag": "p",
+                    "additionalData": {
+                      "minWords": 90,
+                      "maxWords": 180,
+                      "actualContent": ""
+                    }
+                  },
+                  {
+                    "id": "img-2-2-3",
+                    "tag": "img",
+                    "additionalData": {
+                      "minWords": 5,
+                      "maxWords": 15,
+                      "actualContent": ""
+                    }
+                  },
+                  {
+                    "id": "table-2-2-4",
+                    "tag": "table",
+                    "additionalData": {
+                      "minWords": 80,
+                      "maxWords": 160,
+                      "actualContent": ""
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "h3-2-3",
+                "tag": "h3",
+                "additionalData": {
+                  "minWords": 100,
+                  "maxWords": 200,
+                  "actualContent": ""
+                },
+                "realContentStructure": [
+                  {
+                    "id": "p-2-3-1",
+                    "tag": "p",
+                    "additionalData": {
+                      "minWords": 80,
+                      "maxWords": 160,
+                      "actualContent": ""
+                    }
+                  },
+                  {
+                    "id": "ul-2-3-2",
+                    "tag": "ul",
+                    "additionalData": {
+                      "minWords": 40,
+                      "maxWords": 80,
+                      "actualContent": ""
+                    }
+                  },
+                  {
+                    "id": "code-2-3-3",
+                    "tag": "code",
+                    "additionalData": {
+                      "minWords": 20,
+                      "maxWords": 50,
+                      "actualContent": ""
+                    }
+                  },
+                  {
+                    "id": "p-2-3-4",
+                    "tag": "p",
+                    "additionalData": {
+                      "minWords": 60,
+                      "maxWords": 120,
+                      "actualContent": ""
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "h2-3",
+            "tag": "h2",
+            "classification": "semantic",
+            "keywords": [],
+            "taxonomy": "",
+            "attention": "",
+            "intent": "",
+            "audiences": "",
+            "selfPrompt": "",
+            "designDescription": "",
+            "connectedDesignSectionId": "",
+            "additionalData": {
+              "minWords": 500,
+              "maxWords": 750,
+              "actualContent": ""
+            },
+            "realContentStructure": [
+              {
+                "id": "img-3-1",
+                "tag": "img",
+                "additionalData": {
+                  "minWords": 5,
+                  "maxWords": 15,
+                  "actualContent": ""
+                }
+              },
+              {
+                "id": "p-3-2",
+                "tag": "p",
+                "additionalData": {
+                  "minWords": 110,
+                  "maxWords": 220,
+                  "actualContent": ""
+                }
+              },
+              {
+                "id": "h3-3-3",
+                "tag": "h3",
+                "additionalData": {
+                  "minWords": 200,
+                  "maxWords": 350,
+                  "actualContent": ""
+                },
+                "realContentStructure": [
+                  {
+                    "id": "p-3-3-1",
+                    "tag": "p",
+                    "additionalData": {
+                      "minWords": 85,
+                      "maxWords": 170,
+                      "actualContent": ""
+                    }
+                  },
+                  {
+                    "id": "ol-3-3-2",
+                    "tag": "ol",
+                    "additionalData": {
+                      "minWords": 50,
+                      "maxWords": 100,
+                      "actualContent": ""
+                    }
+                  },
+                  {
+                    "id": "h4-3-3-3",
+                    "tag": "h4",
+                    "additionalData": {
+                      "minWords": 120,
+                      "maxWords": 200,
+                      "actualContent": ""
+                    },
+                    "realContentStructure": [
+                      {
+                        "id": "p-3-3-3-1",
+                        "tag": "p",
+                        "additionalData": {
+                          "minWords": 75,
+                          "maxWords": 150,
+                          "actualContent": ""
+                        }
+                      },
+                      {
+                        "id": "code-3-3-3-2",
+                        "tag": "code",
+                        "additionalData": {
+                          "minWords": 25,
+                          "maxWords": 60,
+                          "actualContent": ""
+                        }
+                      },
+                      {
+                        "id": "p-3-3-3-3",
+                        "tag": "p",
+                        "additionalData": {
+                          "minWords": 65,
+                          "maxWords": 130,
+                          "actualContent": ""
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "h3-3-4",
+                "tag": "h3",
+                "additionalData": {
+                  "minWords": 150,
+                  "maxWords": 250,
+                  "actualContent": ""
+                },
+                "realContentStructure": [
+                  {
+                    "id": "p-3-4-1",
+                    "tag": "p",
+                    "additionalData": {
+                      "minWords": 95,
+                      "maxWords": 190,
+                      "actualContent": ""
+                    }
+                  },
+                  {
+                    "id": "blockquote-3-4-2",
+                    "tag": "blockquote",
+                    "additionalData": {
+                      "minWords": 20,
+                      "maxWords": 45,
+                      "actualContent": ""
+                    }
+                  },
+                  {
+                    "id": "ol-3-4-3",
+                    "tag": "ol",
+                    "additionalData": {
+                      "minWords": 60,
+                      "maxWords": 120,
+                      "actualContent": ""
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "h2-4",
+            "tag": "h2",
+            "classification": "semantic",
+            "keywords": [],
+            "taxonomy": "",
+            "attention": "",
+            "intent": "",
+            "audiences": "",
+            "selfPrompt": "",
+            "designDescription": "",
+            "connectedDesignSectionId": "",
+            "additionalData": {
+              "minWords": 450,
+              "maxWords": 650,
+              "actualContent": ""
+            },
+            "realContentStructure": [
+              {
+                "id": "p-4-1",
+                "tag": "p",
+                "additionalData": {
+                  "minWords": 100,
+                  "maxWords": 200,
+                  "actualContent": ""
+                }
+              },
+              {
+                "id": "h3-4-2",
+                "tag": "h3",
+                "additionalData": {
+                  "minWords": 200,
+                  "maxWords": 300,
+                  "actualContent": ""
+                },
+                "realContentStructure": [
+                  {
+                    "id": "img-4-2-1",
+                    "tag": "img",
+                    "additionalData": {
+                      "minWords": 5,
+                      "maxWords": 15,
+                      "actualContent": ""
+                    }
+                  },
+                  {
+                    "id": "p-4-2-2",
+                    "tag": "p",
+                    "additionalData": {
+                      "minWords": 90,
+                      "maxWords": 180,
+                      "actualContent": ""
+                    }
+                  },
+                  {
+                    "id": "p-4-2-3",
+                    "tag": "p",
+                    "additionalData": {
+                      "minWords": 85,
+                      "maxWords": 170,
+                      "actualContent": ""
+                    }
+                  },
+                  {
+                    "id": "ul-4-2-4",
+                    "tag": "ul",
+                    "additionalData": {
+                      "minWords": 45,
+                      "maxWords": 90,
+                      "actualContent": ""
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "h3-4-3",
+                "tag": "h3",
+                "additionalData": {
+                  "minWords": 250,
+                  "maxWords": 350,
+                  "actualContent": ""
+                },
+                "realContentStructure": [
+                  {
+                    "id": "p-4-3-1",
+                    "tag": "p",
+                    "additionalData": {
+                      "minWords": 110,
+                      "maxWords": 220,
+                      "actualContent": ""
+                    }
+                  },
+                  {
+                    "id": "p-4-3-2",
+                    "tag": "p",
+                    "additionalData": {
+                      "minWords": 80,
+                      "maxWords": 160,
+                      "actualContent": ""
+                    }
+                  },
+                  {
+                    "id": "ol-4-3-3",
+                    "tag": "ol",
+                    "additionalData": {
+                      "minWords": 55,
+                      "maxWords": 110,
+                      "actualContent": ""
+                    }
+                  },
+                  {
+                    "id": "blockquote-4-3-4",
+                    "tag": "blockquote",
+                    "additionalData": {
+                      "minWords": 18,
+                      "maxWords": 40,
+                      "actualContent": ""
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "h2-5",
+            "tag": "h2",
+            "classification": "semantic",
+            "keywords": [],
+            "taxonomy": "",
+            "attention": "",
+            "intent": "",
+            "audiences": "",
+            "selfPrompt": "",
+            "designDescription": "",
+            "connectedDesignSectionId": "",
+            "additionalData": {
+              "minWords": 400,
+              "maxWords": 550,
+              "actualContent": ""
+            },
+            "realContentStructure": [
+              {
+                "id": "p-5-1",
+                "tag": "p",
+                "additionalData": {
+                  "minWords": 105,
+                  "maxWords": 210,
+                  "actualContent": ""
+                }
+              },
+              {
+                "id": "img-5-2",
+                "tag": "img",
+                "additionalData": {
+                  "minWords": 5,
+                  "maxWords": 15,
+                  "actualContent": ""
+                }
+              },
+              {
+                "id": "h3-5-3",
+                "tag": "h3",
+                "additionalData": {
+                  "minWords": 150,
+                  "maxWords": 250,
+                  "actualContent": ""
+                },
+                "realContentStructure": [
+                  {
+                    "id": "p-5-3-1",
+                    "tag": "p",
+                    "additionalData": {
+                      "minWords": 80,
+                      "maxWords": 160,
+                      "actualContent": ""
+                    }
+                  },
+                  {
+                    "id": "ul-5-3-2",
+                    "tag": "ul",
+                    "additionalData": {
+                      "minWords": 40,
+                      "maxWords": 80,
+                      "actualContent": ""
+                    }
+                  },
+                  {
+                    "id": "p-5-3-3",
+                    "tag": "p",
+                    "additionalData": {
+                      "minWords": 70,
+                      "maxWords": 140,
+                      "actualContent": ""
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "h2-6",
+            "tag": "h2",
+            "classification": "semantic",
+            "keywords": [],
+            "taxonomy": "",
+            "attention": "",
+            "intent": "",
+            "audiences": "",
+            "selfPrompt": "",
+            "designDescription": "",
+            "connectedDesignSectionId": "",
+            "additionalData": {
+              "minWords": 350,
+              "maxWords": 500,
+              "actualContent": ""
+            },
+            "realContentStructure": [
+              {
+                "id": "p-6-1",
+                "tag": "p",
+                "additionalData": {
+                  "minWords": 95,
+                  "maxWords": 190,
+                  "actualContent": ""
+                }
+              },
+              {
+                "id": "h3-6-2",
+                "tag": "h3",
+                "additionalData": {
+                  "minWords": 200,
+                  "maxWords": 300,
+                  "actualContent": ""
+                },
+                "realContentStructure": [
+                  {
+                    "id": "p-6-2-1",
+                    "tag": "p",
+                    "additionalData": {
+                      "minWords": 75,
+                      "maxWords": 150,
+                      "actualContent": ""
+                    }
+                  },
+                  {
+                    "id": "table-6-2-2",
+                    "tag": "table",
+                    "additionalData": {
+                      "minWords": 100,
+                      "maxWords": 200,
+                      "actualContent": ""
+                    }
+                  },
+                  {
+                    "id": "p-6-2-3",
+                    "tag": "p",
+                    "additionalData": {
+                      "minWords": 85,
+                      "maxWords": 170,
+                      "actualContent": ""
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "h3-6-3",
+                "tag": "h3",
+                "additionalData": {
+                  "minWords": 100,
+                  "maxWords": 150,
+                  "actualContent": ""
+                },
+                "realContentStructure": [
+                  {
+                    "id": "p-6-3-1",
+                    "tag": "p",
+                    "additionalData": {
+                      "minWords": 90,
+                      "maxWords": 180,
+                      "actualContent": ""
+                    }
+                  },
+                  {
+                    "id": "code-6-3-2",
+                    "tag": "code",
+                    "additionalData": {
+                      "minWords": 30,
+                      "maxWords": 70,
+                      "actualContent": ""
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "h2-7",
+            "tag": "h2",
+            "classification": "semantic",
+            "keywords": [],
+            "taxonomy": "",
+            "attention": "",
+            "intent": "",
+            "audiences": "",
+            "selfPrompt": "",
+            "designDescription": "",
+            "connectedDesignSectionId": "",
+            "additionalData": {
+              "minWords": 300,
+              "maxWords": 450,
+              "actualContent": ""
+            },
+            "realContentStructure": [
+              {
+                "id": "p-7-1",
+                "tag": "p",
+                "additionalData": {
+                  "minWords": 120,
+                  "maxWords": 240,
+                  "actualContent": ""
+                }
+              },
+              {
+                "id": "p-7-2",
+                "tag": "p",
+                "additionalData": {
+                  "minWords": 100,
+                  "maxWords": 200,
+                  "actualContent": ""
+                }
+              },
+              {
+                "id": "ul-7-3",
+                "tag": "ul",
+                "additionalData": {
+                  "minWords": 60,
+                  "maxWords": 120,
+                  "actualContent": ""
+                }
+              },
+              {
+                "id": "p-7-4",
+                "tag": "p",
+                "additionalData": {
+                  "minWords": 80,
+                  "maxWords": 160,
+                  "actualContent": ""
+                }
+              },
+              {
+                "id": "blockquote-7-5",
+                "tag": "blockquote",
+                "additionalData": {
+                  "minWords": 15,
+                  "maxWords": 35,
+                  "actualContent": ""
+                }
+              }
+            ]
+          }
+        ],
+        "isPublished": false,
+        "isAddedToPrompt": false,
+        "isVectorConnected": false,
+        "isChatSynchronized": false,
+        "order": 3,
+        "badgeName": "NEW"
       }
     ],
     "order": 2
@@ -3853,5 +4804,5 @@ export const contentData = {
 
 export type contentData = typeof contentData;
 
-export const lastUpdated = "2025-09-16T03:00:30.769Z";
+export const lastUpdated = "2025-09-16T03:01:30.774Z";
 export const generatedBy = "menu-persist-api";
