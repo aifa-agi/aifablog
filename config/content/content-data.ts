@@ -1,4 +1,4 @@
-import { MenuCategory } from "@/app/@right/(_service)/(_types)/menu-types";
+import { MenuCategory } from "@/app/(_service)/types/menu-types";
 
 export const contentData = {
   categories: [
@@ -575,9 +575,9 @@ export const contentData = {
             ]
           }
         ],
-        "isPublished": true,
+        "isPublished": false,
         "isAddedToPrompt": false,
-        "isVectorConnected": true,
+        "isVectorConnected": false,
         "isChatSynchronized": false,
         "order": 1,
         "title": "Паромы на Тенерифе! Тенерифе 2026",
@@ -4104,5 +4104,5 @@ export const contentData = {
 
 export type contentData = typeof contentData;
 
-export const lastUpdated = "2025-09-16T08:18:28.289Z";
+export const lastUpdated = "2025-09-18T08:46:40.959Z";
 export const generatedBy = "menu-persist-api";
