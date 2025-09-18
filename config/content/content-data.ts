@@ -3398,6 +3398,9 @@ export const contentData = {
             ],
             "status": "checked"
           }
+        ],
+        "keyWords": [
+          "asdas"
         ]
       },
       {
@@ -4104,5 +4107,5 @@ export const contentData = {
 
 export type contentData = typeof contentData;
 
-export const lastUpdated = "2025-09-18T08:46:40.959Z";
+export const lastUpdated = "2025-09-18T08:47:02.905Z";
 export const generatedBy = "menu-persist-api";
